@@ -83,6 +83,49 @@ def _http_get(
     raise RuntimeError(f"GET failed after {max_retries} retries: {url} params={params} err={last_err}")
 
 
+def _http_request(
+    session: requests.Session,
+    url: str,
+    *,
+    method: str = "GET",
+    params: Optional[dict] = None,
+    data: Optional[dict] = None,
+    headers: Optional[dict] = None,
+    timeout: int = 60,
+    max_retries: int = 5,
+) -> requests.Response:
+    last_err = None
+    method = method.upper()
+
+    for attempt in range(1, max_retries + 1):
+        try:
+            if method == "POST":
+                r = session.post(url, params=params, data=data, headers=headers, timeout=timeout)
+            else:
+                r = session.get(url, params=params, headers=headers, timeout=timeout)
+
+            # Retry on throttling or transient server errors
+            if r.status_code == 429 or 500 <= r.status_code < 600:
+                raise requests.HTTPError(f"HTTP {r.status_code}: {r.text[:200]}")
+
+            # For query problems (4xx), do NOT keep retrying blindly.
+            if 400 <= r.status_code < 500:
+                # This will raise with a helpful message that includes the response body snippet
+                raise requests.HTTPError(f"HTTP {r.status_code}: {r.text[:400]}")
+
+            r.raise_for_status()
+            return r
+
+        except Exception as e:
+            last_err = e
+            backoff = min(60, 2**attempt) + random.uniform(0, 1.0)
+            time.sleep(backoff)
+
+    raise RuntimeError(
+        f"{method} failed after {max_retries} retries: {url} params={params} err={last_err}"
+    )
+
+
 def _clean_text(s: Optional[str]) -> Optional[str]:
     if not s:
         return None
@@ -191,7 +234,8 @@ def pubmed_esearch(
     if api_key:
         params["api_key"] = api_key
 
-    r = _http_get(session, f"{NCBI_EUTILS}/esearch.fcgi", params=params)
+    # POST avoids "URI Too Long" for big queries
+    r = _http_request(session, f"{NCBI_EUTILS}/esearch.fcgi", method="POST", data=params)
     root = ET.fromstring(r.text)
 
     count = int(root.findtext("./Count", default="0"))
@@ -223,7 +267,8 @@ def pubmed_efetch_batch(
     if api_key:
         params["api_key"] = api_key
 
-    r = _http_get(session, f"{NCBI_EUTILS}/efetch.fcgi", params=params)
+    # POST is also safe here (even though the payload is smaller)
+    r = _http_request(session, f"{NCBI_EUTILS}/efetch.fcgi", method="POST", data=params)
     return r.text
 
 
