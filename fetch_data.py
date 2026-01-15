@@ -2,15 +2,16 @@
 """
 fetch_data.py
 
-Fetch PubMed records for a query, save metadata to JSONL, and download PDFs
-ONLY when available via:
+Fetch PubMed records for a query, save metadata to JSONL, and download PDFs ONLY when available via:
   - PubMed Central Open Access (PMC OA)
   - (Optional) Unpaywall OA PDF URLs by DOI
 
-Also fetch Web of Science (Clarivate) metadata via Web of Science API Expanded
-(https://api.clarivate.com/api/wos) using X-ApiKey authentication.
+Also fetch Web of Science (Clarivate) metadata via Web of Science API Expanded:
+  https://api.clarivate.com/api/wos
+using X-ApiKey authentication.
 
-Usage examples are at the bottom of this file.
+Key feature:
+  - PubMed chunking by publication year to bypass the ESearch history paging limit (<= 9,999 records per chunk).
 
 Outputs (under --out_dir):
   data/
@@ -18,13 +19,14 @@ Outputs (under --out_dir):
     wos_records.jsonl
   pdfs/
     pmc/<PMCID>.pdf
-    oa/<hash_or_doi>.pdf  (Unpaywall OA PDFs)
+    oa/<hash>.pdf  (Unpaywall OA PDFs)
+
+Usage examples (see bottom of file).
 """
 
 from __future__ import annotations
 
 import argparse
-import dataclasses
 import hashlib
 import json
 import os
@@ -33,6 +35,7 @@ import re
 import shutil
 import time
 from dataclasses import dataclass, asdict
+from datetime import datetime
 from typing import Any, Dict, List, Optional, Tuple
 
 import requests
@@ -44,6 +47,13 @@ PMC_OA_FCGI = "https://www.ncbi.nlm.nih.gov/pmc/utils/oa/oa.fcgi"
 # Web of Science API Expanded (Clarivate)
 WOS_EXPANDED_SEARCH = "https://api.clarivate.com/api/wos"
 
+# PubMed ESearch/History paging limit
+PUBMED_ESRCH_MAX = 9999
+
+
+# -------------------------
+# Utilities
+# -------------------------
 
 def _safe_mkdir(path: str) -> None:
     os.makedirs(path, exist_ok=True)
@@ -59,30 +69,6 @@ def _requests_session(user_agent: str) -> requests.Session:
     return s
 
 
-def _http_get(
-    session: requests.Session,
-    url: str,
-    params: Optional[dict] = None,
-    headers: Optional[dict] = None,
-    timeout: int = 60,
-    max_retries: int = 5,
-) -> requests.Response:
-    last_err = None
-    for attempt in range(1, max_retries + 1):
-        try:
-            r = session.get(url, params=params, headers=headers, timeout=timeout)
-            # Retry on throttling or transient server errors
-            if r.status_code == 429 or 500 <= r.status_code < 600:
-                raise requests.HTTPError(f"HTTP {r.status_code}: {r.text[:200]}")
-            r.raise_for_status()
-            return r
-        except Exception as e:
-            last_err = e
-            backoff = min(60, 2**attempt) + random.uniform(0, 1.0)
-            time.sleep(backoff)
-    raise RuntimeError(f"GET failed after {max_retries} retries: {url} params={params} err={last_err}")
-
-
 def _http_request(
     session: requests.Session,
     url: str,
@@ -94,7 +80,13 @@ def _http_request(
     timeout: int = 60,
     max_retries: int = 5,
 ) -> requests.Response:
-    last_err = None
+    """
+    HTTP helper with retries and backoff.
+
+    - Retries on 429 and 5xx.
+    - Raises a descriptive error on 4xx (often query/limit issues).
+    """
+    last_err: Optional[Exception] = None
     method = method.upper()
 
     for attempt in range(1, max_retries + 1):
@@ -104,13 +96,10 @@ def _http_request(
             else:
                 r = session.get(url, params=params, headers=headers, timeout=timeout)
 
-            # Retry on throttling or transient server errors
             if r.status_code == 429 or 500 <= r.status_code < 600:
                 raise requests.HTTPError(f"HTTP {r.status_code}: {r.text[:200]}")
 
-            # For query problems (4xx), do NOT keep retrying blindly.
             if 400 <= r.status_code < 500:
-                # This will raise with a helpful message that includes the response body snippet
                 raise requests.HTTPError(f"HTTP {r.status_code}: {r.text[:400]}")
 
             r.raise_for_status()
@@ -142,6 +131,9 @@ def read_query_text(path: str) -> str:
 
 
 def _load_existing_ids(jsonl_path: str, id_field: str) -> set:
+    """
+    Used for --append mode: keep a set of IDs already written to JSONL.
+    """
     ids = set()
     if not os.path.exists(jsonl_path):
         return ids
@@ -161,14 +153,17 @@ def _load_existing_ids(jsonl_path: str, id_field: str) -> set:
 
 
 def _hash_to_filename(s: str) -> str:
-    h = hashlib.sha256(s.encode("utf-8")).hexdigest()[:24]
-    return h
+    return hashlib.sha256(s.encode("utf-8")).hexdigest()[:24]
 
 
 def download_pdf(session: requests.Session, url: str, out_path: str, overwrite: bool) -> None:
+    """
+    Download PDF to out_path. Uses a .part temp file for atomic write.
+    """
     _safe_mkdir(os.path.dirname(out_path))
     if not overwrite and os.path.exists(out_path) and os.path.getsize(out_path) > 0:
         return
+
     with session.get(url, stream=True, timeout=120) as r:
         r.raise_for_status()
         tmp = out_path + ".part"
@@ -180,7 +175,7 @@ def download_pdf(session: requests.Session, url: str, out_path: str, overwrite: 
 
 
 # -------------------------
-# PubMed ingestion
+# Data model
 # -------------------------
 
 @dataclass
@@ -215,6 +210,23 @@ class UnifiedRecord:
     wos_uid: Optional[str]
     wos_times_cited: Optional[int]
 
+    # Optional bookkeeping
+    pubmed_chunk_label: Optional[str] = None
+
+
+# -------------------------
+# PubMed ingestion
+# -------------------------
+
+def _pubmed_year_query(base_query: str, start_year: int, end_year: int) -> str:
+    """
+    Add a PubMed date-of-publication filter for a year range.
+
+    PubMed supports [dp] (Date of Publication) range queries:
+      (YYYY:YYYY[dp]) works as an inclusive range in practice for year filters.
+    """
+    return f"({base_query}) AND ({start_year}:{end_year}[dp])"
+
 
 def pubmed_esearch(
     session: requests.Session,
@@ -223,6 +235,10 @@ def pubmed_esearch(
     api_key: Optional[str],
     retmax: int,
 ) -> Tuple[int, str, str]:
+    """
+    ESearch using the NCBI history server.
+    Uses POST to avoid URL-length limits for large queries.
+    """
     params = {
         "db": "pubmed",
         "term": query,
@@ -234,7 +250,6 @@ def pubmed_esearch(
     if api_key:
         params["api_key"] = api_key
 
-    # POST avoids "URI Too Long" for big queries
     r = _http_request(session, f"{NCBI_EUTILS}/esearch.fcgi", method="POST", data=params)
     root = ET.fromstring(r.text)
 
@@ -255,6 +270,10 @@ def pubmed_efetch_batch(
     retstart: int,
     retmax: int,
 ) -> str:
+    """
+    EFetch a batch from the history server.
+    Uses POST for consistency and robustness.
+    """
     params = {
         "db": "pubmed",
         "query_key": query_key,
@@ -267,12 +286,14 @@ def pubmed_efetch_batch(
     if api_key:
         params["api_key"] = api_key
 
-    # POST is also safe here (even though the payload is smaller)
     r = _http_request(session, f"{NCBI_EUTILS}/efetch.fcgi", method="POST", data=params)
     return r.text
 
 
 def parse_pubmed_article(article: ET.Element) -> UnifiedRecord:
+    """
+    Parse essential bibliographic fields from a PubmedArticle XML element.
+    """
     pmid = article.findtext(".//MedlineCitation/PMID")
     if not pmid:
         raise ValueError("Missing PMID.")
@@ -280,10 +301,11 @@ def parse_pubmed_article(article: ET.Element) -> UnifiedRecord:
     title = _clean_text(article.findtext(".//Article/ArticleTitle"))
     journal = _clean_text(article.findtext(".//Article/Journal/Title"))
 
+    # Abstract may have multiple nodes; concatenate
     abstract_nodes = article.findall(".//Article/Abstract/AbstractText")
     abstract = None
     if abstract_nodes:
-        parts = []
+        parts: List[str] = []
         for n in abstract_nodes:
             label = n.attrib.get("Label")
             txt = "".join(n.itertext())
@@ -303,6 +325,7 @@ def parse_pubmed_article(article: ET.Element) -> UnifiedRecord:
         if m:
             year = int(m.group(0))
 
+    # IDs
     pmcid = None
     doi = None
     for aid in article.findall(".//PubmedData/ArticleIdList/ArticleId"):
@@ -330,6 +353,7 @@ def parse_pubmed_article(article: ET.Element) -> UnifiedRecord:
         pdf_path=None,
         wos_uid=None,
         wos_times_cited=None,
+        pubmed_chunk_label=None,
     )
 
 
@@ -339,12 +363,17 @@ def pmc_oa_lookup_pdf_url(
     email: str,
     api_key: Optional[str],
 ) -> Optional[str]:
+    """
+    Query the PMC OA service to obtain an OA PDF link for a given PMCID.
+    Returns the PDF URL if present; otherwise None.
+    """
     params = {"id": pmcid, "format": "xml", "email": email}
     if api_key:
         params["api_key"] = api_key
 
-    r = _http_get(session, PMC_OA_FCGI, params=params)
+    r = _http_request(session, PMC_OA_FCGI, method="GET", params=params)
     root = ET.fromstring(r.text)
+
     for link in root.findall(".//link"):
         fmt = (link.attrib.get("format") or "").lower()
         href = link.attrib.get("href")
@@ -361,13 +390,14 @@ def unpaywall_best_pdf_url(session: requests.Session, doi: str, email: str) -> O
     """
     Unpaywall REST API: https://api.unpaywall.org/v2/<doi>?email=<email>
 
-    Returns a PDF URL if an OA location with url_for_pdf exists; otherwise None.
+    Returns an OA PDF URL if best_oa_location.url_for_pdf exists; otherwise falls back to any OA location.
     """
     doi = doi.strip()
     if not doi:
         return None
+
     url = f"https://api.unpaywall.org/v2/{doi}"
-    r = _http_get(session, url, params={"email": email}, timeout=60)
+    r = _http_request(session, url, method="GET", params={"email": email}, timeout=60)
     data = r.json()
 
     best = data.get("best_oa_location") or {}
@@ -375,7 +405,6 @@ def unpaywall_best_pdf_url(session: requests.Session, doi: str, email: str) -> O
     if pdf:
         return pdf
 
-    # Fall back to any OA location
     for loc in data.get("oa_locations") or []:
         pdf = loc.get("url_for_pdf")
         if pdf:
@@ -420,6 +449,9 @@ def wos_search_page(
     option_view: str,
     wos_base_url: str,
 ) -> Dict[str, Any]:
+    """
+    Query the WoS Expanded API for a page of records.
+    """
     params = {
         "databaseId": database_id,
         "usrQuery": usr_query,
@@ -428,22 +460,21 @@ def wos_search_page(
         "optionView": option_view,    # FR (full record) or SR (short record)
     }
     headers = {"X-ApiKey": api_key, "Accept": "application/json"}
-    r = _http_get(session, wos_base_url, params=params, headers=headers, timeout=90)
+    r = _http_request(session, wos_base_url, method="GET", params=params, headers=headers, timeout=90)
     return r.json()
 
 
 def parse_wos_rec(rec: Dict[str, Any]) -> UnifiedRecord:
+    """
+    Parse essential fields from a WoS record. WoS JSON structure varies across entitlements/optionView.
+    """
     uid = rec.get("UID") or rec.get("uid") or rec.get("UT")
     uid = str(uid) if uid else None
 
     title = None
-    # Typical location: static_data.summary.titles.title[*]
     titles = _deep_get(rec, ["static_data", "summary", "titles", "title"], default=None)
     for t in _as_list(titles):
         if isinstance(t, dict):
-            # Common keys: "type" and "content"
-            if (t.get("type") or "").lower() in ("item", "source", "title"):
-                title = title or t.get("content")
             title = title or t.get("content")
     title = _clean_text(title)
 
@@ -470,10 +501,8 @@ def parse_wos_rec(rec: Dict[str, Any]) -> UnifiedRecord:
             doi = ident.get("value")
     doi = _clean_text(doi)
 
-    # Abstract often lives under fullrecord_metadata.abstracts.*; structure varies.
     abstract = None
     abs_obj = _deep_get(rec, ["static_data", "fullrecord_metadata", "abstracts", "abstract"], default=None)
-    # Some responses have abstract as list; each has abstract_text with paragraphs
     for a in _as_list(abs_obj):
         txt = _deep_get(a, ["abstract_text", "p"], default=None)
         if txt:
@@ -486,9 +515,7 @@ def parse_wos_rec(rec: Dict[str, Any]) -> UnifiedRecord:
 
     times_cited = None
     tc = _deep_get(rec, ["dynamic_data", "citation_related", "tc_list", "silo_tc"], default=None)
-    # Sometimes tc_list.silo_tc is a list of dicts; sometimes tc_list has "local_count"
     if isinstance(tc, list) and tc:
-        # "WOS" or "WOK" etc.
         try:
             times_cited = int(tc[0].get("local_count"))
         except Exception:
@@ -514,21 +541,35 @@ def parse_wos_rec(rec: Dict[str, Any]) -> UnifiedRecord:
         pdf_path=None,
         wos_uid=str(uid) if uid else None,
         wos_times_cited=times_cited,
+        pubmed_chunk_label=None,
     )
 
+
+# -------------------------
+# Main
+# -------------------------
 
 def main() -> None:
     ap = argparse.ArgumentParser()
 
     # Sources
-    ap.add_argument("--sources", default="pubmed", help="Comma-separated: pubmed,wos,both (e.g., 'pubmed', 'wos', 'both').")
+    ap.add_argument(
+        "--sources",
+        default="pubmed",
+        help="Comma-separated: pubmed,wos,both (e.g., 'pubmed', 'wos', 'both').",
+    )
 
     # PubMed
     ap.add_argument("--pubmed_query_file", default=None, help="Text file containing the PubMed query.")
-    ap.add_argument("--email", default=None, help="Email for NCBI/Unpaywall (required for PubMed; recommended for Unpaywall).")
+    ap.add_argument("--email", default=None, help="Email for NCBI/Unpaywall (required for PubMed).")
     ap.add_argument("--ncbi_api_key", default=None, help="NCBI API key (optional but recommended).")
     ap.add_argument("--pubmed_batch_size", type=int, default=200, help="PubMed EFetch batch size.")
-    ap.add_argument("--pubmed_retmax", type=int, default=1000000, help="Maximum PubMed records to fetch.")
+    ap.add_argument("--pubmed_retmax", type=int, default=1000000, help="Max PubMed records to fetch (cap applies per chunk).")
+
+    # PubMed chunking
+    ap.add_argument("--pubmed_chunk_by_year", action="store_true", help="Split PubMed query by year to bypass the 9,999 limit.")
+    ap.add_argument("--pubmed_start_year", type=int, default=1960, help="Start year for PubMed chunking.")
+    ap.add_argument("--pubmed_end_year", type=int, default=None, help="End year for PubMed chunking (defaults to current year).")
 
     # PDFs
     ap.add_argument("--download_pdfs", action="store_true", help="Download PDFs when available (PMC OA; optionally Unpaywall OA).")
@@ -536,17 +577,17 @@ def main() -> None:
 
     # WoS
     ap.add_argument("--wos_query_file", default=None, help="Text file containing the WoS Advanced Search query (usrQuery).")
-    ap.add_argument("--wos_api_key", default=os.environ.get("WOS_API_KEY"), help="Web of Science API key (or set env WOS_API_KEY).")
+    ap.add_argument("--wos_api_key", default=os.environ.get("WOS_API_KEY"), help="WoS API key (or set env WOS_API_KEY).")
     ap.add_argument("--wos_database_id", default="WOS", help="WoS databaseId (commonly WOS or WOK depending on entitlement).")
-    ap.add_argument("--wos_count", type=int, default=100, help="WoS page size (count).")
+    ap.add_argument("--wos_count", type=int, default=100, help="WoS page size.")
     ap.add_argument("--wos_option_view", default="FR", help="WoS optionView: FR (full) or SR (short).")
     ap.add_argument("--wos_base_url", default=WOS_EXPANDED_SEARCH, help="Override WoS base URL if needed.")
 
     # Output / rate limiting
     ap.add_argument("--out_dir", required=True, help="Output directory.")
-    ap.add_argument("--sleep", type=float, default=0.34, help="Sleep seconds between requests (rate limiting).")
-    ap.add_argument("--overwrite", action="store_true", help="If set, deletes previous output directory contents before writing new output.")
-    ap.add_argument("--append", action="store_true", help="If set, appends to existing JSONL files (and skips existing IDs). Default overwrites JSONL unless --append is used.")
+    ap.add_argument("--sleep", type=float, default=0.34, help="Sleep seconds between requests.")
+    ap.add_argument("--overwrite", action="store_true", help="Delete previous output directory contents before writing new output.")
+    ap.add_argument("--append", action="store_true", help="Append to existing JSONL files (skip IDs already present).")
 
     args = ap.parse_args()
 
@@ -575,10 +616,6 @@ def main() -> None:
     pubmed_path = os.path.join(data_dir, "pubmed_records.jsonl")
     wos_path = os.path.join(data_dir, "wos_records.jsonl")
 
-    # Decide write modes
-    pubmed_mode = "a" if args.append else "w"
-    wos_mode = "a" if args.append else "w"
-
     session = _requests_session(user_agent="nicotine-coi-analysis/1.0 (academic research)")
 
     # ---------------- PubMed ----------------
@@ -588,76 +625,102 @@ def main() -> None:
         if not args.email:
             raise SystemExit("--email is required for PubMed (NCBI recommends a contact email).")
 
-        query = read_query_text(args.pubmed_query_file)
+        base_query = read_query_text(args.pubmed_query_file)
+
+        if args.pubmed_end_year is None:
+            args.pubmed_end_year = datetime.utcnow().year
+
+        if args.pubmed_chunk_by_year:
+            year_ranges = [(y, y) for y in range(args.pubmed_start_year, args.pubmed_end_year + 1)]
+        else:
+            year_ranges = [(None, None)]
 
         existing_pmids = _load_existing_ids(pubmed_path, "record_id") if args.append else set()
+        pubmed_mode = "a" if args.append else "w"
 
-        count, webenv, query_key = pubmed_esearch(
-            session=session,
-            query=query,
-            email=args.email,
-            api_key=args.ncbi_api_key,
-            retmax=args.pubmed_retmax,
-        )
-        total = min(count, args.pubmed_retmax)
-        print(f"[PubMed] hits: {count} (will fetch {total})")
-
-        fetched = 0
+        wrote = 0
         with open(pubmed_path, pubmed_mode, encoding="utf-8") as out_f:
-            for retstart in range(0, total, args.pubmed_batch_size):
-                xml_text = pubmed_efetch_batch(
+            for (y0, y1) in year_ranges:
+                if y0 is None:
+                    query = base_query
+                    label = "ALL_YEARS"
+                else:
+                    query = _pubmed_year_query(base_query, y0, y1)
+                    label = f"{y0}"
+
+                count, webenv, query_key = pubmed_esearch(
                     session=session,
-                    webenv=webenv,
-                    query_key=query_key,
+                    query=query,
                     email=args.email,
                     api_key=args.ncbi_api_key,
-                    retstart=retstart,
-                    retmax=min(args.pubmed_batch_size, total - retstart),
+                    retmax=args.pubmed_retmax,
                 )
 
-                root = ET.fromstring(xml_text)
-                articles = root.findall(".//PubmedArticle")
+                # Enforce PubMed 9,999 limit per chunk (history paging).
+                total = min(count, args.pubmed_retmax, PUBMED_ESRCH_MAX)
 
-                for art in articles:
-                    rec = parse_pubmed_article(art)
-                    if rec.record_id in existing_pmids:
-                        continue
+                print(f"[PubMed:{label}] hits: {count} (will fetch {total})")
+                if count > PUBMED_ESRCH_MAX:
+                    print(
+                        f"[WARN][PubMed:{label}] This year chunk exceeds {PUBMED_ESRCH_MAX} hits. "
+                        f"You will only fetch the first {PUBMED_ESRCH_MAX}. "
+                        f"Use smaller chunks (e.g., months) for {label} if you need complete coverage."
+                    )
 
-                    # PDFs (best effort; OA only)
-                    if args.download_pdfs:
-                        # 1) PMC OA PDF
-                        if rec.pmcid:
-                            try:
-                                pdf_url = pmc_oa_lookup_pdf_url(session, rec.pmcid, args.email, args.ncbi_api_key)
-                                if pdf_url:
-                                    rec.pmc_pdf_url = pdf_url
-                                    pdf_path = os.path.join(pmc_pdf_dir, f"{rec.pmcid}.pdf")
-                                    download_pdf(session, pdf_url, pdf_path, overwrite=args.overwrite)
-                                    rec.pdf_path = pdf_path
-                            except Exception as e:
-                                print(f"[WARN][PubMed] PMC PDF failed for {rec.pmcid}: {e}")
+                for retstart in range(0, total, args.pubmed_batch_size):
+                    xml_text = pubmed_efetch_batch(
+                        session=session,
+                        webenv=webenv,
+                        query_key=query_key,
+                        email=args.email,
+                        api_key=args.ncbi_api_key,
+                        retstart=retstart,
+                        retmax=min(args.pubmed_batch_size, total - retstart),
+                    )
 
-                        # 2) Unpaywall OA PDF by DOI
-                        if args.use_unpaywall:
-                            if not args.email:
-                                raise SystemExit("--email is required for Unpaywall.")
-                            if rec.doi and (not rec.pdf_path):
+                    root = ET.fromstring(xml_text)
+                    articles = root.findall(".//PubmedArticle")
+
+                    for art in articles:
+                        rec = parse_pubmed_article(art)
+                        rec.pubmed_chunk_label = label
+
+                        if rec.record_id in existing_pmids:
+                            continue
+
+                        # PDFs (best effort; OA only)
+                        if args.download_pdfs:
+                            # 1) PMC OA PDF
+                            if rec.pmcid:
                                 try:
-                                    up_pdf = unpaywall_best_pdf_url(session, rec.doi, email=args.email)
-                                    if up_pdf:
-                                        fname = _hash_to_filename(rec.doi) + ".pdf"
-                                        pdf_path = os.path.join(oa_pdf_dir, fname)
-                                        download_pdf(session, up_pdf, pdf_path, overwrite=args.overwrite)
+                                    pdf_url = pmc_oa_lookup_pdf_url(session, rec.pmcid, args.email, args.ncbi_api_key)
+                                    if pdf_url:
+                                        rec.pmc_pdf_url = pdf_url
+                                        pdf_path = os.path.join(pmc_pdf_dir, f"{rec.pmcid}.pdf")
+                                        download_pdf(session, pdf_url, pdf_path, overwrite=args.overwrite)
                                         rec.pdf_path = pdf_path
                                 except Exception as e:
-                                    print(f"[WARN][PubMed] Unpaywall PDF failed for DOI={rec.doi}: {e}")
+                                    print(f"[WARN][PubMed:{label}] PMC PDF failed for {rec.pmcid}: {e}")
 
-                    out_f.write(json.dumps(asdict(rec), ensure_ascii=False) + "\n")
-                    existing_pmids.add(rec.record_id)
-                    fetched += 1
+                            # 2) Unpaywall OA PDF by DOI (only if we don't already have a PDF)
+                            if args.use_unpaywall:
+                                if rec.doi and (not rec.pdf_path):
+                                    try:
+                                        up_pdf = unpaywall_best_pdf_url(session, rec.doi, email=args.email)
+                                        if up_pdf:
+                                            fname = _hash_to_filename(rec.doi) + ".pdf"
+                                            pdf_path = os.path.join(oa_pdf_dir, fname)
+                                            download_pdf(session, up_pdf, pdf_path, overwrite=args.overwrite)
+                                            rec.pdf_path = pdf_path
+                                    except Exception as e:
+                                        print(f"[WARN][PubMed:{label}] Unpaywall PDF failed for DOI={rec.doi}: {e}")
 
-                print(f"[PubMed] fetched {min(retstart + args.pubmed_batch_size, total)}/{total}")
-                _sleep(args.sleep)
+                        out_f.write(json.dumps(asdict(rec), ensure_ascii=False) + "\n")
+                        existing_pmids.add(rec.record_id)
+                        wrote += 1
+
+                    print(f"[PubMed:{label}] fetched {min(retstart + args.pubmed_batch_size, total)}/{total} (wrote={wrote})")
+                    _sleep(args.sleep)
 
         print(f"[PubMed] wrote: {pubmed_path}")
 
@@ -671,10 +734,11 @@ def main() -> None:
         usr_query = read_query_text(args.wos_query_file)
 
         existing_uids = _load_existing_ids(wos_path, "record_id") if args.append else set()
+        wos_mode = "a" if args.append else "w"
 
         first = 1
-        page_size = max(1, min(args.wos_count, 100))  # common max is 100
-        total_found = None
+        page_size = max(1, min(args.wos_count, 100))
+        total_found: Optional[int] = None
         wrote = 0
 
         with open(wos_path, wos_mode, encoding="utf-8") as out_f:
@@ -726,12 +790,13 @@ def main() -> None:
 if __name__ == "__main__":
     main()
 
+
 """
 -------------------------
 Run examples
 -------------------------
 
-1) PubMed only (metadata + PMC OA PDFs only):
+1) PubMed only, chunked by year (recommended to bypass 9,999 limit per query):
   python fetch_data.py \
     --sources pubmed \
     --pubmed_query_file pubmed_query.txt \
@@ -739,9 +804,12 @@ Run examples
     --email "you@domain.com" \
     --ncbi_api_key "<NCBI_API_KEY>" \
     --download_pdfs \
+    --pubmed_chunk_by_year \
+    --pubmed_start_year 1964 \
+    --pubmed_end_year 2024 \
     --sleep 0.34
 
-2) Web of Science only (metadata):
+2) Web of Science only:
   export WOS_API_KEY="<CLARIVATE_API_KEY>"
   python fetch_data.py \
     --sources wos \
@@ -759,6 +827,9 @@ Run examples
     --email "you@domain.com" \
     --ncbi_api_key "<NCBI_API_KEY>" \
     --download_pdfs \
+    --pubmed_chunk_by_year \
+    --pubmed_start_year 1964 \
+    --pubmed_end_year 2024 \
     --sleep 0.34
 
 4) Append (do not overwrite; skip IDs already in JSONL):
@@ -770,4 +841,3 @@ Run examples
 Optional: Unpaywall OA PDFs by DOI (best-effort):
   python fetch_data.py ... --download_pdfs --use_unpaywall --email "you@domain.com"
 """
-
