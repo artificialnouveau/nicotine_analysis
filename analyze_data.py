@@ -532,6 +532,12 @@ POS_PATTERNS = [
     r"\bharm\s+reduction\b", r"\breduced\s+(exposure|harm|risk|toxic|toxicant)\b",
     r"\blower\s+(exposure|levels|biomarkers)\b",
     r"\bimproved\b", r"\bbenefit\b", r"\bsafer\b", r"\bless\s+harmful\b",
+    r"\bdecreased\s+odds\b",
+    r"\blower\s+odds\b",
+    r"\breduced\s+odds\b",
+    r"\bdecreased\s+risk\b",
+    r"\blower\s+risk\b",
+    r"\bnot\s+associated\s+with\s+increased\b",  # mild guardrail
 ]
 NEG_PATTERNS = [
     r"\bharmful\b", r"\btoxic\b", r"\badverse\b", r"\bincreased\s+(risk|harm|exposure)\b",
@@ -539,11 +545,21 @@ NEG_PATTERNS = [
     r"\bcardiovascular\b", r"\brespiratory\b", r"\blung\b.*\binjury\b",
     r"\bcancer\b|\bcarcinogen\b",
     r"\baddiction\b|\bdependence\b",
+    r"\bincreased\s+odds\b",
+    r"\bhigher\s+odds\b",
+    r"\belevated\s+odds\b",
+    r"\bincreased\s+risk\b",
+    r"\bhigher\s+risk\b",
+    r"\bpositively\s+associated\s+with\b",
 ]
 NEUTRAL_PATTERNS = [
     r"\bno\s+significant\b", r"\bnot\s+significant\b", r"\binconclusive\b",
     r"\bmixed\b", r"\bunclear\b", r"\blimited\s+evidence\b", r"\bfurther\s+research\b",
     r"\bno\s+difference\b",
+    r"\bno\s+association\b",
+    r"\bnot\s+associated\b",
+    r"\bno\s+evidence\s+of\b",
+    r"\bno\s+significant\s+association\b",
 ]
 
 # “Conclusion-like” cues to prioritize sentences
@@ -555,13 +571,37 @@ CONCLUSION_CUES = [
 ]
 
 
-def pick_conclusion_sentences(title: str, abstract: str, max_sentences: int = 6) -> List[str]:
+def pick_conclusion_sentences(
+    title: str,
+    abstract: str,
+    abstract_sections: Optional[List[Dict[str, str]]] = None,
+    max_sentences: int = 6
+) -> List[str]:
     """
     Extract a small set of sentences most likely to represent the paper's conclusions.
-    Heuristic:
-      - Prefer sentences containing conclusion cues
-      - Else take last 2-3 sentences of abstract (common structure)
+
+    Priority:
+      1) If structured abstract sections exist and include CONCLUSION(S), use that section text.
+      2) Else, prefer sentences containing conclusion cues.
+      3) Else, take the last 2-3 sentences of the abstract.
     """
+    # 1) Structured abstract: use CONCLUSIONS section if present
+    if abstract_sections:
+        concl_texts = []
+        for sec in abstract_sections:
+            label = (sec.get("label") or "").strip().lower()
+            txt = clean_text(sec.get("text") or "")
+            if not txt:
+                continue
+            if "concl" in label:  # matches CONCLUSION / CONCLUSIONS
+                concl_texts.append(txt)
+
+        if concl_texts:
+            joined = " ".join(concl_texts)
+            sents = [s.strip() for s in SENT_SPLIT.split(joined) if s.strip()]
+            return sents[:max_sentences]
+
+    # Fallback to plain abstract logic
     a = clean_text(abstract)
     if not a:
         return []
@@ -570,7 +610,6 @@ def pick_conclusion_sentences(title: str, abstract: str, max_sentences: int = 6)
     if not sents:
         return []
 
-    # Cue-based selection
     cue_hits = []
     for s in sents:
         low = s.lower()
@@ -580,7 +619,6 @@ def pick_conclusion_sentences(title: str, abstract: str, max_sentences: int = 6)
     if cue_hits:
         return cue_hits[:max_sentences]
 
-    # Otherwise fallback to tail of abstract
     tail = sents[-min(3, len(sents)):]
     return tail[:max_sentences]
 
@@ -662,6 +700,112 @@ def ci95_from_log(or_val: float, se: float) -> Tuple[float, float]:
     hi = math.exp(math.log(or_val) + 1.96 * se)
     return float(lo), float(hi)
 
+def xml_text_all(el: Any) -> str:
+    """Concatenate all text under an XML element."""
+    if el is None:
+        return ""
+    return clean_text(" ".join("".join(el.itertext()).split()))
+
+
+def extract_from_pmc_xml(xml_path: str) -> Dict[str, str]:
+    """
+    Extract COI and Funding text from a PMC JATS XML file (best-effort).
+    Returns dict with keys: 'coi', 'funding'
+    """
+    out = {"coi": "", "funding": ""}
+
+    if not xml_path or not os.path.exists(xml_path):
+        return out
+
+    try:
+        tree = ET.parse(xml_path)
+        root = tree.getroot()
+    except Exception:
+        return out
+
+    # --- COI extraction heuristics ---
+    coi_chunks: List[str] = []
+
+    # Common JATS patterns:
+    # <fn fn-type="conflict"> ... </fn>
+    for fn in root.findall(".//fn"):
+        fn_type = (fn.attrib.get("fn-type") or "").lower()
+        if "conflict" in fn_type or "coi" in fn_type or "competing" in fn_type or "disclosure" in fn_type:
+            txt = xml_text_all(fn)
+            if txt:
+                coi_chunks.append(txt)
+
+    # Sections titled like "Competing interests", "Conflicts of interest", "Disclosures"
+    for sec in root.findall(".//sec"):
+        title_el = sec.find("./title")
+        title_txt = (xml_text_all(title_el) or "").lower()
+        if any(k in title_txt for k in ["conflict", "competing", "disclosure", "declaration of interest"]):
+            txt = xml_text_all(sec)
+            if txt:
+                coi_chunks.append(txt)
+
+    # Sometimes stored as <author-notes> or <notes>
+    for notes in root.findall(".//author-notes") + root.findall(".//notes"):
+        txt_low = xml_text_all(notes).lower()
+        if any(k in txt_low for k in ["conflict", "competing", "disclosure", "declaration of interest"]):
+            coi_chunks.append(xml_text_all(notes))
+
+    out["coi"] = clean_text(" ".join(coi_chunks))[:4000]
+
+    # --- Funding extraction heuristics ---
+    fund_chunks: List[str] = []
+
+    # <funding-group>, <award-group>, <funding-statement>
+    for fg in root.findall(".//funding-group"):
+        t = xml_text_all(fg)
+        if t:
+            fund_chunks.append(t)
+
+    for ag in root.findall(".//award-group"):
+        t = xml_text_all(ag)
+        if t:
+            fund_chunks.append(t)
+
+    for fs in root.findall(".//funding-statement"):
+        t = xml_text_all(fs)
+        if t:
+            fund_chunks.append(t)
+
+    # Acknowledgements sometimes contain funding language
+    for ack in root.findall(".//ack"):
+        t = xml_text_all(ack)
+        if t and any(k in t.lower() for k in ["fund", "supported by", "grant", "award"]):
+            fund_chunks.append(t)
+
+    # Sections titled Funding / Support
+    for sec in root.findall(".//sec"):
+        title_el = sec.find("./title")
+        title_txt = (xml_text_all(title_el) or "").lower()
+        if any(k in title_txt for k in ["funding", "support", "financial support", "grants"]):
+            t = xml_text_all(sec)
+            if t:
+                fund_chunks.append(t)
+
+    out["funding"] = clean_text(" ".join(fund_chunks))[:4000]
+    return out
+
+
+def regex_window(text: str, patterns: List[str], window: int = 1600) -> str:
+    """
+    Find first match of any pattern in text and return a window around it.
+    """
+    t = clean_text(text)
+    if not t:
+        return ""
+    low = t.lower()
+
+    for pat in patterns:
+        m = re.search(pat, low, flags=re.IGNORECASE)
+        if m:
+            start = max(0, m.start() - window // 4)
+            end = min(len(t), m.start() + window)
+            return t[start:end]
+    return ""
 
 # -----------------------------------------
 # Main
