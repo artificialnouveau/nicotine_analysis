@@ -234,9 +234,23 @@ def generate_pyvis(G: nx.Graph, output_path: str):
     </div>
     """
 
-    # Read the saved HTML and inject the legend before </body>
+    # Read the saved HTML, inline the local utils.js, and inject the legend
     with open(output_path, "r", encoding="utf-8") as f:
         html_content = f.read()
+
+    # Inline lib/bindings/utils.js so the HTML is fully self-contained
+    utils_js_path = os.path.join(os.path.dirname(output_path), "..", "lib", "bindings", "utils.js")
+    if not os.path.exists(utils_js_path):
+        # Try from project root
+        utils_js_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "lib", "bindings", "utils.js")
+    if os.path.exists(utils_js_path):
+        with open(utils_js_path, "r", encoding="utf-8") as f:
+            utils_js = f.read()
+        html_content = html_content.replace(
+            '<script src="lib/bindings/utils.js"></script>',
+            f"<script>\n{utils_js}\n</script>",
+        )
+
     html_content = html_content.replace("</body>", legend_html + "\n</body>")
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(html_content)
