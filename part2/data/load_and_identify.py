@@ -42,7 +42,7 @@ INDUSTRY_ORG_PATTERNS = [
     (r"\bcouncil\s+for\s+tobacco\s+research\b", "Council for Tobacco Research"),
     (r"\btobacco\s+institute\b", "Tobacco Institute"),
     (r"\bfoundation\s+for\s+a\s+smoke[-\s]?free\s+world\b", "Foundation for a Smoke-Free World"),
-    (r"\brai\b.*\btobacco\b|\breynolds\s+american\b", "RAI / Reynolds American"),
+    (r"\brai\b.*\btobacco\b", "RAI / Reynolds American"),
 ]
 
 # COI declaration patterns

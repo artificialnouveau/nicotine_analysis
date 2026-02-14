@@ -241,6 +241,8 @@ def page_outcomes(data):
     st.subheader("Positive Outcomes Over Time")
     df_time = papers.dropna(subset=["year"]).copy()
     if not df_time.empty:
+        df_time["year"] = pd.to_numeric(df_time["year"], errors="coerce")
+        df_time = df_time.dropna(subset=["year"])
         df_time["year"] = df_time["year"].astype(int)
         df_time = df_time[(df_time["year"] >= 1990) & (df_time["year"] <= 2026)]
 

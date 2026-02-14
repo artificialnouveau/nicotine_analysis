@@ -66,7 +66,7 @@ def proportion_ztest(n1_success: int, n1_total: int, n2_success: int, n2_total: 
     p_pool = (n1_success + n2_success) / (n1_total + n2_total)
 
     if p_pool == 0 or p_pool == 1:
-        return {"z": 0.0, "p_value": 1.0, "p1": p1, "p2": p2}
+        return {"z": 0.0, "p_value": 1.0, "p1_industry": p1, "p2_independent": p2, "diff": round(p1 - p2, 4)}
 
     se = math.sqrt(p_pool * (1 - p_pool) * (1/n1_total + 1/n2_total))
     z = (p1 - p2) / se if se > 0 else 0.0

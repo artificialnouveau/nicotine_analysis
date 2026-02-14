@@ -198,7 +198,7 @@ def plot_community_scatter(comm_df: pd.DataFrame, output_dir: str):
     fig, ax = plt.subplots(figsize=(10, 7))
 
     sizes = comm_df["n_authors"] * 5
-    sizes = sizes.clip(lower=20)
+    sizes = sizes.clip(lower=20, upper=500)
 
     scatter = ax.scatter(
         comm_df[x_col],
@@ -240,6 +240,8 @@ def plot_timeline(papers_df: pd.DataFrame, output_dir: str):
         return
 
     df = papers_df.dropna(subset=["year"]).copy()
+    df["year"] = pd.to_numeric(df["year"], errors="coerce")
+    df = df.dropna(subset=["year"])
     df["year"] = df["year"].astype(int)
     df = df[(df["year"] >= 1960) & (df["year"] <= 2026)]
 
@@ -389,6 +391,8 @@ def plot_outcome_heatmap_interactive(papers_df: pd.DataFrame, output_dir: str):
         return
 
     df = papers_df.dropna(subset=["year"]).copy()
+    df["year"] = pd.to_numeric(df["year"], errors="coerce")
+    df = df.dropna(subset=["year"])
     df["year"] = df["year"].astype(int)
     df = df[(df["year"] >= 1990) & (df["year"] <= 2026)]
 

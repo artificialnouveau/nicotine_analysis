@@ -202,6 +202,9 @@ def detect_communities(G: nx.Graph) -> Dict[str, int]:
         print("[WARN] python-louvain not installed. Skipping community detection.")
         return {n: 0 for n in G.nodes}
 
+    if G.number_of_nodes() == 0 or G.number_of_edges() == 0:
+        return {n: 0 for n in G.nodes}
+
     partition = community_louvain.best_partition(G, weight="weight", random_state=42)
     # Assign community to nodes
     for node, comm_id in partition.items():
