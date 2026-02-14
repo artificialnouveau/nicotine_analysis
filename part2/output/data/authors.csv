@@ -4814,7 +4814,7 @@ fa095a08657b,"Mayell, Sarah",Mayell,Sarah,S,"Department of Paediatric Respirator
 661f628247d7,"Kengara, Fredrick O",Kengara,Fredrick O,FO,"Department of Applied Sciences, Bomet University College, Bomet, Kenya.",False,,1
 b09fca93ef24,"Rahmandar, Maria H",Rahmandar,Maria H,MH,"Medical Director, Substance Use & Prevention Program (SUPP), The Potocsnak Family Division of Adolescent and Young Adult Medicine, Ann & Robert H. Lurie Children's Hospital of Chicago, Assistant Professor, Department of Pediatrics, Northwestern University Feinberg School of Medicine. Electronic address: MRahmandar@luriechildrens.org.",False,,1
 5b122a34560b,"Voisine, Richard",Voisine,Richard,R,"Imperial Tobacco Canada, 3711 Saint-Antoine Street West, Montreal, QC, H4C 3P6, Canada.",True,Imperial Brands,1
-96ea6f738c0a,"Mullard, Gavin",Mullard,Gavin,G,"BAT (Holdings) Ltd, Globe House, 4 Temple Place, London, WC2R 2PG, UK.",True,British American Tobacco,1
+96ea6f738c0a,"Mullard, Gavin",Mullard,Gavin,G,"BAT (Holdings) Ltd, Globe House, 4 Temple Place, London, WC2R 2PG, UK.",False,,1
 db5cdc2a0e19,"Cohen, Zvi",Cohen,Zvi,Z,"Imperial Tobacco Canada, 3711 Saint-Antoine Street West, Montreal, QC, H4C 3P6, Canada.",True,Imperial Brands,1
 c7afe3b0a273,"Whitted, Lauren",Whitted,Lauren,L,"Department of Preventive Medicine, Keck School of Medicine University of Southern California, Los Angeles, California, USA.",False,,1
 901efe8cedb3,"Jordt, Sven Eric",Jordt,Sven Eric,SE,"Anesthesiology, Duke University School of Medicine, Durham, North Carolina, USA.; Psychiatry, Yale School of Medicine, New Haven, Connecticut, USA.; Department of Anesthesiology, Duke University School of Medicine, Durham, North Carolina, USA sven.jordt@duke.edu.; Yale Tobacco Center of Regulatory Science, Department of Psychiatry, Yale School of Medicine, New Haven, Connecticut, USA.",False,,3
@@ -5237,8 +5237,8 @@ a6d0661dd3a1,"Wang, Yongsheng",Wang,Yongsheng,Y,"Zhengzhou Tobacco Research Inst
 c9e76da704be,"Zong, Guohao",Zong,Guohao,G,"Zhengzhou Tobacco Research Institute of China National Tobacco Corporation (CNTC), Zhengzhou, China.",False,,1
 38245301723a,"Zhao, Le",Zhao,Le,L,"Zhengzhou Tobacco Research Institute of China National Tobacco Corporation (CNTC), Zhengzhou, China.",False,,1
 be723d6f930e,"Feng, Weihua",Feng,Weihua,W,"Zhengzhou Tobacco Research Institute of China National Tobacco Corporation (CNTC), Zhengzhou, China.",False,,1
-72bba4c83279,"Haswell, Linsey E",Haswell,Linsey E,LE,"BAT (Investments) Limited, Regents Park Road, Millbrook, Southampton, SO15 8TL, UK. Linsey_Haswell@bat.com.; Group Life Sciences, BAT (Investments) Ltd., R&D Centre, Southampton, UK.",True,British American Tobacco,2
-ede1a6f15502,"Brown, Elaine",Brown,Elaine,E,"BAT (Investments) Limited, Regents Park Road, Millbrook, Southampton, SO15 8TL, UK.; Group Life Sciences, BAT (Investments) Ltd., R&D Centre, Southampton, UK.",True,British American Tobacco,2
+72bba4c83279,"Haswell, Linsey E",Haswell,Linsey E,LE,"BAT (Investments) Limited, Regents Park Road, Millbrook, Southampton, SO15 8TL, UK. Linsey_Haswell@bat.com.; Group Life Sciences, BAT (Investments) Ltd., R&D Centre, Southampton, UK.",False,,2
+ede1a6f15502,"Brown, Elaine",Brown,Elaine,E,"BAT (Investments) Limited, Regents Park Road, Millbrook, Southampton, SO15 8TL, UK.; Group Life Sciences, BAT (Investments) Ltd., R&D Centre, Southampton, UK.",False,,2
 d28a1bac0716,"McDonald, Amy",McDonald,Amy,A,"School of Population Health, Curtin University, Bentley, WA, 6102, Australia. Electronic address: amy_mcdonald@me.com.",False,,1
 86c0c196b4a8,"Thomas, Laura",Thomas,Laura,L,"Collaboration for Evidence, Research and Impact in Public Health, School of Population Health, Curtin University, Bentley, WA, 6102, Australia.",False,,1
 05e5bd2bbbdf,"Carlin, Daniel E",Carlin,Daniel E,DE,"Department of Medicine, Division of Genetics, University of California San Diego, La Jolla, CA, United States of America.",False,,1
@@ -6460,7 +6460,7 @@ aa7f79e01e2a,"Razzaqe, Sana",Razzaqe,Sana,S,"Rashid Latif College of Pharmacy, R
 ba119abd5eec,"Athar, Usama",Athar,Usama,U,"College of Pharmacy, University of Sargodha, Sargodha 40100, Pakistan.",False,,1
 498ba6a95a05,"Salman, Muhammad",Salman,Muhammad,M,"College of Pharmacy, University of Sargodha, Sargodha 40100, Pakistan.",False,,1
 12709399c4fc,"Ismail, Wajeeha",Ismail,Wajeeha,W,"College of Pharmacy, University of Sargodha, Sargodha 40100, Pakistan.",False,,1
-2b2492ca2f0b,"Fiebelkorn, Stacy",Fiebelkorn,Stacy,S,"Group Life Sciences, BAT (Investments) Ltd., R&D Centre, Southampton, UK.",True,British American Tobacco,1
+2b2492ca2f0b,"Fiebelkorn, Stacy",Fiebelkorn,Stacy,S,"Group Life Sciences, BAT (Investments) Ltd., R&D Centre, Southampton, UK.",False,,1
 e8f67794d897,"Taylor, Eve V",Taylor,Eve V,EV,"Department of Behavioural Science and Health, University College London, London, UK.",False,,1
 fc14c32b7173,"Kisia, Lyagamula",Kisia,Lyagamula,L,"Chronic Disease Management Unit, African Population and Health Research Center, Nairobi, Kenya.",False,,1
 52778046459b,"Mohamed, Shukri F",Mohamed,Shukri F,SF,"Chronic Disease Management Unit, African Population and Health Research Center, Nairobi, Kenya.",False,,1

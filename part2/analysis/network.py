@@ -159,11 +159,13 @@ def compute_centrality(G: nx.Graph) -> pd.DataFrame:
     # For betweenness and closeness, NetworkX treats weight as distance/cost.
     # In a co-authorship network, weight = number of shared papers (strength).
     # We invert the weight so stronger ties = shorter paths.
-    inv_weight = {(u, v): 1.0 / d["weight"] for u, v, d in G.edges(data=True) if d.get("weight", 0) > 0}
-    nx.set_edge_attributes(G, inv_weight, "inv_weight")
+    # Use a temporary copy to avoid leaking inv_weight into the exported graph.
+    H = G.copy()
+    inv_weight = {(u, v): 1.0 / d["weight"] for u, v, d in H.edges(data=True) if d.get("weight", 0) > 0}
+    nx.set_edge_attributes(H, inv_weight, "inv_weight")
 
-    betweenness = nx.betweenness_centrality(G, weight="inv_weight")
-    closeness = nx.closeness_centrality(G, distance="inv_weight")
+    betweenness = nx.betweenness_centrality(H, weight="inv_weight")
+    closeness = nx.closeness_centrality(H, distance="inv_weight")
 
     try:
         # Eigenvector centrality correctly treats weight as strength in NetworkX
@@ -325,10 +327,12 @@ def global_stats(G: nx.Graph) -> Dict[str, Any]:
     stats["n_independent_nodes"] = n_independent
 
     # Assortativity by industry flag (tobacco vs non-tobacco)
+    # Use a temporary copy to avoid leaking industry_int into the exported graph
     try:
-        nx.set_node_attributes(G, {n: 1 if G.nodes[n].get("is_industry") else 0 for n in G.nodes}, "industry_int")
+        H = G.copy()
+        nx.set_node_attributes(H, {n: 1 if H.nodes[n].get("is_industry") else 0 for n in H.nodes}, "industry_int")
         stats["industry_assortativity"] = round(
-            nx.attribute_assortativity_coefficient(G, "industry_int"), 4
+            nx.attribute_assortativity_coefficient(H, "industry_int"), 4
         )
     except Exception:
         stats["industry_assortativity"] = None

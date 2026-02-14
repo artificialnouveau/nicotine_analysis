@@ -281,7 +281,7 @@ def plot_odds_ratio_forest(stats_path: str, output_dir: str):
         or_val = or_data.get("odds_ratio")
         ci_lo = or_data.get("ci_95_lower")
         ci_hi = or_data.get("ci_95_upper")
-        if or_val is not None:
+        if or_val is not None and ci_lo is not None and ci_hi is not None:
             comparisons.append((label, or_val, ci_lo, ci_hi, color))
 
     if not comparisons:

@@ -59,7 +59,7 @@ def odds_ratio_ci(a: int, b: int, c: int, d: int) -> Dict[str, float]:
 def proportion_ztest(n1_success: int, n1_total: int, n2_success: int, n2_total: int) -> Dict[str, float]:
     """Two-proportion z-test."""
     if n1_total == 0 or n2_total == 0:
-        return {"z": None, "p_value": None, "p1": None, "p2": None}
+        return {"z": None, "p_value": None, "p1_industry": None, "p2_independent": None, "diff": None}
 
     p1 = n1_success / n1_total
     p2 = n2_success / n2_total
@@ -168,12 +168,14 @@ def run_all_tests(papers_df: pd.DataFrame, centrality_df: pd.DataFrame) -> Dict[
         results["chi_square"] = {"error": str(e)}
 
     # --- 2. Pairwise Odds Ratios: each group vs Independent ---
-    indep = papers_df[papers_df["industry_category"] == "Independent"]
+    # Exclude "Not coded" papers from OR, z-test, and permutation tests
+    coded_papers = papers_df[papers_df["outcome"] != "Not coded"]
+    indep = coded_papers[coded_papers["industry_category"] == "Independent"]
     c_indep = (indep["outcome"] == "Positive").sum()
     d_indep = len(indep) - c_indep
 
     for group_name in ["Tobacco Company", "COI Declared"]:
-        grp = papers_df[papers_df["industry_category"] == group_name]
+        grp = coded_papers[coded_papers["industry_category"] == group_name]
         a_grp = (grp["outcome"] == "Positive").sum()
         b_grp = len(grp) - a_grp
 
@@ -189,9 +191,9 @@ def run_all_tests(papers_df: pd.DataFrame, centrality_df: pd.DataFrame) -> Dict[
         except Exception:
             results[key]["fisher_exact_p"] = None
 
-    # --- 3. Proportion z-tests (pairwise vs Independent) ---
+    # --- 3. Proportion z-tests (pairwise vs Independent, coded papers only) ---
     for group_name in ["Tobacco Company", "COI Declared"]:
-        grp = papers_df[papers_df["industry_category"] == group_name]
+        grp = coded_papers[coded_papers["industry_category"] == group_name]
         key = f"proportion_ztest_{group_name.lower().replace(' ', '_')}_vs_independent"
         results[key] = proportion_ztest(
             n1_success=(grp["outcome"] == "Positive").sum(),
@@ -201,11 +203,11 @@ def run_all_tests(papers_df: pd.DataFrame, centrality_df: pd.DataFrame) -> Dict[
         )
         results[key]["comparison"] = f"{group_name} vs Independent"
 
-    # --- 4. Permutation tests (pairwise vs Independent) ---
+    # --- 4. Permutation tests (pairwise vs Independent, coded papers only) ---
     for group_name in ["Tobacco Company", "COI Declared"]:
         # Create a binary grouping for this comparison
-        mask = papers_df["industry_category"].isin([group_name, "Independent"])
-        subset = papers_df[mask]
+        mask = coded_papers["industry_category"].isin([group_name, "Independent"])
+        subset = coded_papers[mask]
         groups_binary = (subset["industry_category"] == group_name).map({True: "target", False: "ref"})
 
         key = f"permutation_test_{group_name.lower().replace(' ', '_')}_vs_independent"

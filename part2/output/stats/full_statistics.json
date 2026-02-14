@@ -1,9 +1,9 @@
 {
   "contingency_table": {
     "Positive": {
-      "Tobacco Company": 13,
+      "Tobacco Company": 12,
       "COI Declared": 99,
-      "Independent": 223
+      "Independent": 224
     },
     "Negative": {
       "Tobacco Company": 8,
@@ -21,166 +21,166 @@
       "Independent": 78
     },
     "Not coded": {
-      "Tobacco Company": 85,
+      "Tobacco Company": 84,
       "COI Declared": 249,
-      "Independent": 1182
+      "Independent": 1183
     }
   },
   "chi_square": {
-    "chi2": 10.4285,
-    "p_value": 0.10773,
+    "chi2": 10.5328,
+    "p_value": 0.103934,
     "dof": 6,
     "note": "3-group test (Tobacco/COI/Independent), excludes 'Not coded'"
   },
   "odds_ratio_tobacco_company_vs_independent": {
-    "odds_ratio": 0.8307,
-    "ci_95_lower": 0.4583,
-    "ci_95_upper": 1.5059,
-    "log_or_se": 0.3035,
+    "odds_ratio": 0.8679,
+    "ci_95_lower": 0.3976,
+    "ci_95_upper": 1.8942,
+    "log_or_se": 0.3982,
     "table": {
-      "a": "13",
-      "b": "100",
-      "c": "223",
-      "d": "1425"
+      "a": "12",
+      "b": "15",
+      "c": "224",
+      "d": "243"
     },
     "comparison": "Tobacco Company vs Independent",
-    "fisher_exact_p": 0.668189
+    "fisher_exact_p": 0.843548
   },
   "odds_ratio_coi_declared_vs_independent": {
-    "odds_ratio": 2.0083,
-    "ci_95_lower": 1.5388,
-    "ci_95_upper": 2.6212,
-    "log_or_se": 0.1359,
+    "odds_ratio": 1.6272,
+    "ci_95_lower": 1.1347,
+    "ci_95_upper": 2.3336,
+    "log_or_se": 0.1839,
     "table": {
       "a": "99",
-      "b": "315",
-      "c": "223",
-      "d": "1425"
+      "b": "66",
+      "c": "224",
+      "d": "243"
     },
     "comparison": "COI Declared vs Independent",
-    "fisher_exact_p": 1e-06
+    "fisher_exact_p": 0.008612
   },
   "proportion_ztest_tobacco_company_vs_independent": {
-    "z": -0.6119,
-    "p_value": 0.540597,
-    "p1_industry": 0.115,
-    "p2_independent": 0.1353,
-    "diff": -0.0203,
+    "z": -0.3562,
+    "p_value": 0.721724,
+    "p1_industry": 0.4444,
+    "p2_independent": 0.4797,
+    "diff": -0.0352,
     "comparison": "Tobacco Company vs Independent"
   },
   "proportion_ztest_coi_declared_vs_independent": {
-    "z": 5.2021,
-    "p_value": 0.0,
-    "p1_industry": 0.2391,
-    "p2_independent": 0.1353,
-    "diff": 0.1038,
+    "z": 2.6583,
+    "p_value": 0.007854,
+    "p1_industry": 0.6,
+    "p2_independent": 0.4797,
+    "diff": 0.1203,
     "comparison": "COI Declared vs Independent"
   },
   "permutation_test_tobacco_company_vs_independent": {
-    "observed_proportion": 0.115,
-    "mean_permuted": 0.1343,
-    "p_value": 0.575742,
+    "observed_proportion": 0.4444,
+    "mean_permuted": 0.478,
+    "p_value": 0.841316,
     "n_permutations": 10000,
-    "n_target_group": 113,
+    "n_target_group": 27,
     "comparison": "Tobacco Company vs Independent"
   },
   "permutation_test_coi_declared_vs_independent": {
-    "observed_proportion": 0.2391,
-    "mean_permuted": 0.1562,
-    "p_value": 0.0001,
+    "observed_proportion": 0.6,
+    "mean_permuted": 0.5106,
+    "p_value": 0.009299,
     "n_permutations": 10000,
-    "n_target_group": 414,
+    "n_target_group": 165,
     "comparison": "COI Declared vs Independent"
   },
   "centrality_comparison": {
     "degree_centrality": {
       "Tobacco Company": {
-        "mean": 0.006982,
+        "mean": 0.007057,
         "median": 0.006667,
-        "vs_independent_U": 39803.0,
+        "vs_independent_U": 39006.0,
         "vs_independent_p": 0.0
       },
       "COI Declared": {
         "mean": 0.015085,
         "median": 0.008485,
-        "vs_independent_U": 490494.5,
+        "vs_independent_U": 491807.5,
         "vs_independent_p": 0.0
       },
       "Independent": {
-        "mean": 0.004382,
+        "mean": 0.004381,
         "median": 0.003636
       }
     },
     "betweenness_centrality": {
       "Tobacco Company": {
-        "mean": 0.00105,
-        "median": 2.2e-05,
-        "vs_independent_U": 35243.5,
-        "vs_independent_p": 4.1e-05
+        "mean": 0.001079,
+        "median": 3.6e-05,
+        "vs_independent_U": 34875.5,
+        "vs_independent_p": 1.4e-05
       },
       "COI Declared": {
         "mean": 0.003583,
         "median": 0.0,
-        "vs_independent_U": 340824.5,
-        "vs_independent_p": 0.000102
+        "vs_independent_U": 342009.5,
+        "vs_independent_p": 8.7e-05
       },
       "Independent": {
-        "mean": 0.000626,
+        "mean": 0.000624,
         "median": 0.0
       }
     },
     "closeness_centrality": {
       "Tobacco Company": {
-        "mean": 0.236461,
-        "median": 0.246696,
-        "vs_independent_U": 18839.0,
-        "vs_independent_p": 2e-06
+        "mean": 0.237514,
+        "median": 0.24737,
+        "vs_independent_U": 18633.0,
+        "vs_independent_p": 5e-06
       },
       "COI Declared": {
         "mean": 0.415175,
         "median": 0.434501,
-        "vs_independent_U": 494838.0,
+        "vs_independent_U": 496404.0,
         "vs_independent_p": 0.0
       },
       "Independent": {
-        "mean": 0.268639,
-        "median": 0.306624
+        "mean": 0.268451,
+        "median": 0.306109
       }
     },
     "eigenvector_centrality": {
       "Tobacco Company": {
         "mean": 4e-06,
         "median": 0.0,
-        "vs_independent_U": 13985.0,
+        "vs_independent_U": 13786.0,
         "vs_independent_p": 0.0
       },
       "COI Declared": {
         "mean": 0.009661,
         "median": 0.000208,
-        "vs_independent_U": 466181.5,
+        "vs_independent_U": 467766.5,
         "vs_independent_p": 0.0
       },
       "Independent": {
-        "mean": 0.000457,
+        "mean": 0.000456,
         "median": 7e-06
       }
     }
   },
   "centrality_kruskal_wallis": {
     "degree_centrality": {
-      "H": 408.4531,
+      "H": 408.8858,
       "p_value": 0.0
     },
     "betweenness_centrality": {
-      "H": 25.0754,
-      "p_value": 4e-06
+      "H": 26.8872,
+      "p_value": 1e-06
     },
     "closeness_centrality": {
-      "H": 490.5355,
+      "H": 489.4814,
       "p_value": 0.0
     },
     "eigenvector_centrality": {
-      "H": 404.3453,
+      "H": 402.7302,
       "p_value": 0.0
     }
   },
@@ -193,10 +193,10 @@
       "Mixed": 103,
       "Neutral": 42
     },
-    "n_tobacco_company": 113,
+    "n_tobacco_company": 111,
     "tobacco_company_outcomes": {
-      "Not coded": 85,
-      "Positive": 13,
+      "Not coded": 84,
+      "Positive": 12,
       "Negative": 8,
       "Mixed": 5,
       "Neutral": 2
@@ -209,10 +209,10 @@
       "Mixed": 20,
       "Neutral": 13
     },
-    "n_independent": 1648,
+    "n_independent": 1650,
     "independent_outcomes": {
-      "Not coded": 1182,
-      "Positive": 223,
+      "Not coded": 1183,
+      "Positive": 224,
       "Negative": 138,
       "Mixed": 78,
       "Neutral": 27

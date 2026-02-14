@@ -1013,8 +1013,8 @@ a48ee31fef6e,"Lee, Hyunjoon",False,COI Declared,2,0.0,32,64,0.019394,0.0,0.35343
 d2f1b2b8d5eb,"Jennings, Mariela V",False,COI Declared,2,0.0,32,64,0.019394,0.0,0.353434,3e-05
 a75d1ebe4979,"Toikumo, Sylvanus",False,COI Declared,2,0.0,32,64,0.019394,0.0,0.353434,3e-05
 ec745d0e2236,"Hardesty, Jeffrey J",False,COI Declared,5,0.0,10,26,0.006061,0.0,0.438688,5.1e-05
-ede1a6f15502,"Brown, Elaine",True,Tobacco Company,2,50.0,7,12,0.004242,0.0,0.198036,0.0
-72bba4c83279,"Haswell, Linsey E",True,Tobacco Company,2,50.0,7,12,0.004242,0.0,0.198036,0.0
+ede1a6f15502,"Brown, Elaine",False,Independent,2,50.0,7,12,0.004242,0.0,0.198036,0.0
+72bba4c83279,"Haswell, Linsey E",False,Independent,2,50.0,7,12,0.004242,0.0,0.198036,0.0
 400cbb6d2088,"Tosakoon, Sararat",False,COI Declared,2,0.0,8,9,0.004848,0.0,0.332165,0.0
 d95280324af1,"Kypriotakis, George",False,Independent,2,100.0,9,9,0.005455,0.0,0.332784,2.4e-05
 e6b70cd13104,"Jacobs, Cindy",False,Independent,3,66.7,8,17,0.004848,0.0,0.521219,0.000443

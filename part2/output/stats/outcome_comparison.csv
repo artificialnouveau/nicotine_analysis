@@ -1,16 +1,16 @@
 group,outcome,count,total,percentage
-Tobacco Company,Positive,13,113,11.5
-Tobacco Company,Negative,8,113,7.1
-Tobacco Company,Neutral,2,113,1.8
-Tobacco Company,Mixed,5,113,4.4
-Tobacco Company,Not coded,85,113,75.2
+Tobacco Company,Positive,12,111,10.8
+Tobacco Company,Negative,8,111,7.2
+Tobacco Company,Neutral,2,111,1.8
+Tobacco Company,Mixed,5,111,4.5
+Tobacco Company,Not coded,84,111,75.7
 COI Declared,Positive,99,414,23.9
 COI Declared,Negative,33,414,8.0
 COI Declared,Neutral,13,414,3.1
 COI Declared,Mixed,20,414,4.8
 COI Declared,Not coded,249,414,60.1
-Independent,Positive,223,1648,13.5
-Independent,Negative,138,1648,8.4
-Independent,Neutral,27,1648,1.6
-Independent,Mixed,78,1648,4.7
-Independent,Not coded,1182,1648,71.7
+Independent,Positive,224,1650,13.6
+Independent,Negative,138,1650,8.4
+Independent,Neutral,27,1650,1.6
+Independent,Mixed,78,1650,4.7
+Independent,Not coded,1183,1650,71.7

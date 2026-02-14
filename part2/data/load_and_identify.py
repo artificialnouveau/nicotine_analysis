@@ -30,7 +30,7 @@ import pandas as pd
 INDUSTRY_ORG_PATTERNS = [
     (r"\bphilip\s+morris\b|\bpmi\b|\bphilip\s+morris\s+international\b", "Philip Morris International"),
     (r"\baltria\b", "Altria"),
-    (r"\bbritish\s+american\s+tobacco\b|\bbat\b", "British American Tobacco"),
+    (r"\bbritish\s+american\s+tobacco\b|\bbat\b(?=.*\btobacco\b)", "British American Tobacco"),
     (r"\bjapan\s+tobacco\b|\bjti\b", "Japan Tobacco International"),
     (r"\bimperial\s+brands\b|\bimperial\s+tobacco\b", "Imperial Brands"),
     (r"\brj\s*reynolds\b|\breynolds\s+american\b|\brjr\b", "R.J. Reynolds"),
@@ -39,10 +39,10 @@ INDUSTRY_ORG_PATTERNS = [
     (r"\blorillard\b", "Lorillard"),
     (r"\bvector\s+group\b|\bliggett\b", "Vector Group / Liggett"),
     (r"\bstar\s+scientific\b", "Star Scientific"),
-    (r"\bcouncil\s+for\s+tobacco\s+research\b|\bctr\b", "Council for Tobacco Research"),
+    (r"\bcouncil\s+for\s+tobacco\s+research\b", "Council for Tobacco Research"),
     (r"\btobacco\s+institute\b", "Tobacco Institute"),
     (r"\bfoundation\s+for\s+a\s+smoke[-\s]?free\s+world\b", "Foundation for a Smoke-Free World"),
-    (r"\brav?i\b.*\btobacco\b", "RAI / Reynolds American"),
+    (r"\brai\b.*\btobacco\b|\breynolds\s+american\b", "RAI / Reynolds American"),
 ]
 
 # COI declaration patterns

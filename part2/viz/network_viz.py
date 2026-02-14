@@ -308,7 +308,7 @@ def generate_plotly_network(G: nx.Graph, output_path: str):
                 f"Papers: {d.get('paper_count', 0)}<br>"
                 f"% Positive: {d.get('pct_positive', 0)}%<br>"
                 f"Degree: {G.degree(n)}<br>"
-                f"Industry: {d.get('is_industry', False)}"
+                f"Category: {d.get('author_category', 'Independent')}"
             )
         return go.Scatter(
             x=x, y=y,
