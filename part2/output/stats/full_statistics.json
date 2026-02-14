@@ -1,0 +1,116 @@
+{
+  "contingency_table": {
+    "Positive": {
+      "No": 238,
+      "Yes": 106
+    },
+    "Negative": {
+      "No": 139,
+      "Yes": 46
+    },
+    "Neutral": {
+      "No": 14,
+      "Yes": 13
+    },
+    "Mixed": {
+      "No": 79,
+      "Yes": 24
+    },
+    "Not coded": {
+      "No": 1006,
+      "Yes": 510
+    }
+  },
+  "chi_square": {
+    "chi2": 13.1957,
+    "p_value": 0.010358,
+    "dof": 4
+  },
+  "odds_ratio_positive": {
+    "odds_ratio": 0.9298,
+    "ci_95_lower": 0.7249,
+    "ci_95_upper": 1.1926,
+    "log_or_se": 0.127,
+    "table": {
+      "a": 106,
+      "b": 593,
+      "c": 238,
+      "d": 1238
+    }
+  },
+  "fisher_exact_p": 0.614772,
+  "proportion_ztest_positive": {
+    "z": -0.5731,
+    "p_value": 0.566584,
+    "p1_industry": 0.1516,
+    "p2_independent": 0.1612,
+    "diff": -0.0096
+  },
+  "permutation_test": {
+    "observed_proportion": 0.1516,
+    "mean_permuted": 0.1582,
+    "p_value": 0.742826,
+    "n_permutations": 10000,
+    "n_target_group": 699
+  },
+  "centrality_comparison": {
+    "degree_centrality": {
+      "industry_mean": 0.006982,
+      "industry_median": 0.006667,
+      "independent_mean": 0.009978,
+      "independent_median": 0.005455,
+      "mann_whitney_U": 62379.5,
+      "p_value": 0.415833
+    },
+    "betweenness_centrality": {
+      "industry_mean": 0.001745,
+      "industry_median": 0.000112,
+      "independent_mean": 0.001673,
+      "independent_median": 0.000111,
+      "mann_whitney_U": 64341.0,
+      "p_value": 0.188338
+    },
+    "closeness_centrality": {
+      "industry_mean": 0.170719,
+      "industry_median": 0.17574,
+      "independent_mean": 0.204588,
+      "independent_median": 0.226999,
+      "mann_whitney_U": 27368.0,
+      "p_value": 0.0
+    },
+    "eigenvector_centrality": {
+      "industry_mean": 4e-06,
+      "industry_median": 0.0,
+      "independent_mean": 0.005269,
+      "independent_median": 6.3e-05,
+      "mann_whitney_U": 17776.0,
+      "p_value": 0.0
+    }
+  },
+  "counts": {
+    "total_papers": 2175,
+    "industry_involved_yes": 699,
+    "industry_involved_no": 1476,
+    "outcome_distribution": {
+      "Not coded": 1516,
+      "Positive": 344,
+      "Negative": 185,
+      "Mixed": 103,
+      "Neutral": 27
+    },
+    "industry_outcome_distribution": {
+      "Not coded": 510,
+      "Positive": 106,
+      "Negative": 46,
+      "Mixed": 24,
+      "Neutral": 13
+    },
+    "independent_outcome_distribution": {
+      "Not coded": 1006,
+      "Positive": 238,
+      "Negative": 139,
+      "Mixed": 79,
+      "Neutral": 14
+    }
+  }
+}

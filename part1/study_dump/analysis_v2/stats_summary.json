@@ -1,0 +1,46 @@
+{
+  "n_records_canonical": 2174,
+  "n_industry_involved_yes": 757,
+  "n_industry_involved_no": 1417,
+  "contingency_outcome_by_industry": {
+    "Positive": {
+      "No": 227,
+      "Yes": 109
+    },
+    "Negative": {
+      "No": 139,
+      "Yes": 58
+    },
+    "Neutral": {
+      "No": 13,
+      "Yes": 13
+    },
+    "Mixed": {
+      "No": 82,
+      "Yes": 25
+    },
+    "Not coded": {
+      "No": 956,
+      "Yes": 552
+    }
+  },
+  "chi_square_test": {
+    "chi2": 14.292217807941789,
+    "p_value": 0.006418514811457766,
+    "dof": 4
+  },
+  "positive_vs_notpositive": {
+    "table": {
+      "a_ind_yes_pos": 109,
+      "b_ind_yes_notpos": 648,
+      "c_ind_no_pos": 227,
+      "d_ind_no_notpos": 1190
+    },
+    "odds_ratio": 0.881805079675858,
+    "ci95": [
+      0.6883752922897363,
+      1.1295876061380539
+    ],
+    "fisher_p_value": 0.35027574775673154
+  }
+}

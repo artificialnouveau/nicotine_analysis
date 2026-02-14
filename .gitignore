@@ -1,0 +1,20 @@
+# OS
+.DS_Store
+__pycache__/
+*.pyc
+
+# Large data files — not suitable for git
+part1/study_dump/pdfs/
+part1/study_dump/data/pmc_xml/
+part1/study_dump/data/pubmed_records.jsonl
+part1/scihub.py/
+
+# Streamlit
+.streamlit/
+
+# Python
+*.egg-info/
+dist/
+build/
+.venv/
+venv/

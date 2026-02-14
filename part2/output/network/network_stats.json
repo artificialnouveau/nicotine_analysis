@@ -1,0 +1,16 @@
+{
+  "n_nodes": 1651,
+  "n_edges": 13405,
+  "density": 0.009842,
+  "avg_degree": 16.24,
+  "avg_weighted_degree": 28.58,
+  "n_connected_components": 71,
+  "largest_component_size": 1470,
+  "largest_component_pct": 89.0,
+  "avg_clustering_coefficient": 0.0274,
+  "transitivity": 0.6258,
+  "n_industry_nodes": 75,
+  "n_independent_nodes": 1576,
+  "industry_assortativity": 0.8086,
+  "communities": 92
+}

@@ -1,0 +1,11 @@
+group,outcome,count,total,percentage
+Industry-Involved,Positive,106,699,15.2
+Industry-Involved,Negative,46,699,6.6
+Industry-Involved,Neutral,13,699,1.9
+Industry-Involved,Mixed,24,699,3.4
+Industry-Involved,Not coded,510,699,73.0
+Independent,Positive,238,1476,16.1
+Independent,Negative,139,1476,9.4
+Independent,Neutral,14,1476,0.9
+Independent,Mixed,79,1476,5.4
+Independent,Not coded,1006,1476,68.2
