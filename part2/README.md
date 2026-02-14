@@ -1,34 +1,32 @@
 # Part 2: Tobacco/Nicotine Industry Influence — Network Analysis & Visualization
 
-This analysis builds a co-authorship network of scientific authors in the tobacco and nicotine research space, identifies those with conflicts of interest and/or industry ties, and statistically tests whether their findings skew more positive/beneficial compared to independent researchers.
+This analysis builds a co-authorship network of scientific authors in the tobacco and nicotine research space, classifies papers into three categories based on author conflicts of interest, and statistically tests whether outcome direction differs across groups.
 
 ---
 
 ## What This Analysis Includes
 
-1. **Data Loading & COI Identification** — Ingests 2,175 PubMed records from Part 1, extracts 7,006 unique authors and their affiliations, and flags industry ties by matching against known tobacco/nicotine companies (Philip Morris, BAT, JUUL, R.J. Reynolds, Altria, etc.) and COI disclosure statements.
+1. **Data Loading & COI Identification** — Ingests 2,175 PubMed records from Part 1, extracts 7,006 unique authors and their affiliations, and classifies each paper into one of three categories: Tobacco Company ties, COI Declared (non-tobacco), or Independent.
 
 2. **Co-Authorship Network Construction** — Builds an undirected weighted graph where nodes are authors and edges represent co-publication. Computes degree, betweenness, closeness, and eigenvector centrality for every author. Detects research communities via Louvain clustering.
 
-3. **Statistical Testing** — Runs five complementary tests comparing industry-involved vs independent papers: chi-square, Fisher exact, odds ratio with 95% CI, two-proportion z-test, and a 10,000-iteration permutation test.
+3. **Statistical Testing** — Runs tests comparing all three groups: chi-square (3-group), pairwise Fisher exact tests, odds ratios with 95% CI, proportion z-tests, permutation tests, and Kruskal-Wallis + Mann-Whitney U for centrality metrics.
 
-4. **Visualizations** — Generates six static plots (PNG), four interactive charts (HTML), and an interactive co-authorship network with color-coded nodes and a legend.
+4. **Visualizations** — Generates six static plots (PNG), four interactive charts (HTML), and an interactive co-authorship network with color-coded nodes (three categories) and a legend.
 
 5. **Streamlit Dashboard** — A full interactive dashboard for exploring all results, with filterable paper/author browsers, network views, and outcome charts.
 
 ---
 
-## Dataset Summary
+## Three-Category Classification
 
-| Metric | Value |
-|---|---|
-| Total papers analyzed | 2,175 |
-| Industry-involved papers | 699 (32.1%) |
-| Independent papers | 1,476 (67.9%) |
-| Total unique authors | 7,006 |
-| Industry-affiliated authors | 241 (3.4%) |
-| Authors in network (2+ papers) | 1,651 |
-| Co-authorship edges | 13,405 |
+Papers are classified into three mutually exclusive groups:
+
+| Category | Definition | Papers |
+|---|---|---|
+| **Tobacco Company** | Author has verified affiliation with a known tobacco/nicotine company (Philip Morris, BAT, JUUL, R.J. Reynolds, Altria, etc.) OR the COI statement specifically names a tobacco company | 113 (5.2%) |
+| **COI Declared** | Author declared a conflict of interest (pharma consulting, grants, advisory boards, etc.) but NOT tied to a tobacco company | 414 (19.0%) |
+| **Independent** | No conflict of interest declared | 1,648 (75.8%) |
 
 ---
 
@@ -36,25 +34,41 @@ This analysis builds a co-authorship network of scientific authors in the tobacc
 
 ### Outcome Distribution
 
-| Outcome | Industry-Involved | Independent |
-|---|---|---|
-| Positive | 106 (15.2%) | 238 (16.1%) |
-| Negative | 46 (6.6%) | 139 (9.4%) |
-| Neutral | 13 (1.9%) | 14 (0.9%) |
-| Mixed | 24 (3.4%) | 79 (5.4%) |
-| Not coded | 510 (73.0%) | 1,006 (68.2%) |
+| Outcome | Tobacco Company | COI Declared | Independent |
+|---|---|---|---|
+| Positive | 13 (11.5%) | 99 (23.9%) | 223 (13.5%) |
+| Negative | 8 (7.1%) | 33 (8.0%) | 138 (8.4%) |
+| Neutral | 2 (1.8%) | 13 (3.1%) | 27 (1.6%) |
+| Mixed | 5 (4.4%) | 20 (4.8%) | 78 (4.7%) |
+| Not coded | 85 (75.2%) | 249 (60.1%) | 1,182 (71.7%) |
 
 ### Statistical Tests
 
+#### Tobacco Company vs Independent
+
 | Test | Statistic | p-value | Interpretation |
 |---|---|---|---|
-| Chi-square (full table) | 13.20 | **0.010** | Overall outcome distribution differs significantly |
-| Fisher exact (Positive vs Not) | — | 0.615 | No significant difference in positive rate specifically |
-| Odds ratio (Positive) | 0.93 (95% CI: 0.72–1.19) | — | CI spans 1.0 — no significant association |
-| Proportion z-test | z = −0.57 | 0.567 | Industry: 15.2% positive vs Independent: 16.1% — not significant |
-| Permutation test (n=10,000) | — | 0.743 | Observed rate consistent with random assignment |
+| Odds ratio (Positive) | 0.83 (95% CI: 0.46–1.51) | — | CI spans 1.0 — no significant association |
+| Fisher exact | — | 0.668 | No significant difference |
+| Proportion z-test | z = −0.61 | 0.541 | 11.5% vs 13.5% positive — not significant |
+| Permutation test (two-sided) | — | 0.576 | Consistent with random assignment |
 
-**Bottom line:** Industry-involved papers do **not** show significantly more positive outcomes. However, the overall outcome distribution does differ (p = 0.01) — industry papers report **fewer negative findings** (6.6% vs 9.4%) and **fewer mixed results** (3.4% vs 5.4%), suggesting a potential bias in how negative results are reported or framed rather than an inflation of positive ones.
+#### COI Declared vs Independent
+
+| Test | Statistic | p-value | Interpretation |
+|---|---|---|---|
+| Odds ratio (Positive) | **2.01** (95% CI: 1.54–2.62) | — | **Significant: CI does not span 1.0** |
+| Fisher exact | — | **< 0.001** | **Significant difference** |
+| Proportion z-test | z = 5.20 | **< 0.001** | 23.9% vs 13.5% positive — **significant** |
+| Permutation test (two-sided) | — | **< 0.001** | **Not consistent with random assignment** |
+
+#### Overall (3-group)
+
+| Test | Statistic | p-value | Interpretation |
+|---|---|---|---|
+| Chi-square (coded only, 3×4) | 10.43 | 0.108 | Borderline — not significant at α = 0.05 |
+
+**Bottom line:** Papers with actual **tobacco company ties do not** show significantly more positive outcomes (OR = 0.83, p = 0.67). However, papers where authors **declared a non-tobacco COI** are **2× more likely** to report positive findings (OR = 2.01, p < 0.001). This suggests the positive-outcome signal comes not from tobacco industry influence specifically, but from the broader category of researchers who declare conflicts of interest — potentially reflecting publication norms in industry-adjacent research or funding-related reporting biases that are not tobacco-specific.
 
 ### Network Structure
 
@@ -67,16 +81,16 @@ This analysis builds a co-authorship network of scientific authors in the tobacc
 | Louvain communities | 92 |
 | **Industry assortativity** | **0.8086** |
 
-The interactive co-authorship network reveals a highly clustered research landscape where 89% of authors belong to a single giant connected component, yet industry-affiliated researchers (red diamonds) form tightly insular subgroups — reflected in an industry assortativity coefficient of 0.81, meaning tobacco/nicotine industry-tied authors overwhelmingly co-publish with each other rather than with independent scientists. The most central "bridge" authors connecting disparate research communities — such as Neal Benowitz, Thomas Eissenberg, and Maciej Goniewicz — are all independent researchers, while industry-affiliated authors sit at the network's periphery with significantly lower eigenvector centrality (p < 0.001). This structural segregation across 92 detected communities suggests two largely parallel research ecosystems operating within the same scientific field, with limited cross-pollination between industry-funded and independent groups.
+The interactive co-authorship network reveals a highly clustered research landscape where 89% of authors belong to a single giant connected component. Tobacco company-affiliated researchers (red diamonds) form tightly insular subgroups — reflected in an industry assortativity coefficient of 0.81 — while COI-declared authors (orange triangles) are more centrally embedded. The most central "bridge" authors connecting disparate research communities — such as Neal Benowitz, Thomas Eissenberg, and Maciej Goniewicz — tend to be COI-declared researchers with high betweenness centrality, while tobacco-affiliated authors sit at the network's periphery with significantly lower eigenvector centrality.
 
-### Centrality Comparison (Mann-Whitney U)
+### Centrality Comparison (Kruskal-Wallis + Mann-Whitney U)
 
-| Metric | Industry Mean | Independent Mean | p-value |
-|---|---|---|---|
-| Degree centrality | 0.0070 | 0.0100 | 0.416 |
-| Betweenness centrality | 0.0017 | 0.0017 | 0.188 |
-| Closeness centrality | 0.1707 | 0.2046 | **< 0.001** |
-| Eigenvector centrality | 0.000004 | 0.0053 | **< 0.001** |
+| Metric | Tobacco Co. Mean | COI Declared Mean | Independent Mean | KW p-value |
+|---|---|---|---|---|
+| Degree centrality | 0.0070 | 0.0151 | 0.0044 | **< 0.001** |
+| Betweenness centrality | 0.0011 | 0.0036 | 0.0006 | **< 0.001** |
+| Closeness centrality | 0.2365 | 0.4152 | 0.2686 | **< 0.001** |
+| Eigenvector centrality | 0.000004 | 0.0097 | 0.0005 | **< 0.001** |
 
 ---
 
@@ -84,19 +98,19 @@ The interactive co-authorship network reveals a highly clustered research landsc
 
 ### Static Plots
 
-#### Outcome Counts by Industry Involvement
+#### Outcome Counts by Author Category
 ![Outcome by Industry](output/viz/figures/outcome_by_industry.png)
 
 #### Outcome Proportions (%)
 ![Outcome Proportions](output/viz/figures/outcome_proportions.png)
 
-#### Publication Timeline: Industry vs Independent
+#### Publication Timeline by Author Category
 ![Timeline](output/viz/figures/timeline_industry_papers.png)
 
 #### Odds Ratio Forest Plot
 ![Odds Ratio](output/viz/figures/odds_ratio_forest.png)
 
-#### Network Centrality: Industry vs Independent
+#### Network Centrality by Author Category
 ![Centrality Distribution](output/viz/figures/centrality_distribution.png)
 
 #### Community-Level: Industry Concentration vs Positive Outcomes
@@ -106,13 +120,13 @@ The interactive co-authorship network reveals a highly clustered research landsc
 
 Open these files in a browser for full interactivity:
 
-- **[Co-Authorship Network (pyvis)](https://artificialnouveau.github.io/nicotine_analysis/part2/output/viz/coauthor_network_interactive.html)** — Drag, zoom, and hover over the network. Industry authors are red diamonds, independent are blue circles. Includes a color legend. Node size reflects paper count; edge thickness reflects shared publications.
+- **[Co-Authorship Network (pyvis)](https://artificialnouveau.github.io/nicotine_analysis/part2/output/viz/coauthor_network_interactive.html)** — Drag, zoom, and hover over the network. Tobacco company authors are red diamonds, COI-declared are orange triangles, independent are blue circles. Node size reflects paper count; edge thickness reflects shared publications.
 
-- **[Co-Authorship Network (plotly)](https://artificialnouveau.github.io/nicotine_analysis/part2/output/viz/coauthor_network_plotly.html)** — Spring-layout network with hover tooltips showing author name, paper count, % positive outcomes, and industry status.
+- **[Co-Authorship Network (plotly)](https://artificialnouveau.github.io/nicotine_analysis/part2/output/viz/coauthor_network_plotly.html)** — Spring-layout network with hover tooltips showing author name, paper count, % positive outcomes, and category.
 
-- **[Sankey Diagram: Industry Status to Outcomes](https://artificialnouveau.github.io/nicotine_analysis/part2/output/viz/figures/sankey_funding_outcome.html)** — Flow diagram showing how papers from industry-involved vs independent groups distribute across outcome categories.
+- **[Sankey Diagram: Author Category to Outcomes](https://artificialnouveau.github.io/nicotine_analysis/part2/output/viz/figures/sankey_funding_outcome.html)** — Flow diagram showing how papers from each category distribute across outcome categories.
 
-- **[Outcome Heatmap Over Time](https://artificialnouveau.github.io/nicotine_analysis/part2/output/viz/figures/outcome_heatmap.html)** — Year-by-year heatmap of % positive outcomes for industry vs independent papers from 1990–present.
+- **[Outcome Heatmap Over Time](https://artificialnouveau.github.io/nicotine_analysis/part2/output/viz/figures/outcome_heatmap.html)** — Year-by-year heatmap of % positive outcomes for all three categories from 1990–present.
 
 ### Streamlit Dashboard
 
@@ -172,7 +186,7 @@ streamlit run viz/app.py
 
 ## Methods
 
-- **Industry identification**: Author affiliations are matched against 15 known tobacco/nicotine industry organizations using regex patterns. COI statements are classified using keyword matching against established disclosure phrases.
-- **Outcome coding**: Conclusion-like sentences are extracted from structured abstracts (preferring labeled CONCLUSIONS sections), then classified as Positive/Negative/Neutral/Mixed using directional keyword patterns (e.g., "harm reduction", "cessation" = positive; "carcinogen", "increased risk" = negative).
-- **Network analysis**: Co-authorship graph built with NetworkX; community detection via Louvain algorithm; centrality metrics include degree, betweenness, closeness, and eigenvector centrality.
-- **Statistical tests**: Chi-square test on the full 2x5 contingency table; Fisher exact test on the collapsed 2x2 (Positive vs Not-Positive); odds ratio with Wald 95% CI; two-proportion z-test; permutation test with 10,000 iterations.
+- **Three-category classification**: Papers are classified as "Tobacco Company" (author has verified affiliation with one of 15 known tobacco/nicotine organizations, or COI statement names a tobacco company), "COI Declared" (author disclosed a conflict of interest that is not tobacco-specific), or "Independent" (no COI declared).
+- **Outcome coding**: Conclusion-like sentences are extracted from abstracts, then classified as Positive/Negative/Neutral/Mixed using directional keyword patterns. Neutral patterns (e.g., "no significant") take priority over individual positive/negative signals to prevent misclassification.
+- **Network analysis**: Co-authorship graph built with NetworkX; community detection via Louvain algorithm; centrality metrics include degree, betweenness (with inverted weights so stronger ties = shorter paths), closeness, and eigenvector centrality.
+- **Statistical tests**: Chi-square test on the 3×4 table (coded outcomes only); pairwise Fisher exact, odds ratio with 95% CI, proportion z-test, and two-sided permutation test (10,000 iterations) for each group vs Independent; Kruskal-Wallis and Mann-Whitney U for centrality comparisons.

@@ -90,18 +90,25 @@ def check_industry_affiliation(affiliations: List[str]) -> Tuple[bool, List[str]
 
 
 def classify_coi_statement(coi_text: Optional[str]) -> str:
-    """Returns 'Yes', 'No', or 'Missing'."""
+    """Returns 'Yes', 'No', or 'Missing'.
+
+    Bug fix: check YES phrases first, so a statement that begins with
+    "no conflict" but then discloses actual conflicts is correctly
+    classified as 'Yes'. Only return 'No' if no YES phrases are found.
+    """
     t = clean(coi_text).lower()
     if not t:
         return "Missing"
-    for phrase in NO_COI_PHRASES:
-        if phrase in t:
-            return "No"
+    # Check for actual conflict indicators FIRST
     for phrase in YES_COI_PHRASES:
         if phrase in t:
             return "Yes"
-    # Has text but no clear signal — conservative: treat as declared
-    return "Yes"
+    # Only then check for "no conflict" boilerplate
+    for phrase in NO_COI_PHRASES:
+        if phrase in t:
+            return "No"
+    # Has text but no clear signal — conservative: treat as unknown
+    return "Missing"
 
 
 def read_jsonl(path: str) -> List[Dict[str, Any]]:
@@ -164,18 +171,26 @@ def extract_conclusion_sentences(abstract: str, max_sents: int = 6) -> List[str]
 
 
 def code_outcome(sentences: List[str]) -> str:
+    """Code outcome direction from conclusion sentences.
+
+    Bug fix: Neutral patterns (e.g., "no significant") now take priority
+    over Positive, so "no significant improvement" is coded Neutral, not
+    Positive. Order: Mixed > Neutral > Negative > Positive > Not coded.
+    """
     pos = any(re.search(p, s.lower()) for s in sentences for p in POS_PATTERNS)
     neg = any(re.search(p, s.lower()) for s in sentences for p in NEG_PATTERNS)
     neu = any(re.search(p, s.lower()) for s in sentences for p in NEUTRAL_PATTERNS)
 
     if pos and neg:
         return "Mixed"
+    # Neutral overrides individual pos/neg — "no significant improvement"
+    # should be Neutral, not Positive
+    if neu:
+        return "Neutral"
     if neg:
         return "Negative"
     if pos:
         return "Positive"
-    if neu:
-        return "Neutral"
     return "Not coded"
 
 
@@ -267,8 +282,30 @@ def process_records(records: List[Dict]) -> Tuple[pd.DataFrame, pd.DataFrame, pd
                 "is_industry_author": is_industry,
             })
 
-        # Determine industry involvement (affiliation OR declared COI)
-        industry_involved = paper_has_industry_author or declared_coi == "Yes"
+        # Determine industry involvement: require actual tobacco/nicotine industry
+        # affiliation OR tobacco-industry-specific language in the COI statement.
+        # A generic declared COI (e.g., pharma consulting, NIH grants) does NOT
+        # count as tobacco-industry involvement.
+        coi_mentions_industry = False
+        if coi_statement:
+            coi_lower = coi_statement.lower()
+            for pattern, _ in INDUSTRY_ORG_PATTERNS:
+                if re.search(pattern, coi_lower, re.IGNORECASE):
+                    coi_mentions_industry = True
+                    break
+        industry_involved = paper_has_industry_author or coi_mentions_industry
+
+        # Three-category classification:
+        #   "Tobacco Company" — actual tobacco/nicotine industry affiliation or
+        #                       COI statement names a known tobacco company
+        #   "COI Declared"   — declared a conflict of interest but NOT tobacco-specific
+        #   "Independent"    — no conflicts declared
+        if industry_involved:
+            industry_category = "Tobacco Company"
+        elif declared_coi == "Yes":
+            industry_category = "COI Declared"
+        else:
+            industry_category = "Independent"
 
         papers_list.append({
             "paper_id": paper_id,
@@ -281,7 +318,7 @@ def process_records(records: List[Dict]) -> Tuple[pd.DataFrame, pd.DataFrame, pd
             "declared_coi": declared_coi,
             "has_industry_author": paper_has_industry_author,
             "industry_orgs": "; ".join(sorted(set(paper_industry_orgs))),
-            "industry_involved": "Yes" if industry_involved else "No",
+            "industry_category": industry_category,
             "outcome": outcome,
             "author_count": len(paper_author_ids),
             "author_ids": ";".join(paper_author_ids),
@@ -342,10 +379,17 @@ def main():
     edges_df.to_csv(edges_path, index=False)
 
     n_industry = authors_df["is_industry_affiliated"].sum() if "is_industry_affiliated" in authors_df.columns else 0
-    n_papers_ind = (papers_df["industry_involved"] == "Yes").sum() if not papers_df.empty else 0
+
+    if not papers_df.empty and "industry_category" in papers_df.columns:
+        cat_counts = papers_df["industry_category"].value_counts()
+        n_tobacco = cat_counts.get("Tobacco Company", 0)
+        n_coi = cat_counts.get("COI Declared", 0)
+        n_indep = cat_counts.get("Independent", 0)
+    else:
+        n_tobacco = n_coi = n_indep = 0
 
     print(f"Authors: {len(authors_df)} ({n_industry} industry-affiliated)")
-    print(f"Papers:  {len(papers_df)} ({n_papers_ind} industry-involved)")
+    print(f"Papers:  {len(papers_df)} (Tobacco Company: {n_tobacco}, COI Declared: {n_coi}, Independent: {n_indep})")
     print(f"Edges:   {len(edges_df)}")
     print(f"Output:  {args.output_dir}")
 

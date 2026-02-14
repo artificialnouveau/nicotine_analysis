@@ -4,20 +4,16 @@ app.py
 
 Streamlit interactive dashboard for the tobacco/nicotine industry influence analysis.
 
-Run: streamlit run viz/app.py -- --data_dir output/data --network_dir output/network --stats_dir output/stats
+Run: streamlit run viz/app.py
 
-Features:
-  - Overview statistics and key findings
-  - Interactive co-authorship network (embedded plotly)
-  - Outcome comparison charts (industry vs independent)
-  - Community breakdown
-  - Author explorer with search
-  - Paper browser with filters
+Uses three-category classification:
+  - Tobacco Company: actual tobacco/nicotine industry ties
+  - COI Declared: declared conflict of interest (non-tobacco)
+  - Independent: no conflicts declared
 """
 
 from __future__ import annotations
 
-import argparse
 import json
 import os
 import sys
@@ -33,21 +29,20 @@ except ImportError:
     print("Streamlit and plotly are required: pip install streamlit plotly")
     sys.exit(1)
 
-try:
-    import networkx as nx
-    HAS_NX = True
-except ImportError:
-    HAS_NX = False
-
 
 # ---------------------------------------------------------------------------
 # Config
 # ---------------------------------------------------------------------------
 
+CATEGORY_ORDER = ["Tobacco Company", "COI Declared", "Independent"]
+CATEGORY_COLORS = {
+    "Tobacco Company": "#e74c3c",
+    "COI Declared": "#f39c12",
+    "Independent": "#3498db",
+}
+
 OUTCOME_ORDER = ["Positive", "Negative", "Neutral", "Mixed", "Not coded"]
-COLORS = {
-    "industry": "#e74c3c",
-    "independent": "#3498db",
+OUTCOME_COLORS = {
     "Positive": "#2ecc71",
     "Negative": "#e74c3c",
     "Neutral": "#95a5a6",
@@ -67,6 +62,12 @@ def load_data(data_dir: str, network_dir: str, stats_dir: str):
     data["papers"] = pd.read_csv(papers_path) if os.path.exists(papers_path) else pd.DataFrame()
     data["authors"] = pd.read_csv(authors_path) if os.path.exists(authors_path) else pd.DataFrame()
     data["edges"] = pd.read_csv(edges_path) if os.path.exists(edges_path) else pd.DataFrame()
+
+    # Ensure boolean columns are actual bools (CSVs load them as strings)
+    if not data["authors"].empty and "is_industry_affiliated" in data["authors"].columns:
+        data["authors"]["is_industry_affiliated"] = data["authors"]["is_industry_affiliated"].map(
+            lambda x: str(x).strip().lower() in ("true", "1", "yes")
+        )
 
     centrality_path = os.path.join(network_dir, "top_authors_centrality.csv")
     comm_path = os.path.join(network_dir, "community_summary.csv")
@@ -112,51 +113,53 @@ def page_overview(data):
     with col1:
         st.metric("Total Papers", len(papers))
     with col2:
-        n_ind = (papers["industry_involved"] == "Yes").sum()
-        st.metric("Industry-Involved", n_ind)
+        if "industry_category" in papers.columns:
+            n_tobacco = (papers["industry_category"] == "Tobacco Company").sum()
+            st.metric("Tobacco Company", n_tobacco)
+        else:
+            st.metric("Tobacco Company", "N/A")
     with col3:
-        st.metric("Total Authors", len(authors) if not authors.empty else "N/A")
+        if "industry_category" in papers.columns:
+            n_coi = (papers["industry_category"] == "COI Declared").sum()
+            st.metric("COI Declared", n_coi)
+        else:
+            st.metric("COI Declared", "N/A")
     with col4:
-        n_ind_auth = authors["is_industry_affiliated"].sum() if not authors.empty and "is_industry_affiliated" in authors.columns else 0
-        st.metric("Industry Authors", int(n_ind_auth))
+        if "industry_category" in papers.columns:
+            n_indep = (papers["industry_category"] == "Independent").sum()
+            st.metric("Independent", n_indep)
+        else:
+            st.metric("Independent", "N/A")
 
     st.divider()
 
     # Key statistical findings
     st.subheader("Key Statistical Findings")
 
-    or_data = stats.get("odds_ratio_positive", {})
     chi_data = stats.get("chi_square", {})
-    prop_data = stats.get("proportion_ztest_positive", {})
 
     col1, col2, col3 = st.columns(3)
     with col1:
-        or_val = or_data.get("odds_ratio", "N/A")
-        ci_lo = or_data.get("ci_95_lower", "")
-        ci_hi = or_data.get("ci_95_upper", "")
-        st.metric("Odds Ratio (Positive)", f"{or_val}")
+        or_tobacco = stats.get("odds_ratio_tobacco_company_vs_independent", {})
+        or_val = or_tobacco.get("odds_ratio", "N/A")
+        ci_lo = or_tobacco.get("ci_95_lower", "")
+        ci_hi = or_tobacco.get("ci_95_upper", "")
+        st.metric("OR: Tobacco vs Independent", f"{or_val}")
         if ci_lo and ci_hi:
             st.caption(f"95% CI: [{ci_lo}, {ci_hi}]")
 
     with col2:
-        p_val = chi_data.get("p_value", "N/A")
-        st.metric("Chi-square p-value", f"{p_val}")
+        or_coi = stats.get("odds_ratio_coi_declared_vs_independent", {})
+        or_val_coi = or_coi.get("odds_ratio", "N/A")
+        ci_lo_coi = or_coi.get("ci_95_lower", "")
+        ci_hi_coi = or_coi.get("ci_95_upper", "")
+        st.metric("OR: COI vs Independent", f"{or_val_coi}")
+        if ci_lo_coi and ci_hi_coi:
+            st.caption(f"95% CI: [{ci_lo_coi}, {ci_hi_coi}]")
 
     with col3:
-        fisher_p = stats.get("fisher_exact_p", "N/A")
-        st.metric("Fisher exact p-value", f"{fisher_p}")
-
-    # Interpretation
-    if isinstance(or_val, (int, float)) and or_val > 1:
-        st.info(
-            f"Industry-involved papers are **{or_val:.2f}x** more likely to report "
-            f"positive/beneficial outcomes compared to independent papers."
-        )
-    elif isinstance(or_val, (int, float)) and or_val < 1:
-        st.info(
-            f"Industry-involved papers are **{1/or_val:.2f}x less likely** to report "
-            f"positive outcomes compared to independent papers."
-        )
+        p_val = chi_data.get("p_value", "N/A")
+        st.metric("Chi-square p-value (3-group)", f"{p_val}")
 
     # Network stats
     if net_stats:
@@ -173,22 +176,22 @@ def page_overview(data):
             st.metric("Industry Assortativity", f"{assort:.3f}" if assort is not None else "N/A")
             if assort is not None:
                 if assort > 0:
-                    st.caption("Positive = industry authors cluster together")
+                    st.caption("Positive = tobacco authors cluster together")
                 else:
-                    st.caption("Negative = industry authors don't cluster")
+                    st.caption("Negative = tobacco authors don't cluster")
 
 
 def page_outcomes(data):
     st.header("Outcome Analysis")
 
     papers = data["papers"]
-    if papers.empty:
+    if papers.empty or "industry_category" not in papers.columns:
         st.warning("No data loaded.")
         return
 
     # Grouped bar chart
-    st.subheader("Outcome Counts by Industry Involvement")
-    ctab = pd.crosstab(papers["industry_involved"], papers["outcome"])
+    st.subheader("Outcome Counts by Author Category")
+    ctab = pd.crosstab(papers["industry_category"], papers["outcome"])
     for col in OUTCOME_ORDER:
         if col not in ctab.columns:
             ctab[col] = 0
@@ -197,21 +200,21 @@ def page_outcomes(data):
     fig = go.Figure()
     for outcome in OUTCOME_ORDER:
         vals = []
-        for group in ["Yes", "No"]:
-            vals.append(ctab.loc[group, outcome] if group in ctab.index else 0)
+        for cat in CATEGORY_ORDER:
+            vals.append(ctab.loc[cat, outcome] if cat in ctab.index else 0)
         fig.add_trace(go.Bar(
             name=outcome,
-            x=["Industry-Involved", "Independent"],
+            x=CATEGORY_ORDER,
             y=vals,
-            marker_color=COLORS.get(outcome, "#999"),
+            marker_color=OUTCOME_COLORS.get(outcome, "#999"),
         ))
-    fig.update_layout(barmode="group", title="Paper Outcomes by Industry Involvement",
+    fig.update_layout(barmode="group", title="Paper Outcomes by Author Category",
                       yaxis_title="Count", height=500)
     st.plotly_chart(fig, use_container_width=True)
 
     # Proportional view
     st.subheader("Outcome Proportions (%)")
-    ctab_pct = pd.crosstab(papers["industry_involved"], papers["outcome"], normalize="index") * 100
+    ctab_pct = pd.crosstab(papers["industry_category"], papers["outcome"], normalize="index") * 100
     for col in OUTCOME_ORDER:
         if col not in ctab_pct.columns:
             ctab_pct[col] = 0
@@ -220,13 +223,13 @@ def page_outcomes(data):
     fig2 = go.Figure()
     for outcome in OUTCOME_ORDER:
         vals = []
-        for group in ["Yes", "No"]:
-            vals.append(round(ctab_pct.loc[group, outcome], 1) if group in ctab_pct.index else 0)
+        for cat in CATEGORY_ORDER:
+            vals.append(round(ctab_pct.loc[cat, outcome], 1) if cat in ctab_pct.index else 0)
         fig2.add_trace(go.Bar(
             name=outcome,
-            x=["Industry-Involved", "Independent"],
+            x=CATEGORY_ORDER,
             y=vals,
-            marker_color=COLORS.get(outcome, "#999"),
+            marker_color=OUTCOME_COLORS.get(outcome, "#999"),
             text=[f"{v:.1f}%" for v in vals],
             textposition="auto",
         ))
@@ -243,16 +246,16 @@ def page_outcomes(data):
 
         yearly = []
         for year in sorted(df_time["year"].unique()):
-            for group, label in [("Yes", "Industry"), ("No", "Independent")]:
-                sub = df_time[(df_time["year"] == year) & (df_time["industry_involved"] == group)]
+            for cat in CATEGORY_ORDER:
+                sub = df_time[(df_time["year"] == year) & (df_time["industry_category"] == cat)]
                 n_pos = (sub["outcome"] == "Positive").sum()
                 total = len(sub)
                 pct = (n_pos / total * 100) if total > 0 else 0
-                yearly.append({"year": year, "group": label, "pct_positive": pct, "n": total})
+                yearly.append({"year": year, "group": cat, "pct_positive": pct, "n": total})
 
         yearly_df = pd.DataFrame(yearly)
         fig3 = px.line(yearly_df, x="year", y="pct_positive", color="group",
-                       color_discrete_map={"Industry": COLORS["industry"], "Independent": COLORS["independent"]},
+                       color_discrete_map=CATEGORY_COLORS,
                        title="% Positive Outcomes Over Time",
                        labels={"pct_positive": "% Positive", "year": "Year"})
         fig3.update_layout(height=400)
@@ -272,23 +275,25 @@ def page_network(data):
     # Top authors table
     st.subheader("Top Authors by Betweenness Centrality")
     top_n = st.slider("Show top N authors", 10, 100, 25)
-    display_cols = ["name", "is_industry", "paper_count", "degree",
+    display_cols = ["name", "author_category", "paper_count", "degree",
                     "betweenness_centrality", "eigenvector_centrality", "pct_positive"]
     available_cols = [c for c in display_cols if c in centrality.columns]
-    st.dataframe(centrality.head(top_n)[available_cols], use_container_width=True)
+    sorted_cent = centrality.sort_values("betweenness_centrality", ascending=False) if "betweenness_centrality" in centrality.columns else centrality
+    st.dataframe(sorted_cent.head(top_n)[available_cols], use_container_width=True)
 
     # Centrality comparison
-    st.subheader("Centrality: Industry vs Independent")
-    if "is_industry" in centrality.columns:
+    st.subheader("Centrality by Author Category")
+    if "author_category" in centrality.columns:
         metric = st.selectbox("Metric", ["betweenness_centrality", "degree_centrality",
                                           "eigenvector_centrality", "closeness_centrality"])
         if metric in centrality.columns:
             fig = px.box(
-                centrality, x="is_industry", y=metric,
-                color="is_industry",
-                color_discrete_map={True: COLORS["industry"], False: COLORS["independent"]},
-                labels={"is_industry": "Industry-Affiliated", metric: metric.replace("_", " ").title()},
-                title=f"{metric.replace('_', ' ').title()} by Industry Status",
+                centrality, x="author_category", y=metric,
+                color="author_category",
+                color_discrete_map=CATEGORY_COLORS,
+                category_orders={"author_category": CATEGORY_ORDER},
+                labels={"author_category": "Author Category", metric: metric.replace("_", " ").title()},
+                title=f"{metric.replace('_', ' ').title()} by Author Category",
             )
             st.plotly_chart(fig, use_container_width=True)
 
@@ -297,13 +302,14 @@ def page_network(data):
         st.subheader("Community Breakdown")
         st.dataframe(communities, use_container_width=True)
 
+        x_col = "pct_tobacco" if "pct_tobacco" in communities.columns else "pct_industry"
         fig = px.scatter(
-            communities, x="pct_industry", y="pct_positive",
-            size="n_authors", color="pct_industry",
+            communities, x=x_col, y="pct_positive",
+            size="n_authors", color=x_col,
             color_continuous_scale="RdYlBu_r",
-            hover_data=["community_id", "n_authors", "n_industry_authors"],
-            title="Communities: % Industry vs % Positive Outcomes",
-            labels={"pct_industry": "% Industry Authors", "pct_positive": "% Positive Outcomes"},
+            hover_data=["community_id", "n_authors"],
+            title="Communities: % Tobacco Company vs % Positive Outcomes",
+            labels={x_col: "% Tobacco Company Authors", "pct_positive": "% Positive Outcomes"},
         )
         st.plotly_chart(fig, use_container_width=True)
 
@@ -325,14 +331,15 @@ def page_papers(data):
     # Filters
     col1, col2, col3 = st.columns(3)
     with col1:
-        industry_filter = st.multiselect("Industry Involved", ["Yes", "No"], default=["Yes", "No"])
+        cat_filter = st.multiselect("Author Category", CATEGORY_ORDER, default=CATEGORY_ORDER)
     with col2:
         outcome_filter = st.multiselect("Outcome", OUTCOME_ORDER, default=OUTCOME_ORDER)
     with col3:
         search = st.text_input("Search title")
 
+    cat_col = "industry_category" if "industry_category" in papers.columns else "industry_involved"
     filtered = papers[
-        papers["industry_involved"].isin(industry_filter) &
+        papers[cat_col].isin(cat_filter) &
         papers["outcome"].isin(outcome_filter)
     ]
     if search:
@@ -340,7 +347,7 @@ def page_papers(data):
 
     st.write(f"Showing {len(filtered)} / {len(papers)} papers")
 
-    display_cols = ["title", "year", "journal", "outcome", "industry_involved",
+    display_cols = ["title", "year", "journal", "outcome", "industry_category",
                     "declared_coi", "industry_orgs", "doi"]
     available = [c for c in display_cols if c in filtered.columns]
     st.dataframe(filtered[available].head(200), use_container_width=True, height=600)
@@ -358,8 +365,12 @@ def page_authors(data):
 
     # Merge centrality if available
     if not centrality.empty and "author_id" in centrality.columns:
-        merged = authors.merge(centrality[["author_id", "degree", "betweenness_centrality",
-                                            "eigenvector_centrality", "pct_positive"]],
+        merge_cols = ["author_id", "degree", "betweenness_centrality",
+                      "eigenvector_centrality", "pct_positive"]
+        if "author_category" in centrality.columns:
+            merge_cols.append("author_category")
+        merge_cols = [c for c in merge_cols if c in centrality.columns]
+        merged = authors.merge(centrality[merge_cols],
                                on="author_id", how="left", suffixes=("", "_cent"))
     else:
         merged = authors
@@ -367,17 +378,23 @@ def page_authors(data):
     # Filter
     col1, col2 = st.columns(2)
     with col1:
-        show_industry = st.checkbox("Show only industry-affiliated", value=False)
+        show_filter = st.selectbox("Filter by category", ["All", "Tobacco Company", "COI Declared", "Independent"])
     with col2:
         search = st.text_input("Search author name")
 
-    if show_industry and "is_industry_affiliated" in merged.columns:
-        merged = merged[merged["is_industry_affiliated"] == True]
+    if show_filter != "All":
+        if "author_category" in merged.columns:
+            merged = merged[merged["author_category"] == show_filter]
+        elif show_filter == "Tobacco Company" and "is_industry_affiliated" in merged.columns:
+            merged = merged[merged["is_industry_affiliated"] == True]
+
     if search:
         merged = merged[merged["name"].str.contains(search, case=False, na=False)]
 
     display_cols = ["name", "is_industry_affiliated", "industry_orgs", "paper_count",
                     "degree", "betweenness_centrality", "pct_positive", "affiliations"]
+    if "author_category" in merged.columns:
+        display_cols.insert(1, "author_category")
     available = [c for c in display_cols if c in merged.columns]
 
     st.write(f"Showing {len(merged)} authors")
@@ -398,14 +415,11 @@ def main():
     st.title("Tobacco/Nicotine Industry Influence Network Analysis")
     st.caption("Analyzing conflicts of interest and outcome bias in tobacco/nicotine research")
 
-    # Parse args from CLI (streamlit passes them after --)
-    # Default paths for convenience
     base = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     default_data = os.path.join(base, "output", "data")
     default_network = os.path.join(base, "output", "network")
     default_stats = os.path.join(base, "output", "stats")
 
-    # Allow override via query params or sidebar
     with st.sidebar:
         st.header("Data Paths")
         data_dir = st.text_input("Data dir", value=default_data)
@@ -414,7 +428,6 @@ def main():
 
     data = load_data(data_dir, network_dir, stats_dir)
 
-    # Navigation
     with st.sidebar:
         st.divider()
         page = st.radio("Navigate", ["Overview", "Outcomes", "Network", "Papers", "Authors"])

@@ -32,11 +32,20 @@ except ImportError:
     HAS_PLOTLY = False
 
 
-INDUSTRY_COLOR = "#e74c3c"
-INDEPENDENT_COLOR = "#3498db"
-MIXED_EDGE_COLOR = "#f39c12"
-IND_EDGE_COLOR = "#e74c3c"
-NOIND_EDGE_COLOR = "#3498db"
+TOBACCO_COLOR = "#e74c3c"     # red
+COI_COLOR = "#f39c12"         # amber/orange
+INDEPENDENT_COLOR = "#3498db" # blue
+
+CATEGORY_COLORS = {
+    "Tobacco Company": TOBACCO_COLOR,
+    "COI Declared": COI_COLOR,
+    "Independent": INDEPENDENT_COLOR,
+}
+CATEGORY_SHAPES = {
+    "Tobacco Company": "diamond",
+    "COI Declared": "triangle",
+    "Independent": "dot",
+}
 
 
 def load_network(graphml_path: str) -> nx.Graph:
@@ -131,27 +140,26 @@ def generate_pyvis(G: nx.Graph, output_path: str):
     # Add nodes
     for node in G.nodes:
         data = G.nodes[node]
-        is_industry = str(data.get("is_industry", "false")).lower() == "true"
+        author_cat = str(data.get("author_category", "Independent"))
         name = data.get("label", node)
         paper_count = int(float(data.get("paper_count", 1)))
         pct_pos = float(data.get("pct_positive", 0))
         community = data.get("community", 0)
         orgs = data.get("industry_orgs", "")
 
-        color = INDUSTRY_COLOR if is_industry else INDEPENDENT_COLOR
+        color = CATEGORY_COLORS.get(author_cat, INDEPENDENT_COLOR)
+        shape = CATEGORY_SHAPES.get(author_cat, "dot")
         size = max(8, min(50, paper_count * 3))
 
         title = (
             f"<b>{name}</b><br>"
             f"Papers: {paper_count}<br>"
-            f"Industry: {'Yes' if is_industry else 'No'}<br>"
+            f"Category: {author_cat}<br>"
             f"% Positive: {pct_pos:.1f}%<br>"
             f"Community: {community}<br>"
         )
-        if orgs:
+        if orgs and str(orgs).lower() not in ("", "nan", "none"):
             title += f"Orgs: {orgs}<br>"
-
-        shape = "diamond" if is_industry else "dot"
 
         net.add_node(
             node,
@@ -160,7 +168,7 @@ def generate_pyvis(G: nx.Graph, output_path: str):
             color=color,
             size=size,
             shape=shape,
-            borderWidth=3 if is_industry else 1,
+            borderWidth=3 if author_cat == "Tobacco Company" else (2 if author_cat == "COI Declared" else 1),
         )
 
     # Add edges
@@ -168,12 +176,12 @@ def generate_pyvis(G: nx.Graph, output_path: str):
         weight = float(data.get("weight", 1))
         edge_type = data.get("edge_type", "independent")
 
-        if edge_type == "both_industry":
-            color = IND_EDGE_COLOR
-        elif edge_type == "mixed":
-            color = MIXED_EDGE_COLOR
+        if "tobacco" in edge_type:
+            color = TOBACCO_COLOR
+        elif "coi" in edge_type:
+            color = COI_COLOR
         else:
-            color = NOIND_EDGE_COLOR
+            color = INDEPENDENT_COLOR
 
         net.add_edge(
             u, v,
@@ -199,15 +207,19 @@ def generate_pyvis(G: nx.Graph, output_path: str):
         color: white;
         font-size: 13px;
         box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-        min-width: 180px;
+        min-width: 200px;
     ">
         <div style="font-weight: bold; font-size: 15px; margin-bottom: 12px; border-bottom: 1px solid #555; padding-bottom: 8px;">
             Legend
         </div>
         <div style="font-weight: bold; margin-bottom: 6px; color: #ccc;">Nodes (Authors)</div>
         <div style="display: flex; align-items: center; margin-bottom: 5px;">
-            <span style="display:inline-block; width:16px; height:16px; background:#e74c3c; border-radius:2px; margin-right:8px; clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);"></span>
-            Industry-Affiliated
+            <span style="display:inline-block; width:16px; height:16px; background:#e74c3c; margin-right:8px; clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);"></span>
+            Tobacco Company
+        </div>
+        <div style="display: flex; align-items: center; margin-bottom: 5px;">
+            <span style="display:inline-block; width:16px; height:16px; background:#f39c12; margin-right:8px; clip-path: polygon(50% 0%, 100% 87%, 0% 87%);"></span>
+            COI Declared
         </div>
         <div style="display: flex; align-items: center; margin-bottom: 10px;">
             <span style="display:inline-block; width:14px; height:14px; background:#3498db; border-radius:50%; margin-right:8px;"></span>
@@ -216,11 +228,11 @@ def generate_pyvis(G: nx.Graph, output_path: str):
         <div style="font-weight: bold; margin-bottom: 6px; color: #ccc;">Edges (Co-authorship)</div>
         <div style="display: flex; align-items: center; margin-bottom: 4px;">
             <span style="display:inline-block; width:24px; height:3px; background:#e74c3c; margin-right:8px;"></span>
-            Both Industry
+            Involves Tobacco Company
         </div>
         <div style="display: flex; align-items: center; margin-bottom: 4px;">
             <span style="display:inline-block; width:24px; height:3px; background:#f39c12; margin-right:8px;"></span>
-            Mixed (Industry + Independent)
+            Involves COI Declared
         </div>
         <div style="display: flex; align-items: center; margin-bottom: 10px;">
             <span style="display:inline-block; width:24px; height:3px; background:#3498db; margin-right:8px;"></span>
@@ -312,19 +324,26 @@ def generate_plotly_network(G: nx.Graph, output_path: str):
             ),
         )
 
-    ind_nodes = [n for n in G.nodes if str(G.nodes[n].get("is_industry", "false")).lower() == "true"]
-    noind_nodes = [n for n in G.nodes if n not in ind_nodes]
+    # Group nodes by category
+    cat_nodes = {}
+    for n in G.nodes:
+        cat = str(G.nodes[n].get("author_category", "Independent"))
+        cat_nodes.setdefault(cat, []).append(n)
 
     traces = [edge_trace]
-    if noind_nodes:
-        traces.append(make_node_trace(noind_nodes, INDEPENDENT_COLOR, "Independent", "circle"))
-    if ind_nodes:
-        traces.append(make_node_trace(ind_nodes, INDUSTRY_COLOR, "Industry-Affiliated", "diamond"))
+    plotly_symbols = {"Tobacco Company": "diamond", "COI Declared": "triangle-up", "Independent": "circle"}
+    for cat in ["Independent", "COI Declared", "Tobacco Company"]:
+        nodes = cat_nodes.get(cat, [])
+        if nodes:
+            traces.append(make_node_trace(
+                nodes, CATEGORY_COLORS.get(cat, INDEPENDENT_COLOR), cat,
+                plotly_symbols.get(cat, "circle"),
+            ))
 
     fig = go.Figure(
         data=traces,
         layout=go.Layout(
-            title="Co-Authorship Network: Industry vs Independent Researchers",
+            title="Co-Authorship Network: Tobacco Company / COI / Independent",
             titlefont_size=16,
             showlegend=True,
             hovermode="closest",

@@ -5,6 +5,11 @@ plots.py
 Generate static and interactive visualizations for the tobacco/nicotine
 industry influence analysis.
 
+Uses three-category classification:
+  - Tobacco Company: actual tobacco/nicotine industry ties
+  - COI Declared: declared conflict of interest (non-tobacco)
+  - Independent: no conflicts declared
+
 Outputs (to --output_dir/figures/):
   Static (matplotlib/seaborn):
     - outcome_by_industry.png
@@ -40,10 +45,16 @@ except ImportError:
     HAS_PLOTLY = False
 
 
-# Color scheme
-COLORS = {
-    "industry": "#e74c3c",
-    "independent": "#3498db",
+# Color scheme — three categories
+CATEGORY_ORDER = ["Tobacco Company", "COI Declared", "Independent"]
+CATEGORY_COLORS = {
+    "Tobacco Company": "#e74c3c",   # red
+    "COI Declared": "#f39c12",      # amber/orange
+    "Independent": "#3498db",       # blue
+}
+
+OUTCOME_ORDER = ["Positive", "Negative", "Neutral", "Mixed", "Not coded"]
+OUTCOME_COLORS = {
     "Positive": "#2ecc71",
     "Negative": "#e74c3c",
     "Neutral": "#95a5a6",
@@ -51,43 +62,50 @@ COLORS = {
     "Not coded": "#bdc3c7",
 }
 
-OUTCOME_ORDER = ["Positive", "Negative", "Neutral", "Mixed", "Not coded"]
+
+def _hex_to_rgba(hex_color: str, alpha: float = 0.4) -> str:
+    """Convert a hex color to rgba string."""
+    if hex_color.startswith("#") and len(hex_color) == 7:
+        r = int(hex_color[1:3], 16)
+        g = int(hex_color[3:5], 16)
+        b = int(hex_color[5:7], 16)
+        return f"rgba({r},{g},{b},{alpha})"
+    return hex_color
 
 
 def plot_outcome_by_industry(papers_df: pd.DataFrame, output_dir: str):
-    """Grouped bar chart: outcome counts by industry involvement."""
-    ctab = pd.crosstab(papers_df["industry_involved"], papers_df["outcome"])
+    """Grouped bar chart: outcome counts by three categories."""
+    ctab = pd.crosstab(papers_df["industry_category"], papers_df["outcome"])
     for col in OUTCOME_ORDER:
         if col not in ctab.columns:
             ctab[col] = 0
     ctab = ctab[OUTCOME_ORDER]
 
-    fig, ax = plt.subplots(figsize=(12, 6))
+    fig, ax = plt.subplots(figsize=(14, 6))
     x = np.arange(len(OUTCOME_ORDER))
-    width = 0.35
+    width = 0.25
+    offsets = [-width, 0, width]
 
-    ind_yes = ctab.loc["Yes"].values if "Yes" in ctab.index else np.zeros(len(OUTCOME_ORDER))
-    ind_no = ctab.loc["No"].values if "No" in ctab.index else np.zeros(len(OUTCOME_ORDER))
-
-    bars1 = ax.bar(x - width/2, ind_yes, width, label="Industry-Involved",
-                   color=COLORS["industry"], alpha=0.85, edgecolor="white")
-    bars2 = ax.bar(x + width/2, ind_no, width, label="Independent",
-                   color=COLORS["independent"], alpha=0.85, edgecolor="white")
+    all_bars = []
+    for i, cat in enumerate(CATEGORY_ORDER):
+        vals = ctab.loc[cat].values if cat in ctab.index else np.zeros(len(OUTCOME_ORDER))
+        bars = ax.bar(x + offsets[i], vals, width, label=cat,
+                      color=CATEGORY_COLORS[cat], alpha=0.85, edgecolor="white")
+        all_bars.append(bars)
 
     ax.set_xlabel("Outcome Direction", fontsize=12)
     ax.set_ylabel("Number of Papers", fontsize=12)
-    ax.set_title("Paper Outcomes: Industry-Involved vs Independent", fontsize=14, fontweight="bold")
+    ax.set_title("Paper Outcomes by Author Category", fontsize=14, fontweight="bold")
     ax.set_xticks(x)
     ax.set_xticklabels(OUTCOME_ORDER, fontsize=11)
-    ax.legend(fontsize=11)
+    ax.legend(fontsize=10)
 
-    # Add value labels
-    for bars in [bars1, bars2]:
+    for bars in all_bars:
         for bar in bars:
             h = bar.get_height()
             if h > 0:
                 ax.annotate(f"{int(h)}", xy=(bar.get_x() + bar.get_width()/2, h),
-                           xytext=(0, 3), textcoords="offset points", ha="center", fontsize=9)
+                           xytext=(0, 3), textcoords="offset points", ha="center", fontsize=8)
 
     plt.tight_layout()
     plt.savefig(os.path.join(output_dir, "outcome_by_industry.png"), dpi=200, bbox_inches="tight")
@@ -95,21 +113,23 @@ def plot_outcome_by_industry(papers_df: pd.DataFrame, output_dir: str):
 
 
 def plot_outcome_proportions(papers_df: pd.DataFrame, output_dir: str):
-    """Stacked bar chart showing proportions instead of counts."""
-    ctab = pd.crosstab(papers_df["industry_involved"], papers_df["outcome"], normalize="index") * 100
+    """Stacked bar chart showing proportions for three categories."""
+    ctab = pd.crosstab(papers_df["industry_category"], papers_df["outcome"], normalize="index") * 100
     for col in OUTCOME_ORDER:
         if col not in ctab.columns:
             ctab[col] = 0
     ctab = ctab[OUTCOME_ORDER]
+    # Reorder rows
+    ctab = ctab.reindex([c for c in CATEGORY_ORDER if c in ctab.index])
 
     fig, ax = plt.subplots(figsize=(10, 6))
     ctab.plot(kind="barh", stacked=True, ax=ax,
-              color=[COLORS.get(o, "#999") for o in OUTCOME_ORDER], edgecolor="white")
+              color=[OUTCOME_COLORS.get(o, "#999") for o in OUTCOME_ORDER], edgecolor="white")
 
     ax.set_xlabel("Percentage of Papers (%)", fontsize=12)
     ax.set_ylabel("")
-    ax.set_yticklabels(["Industry-Involved" if v == "Yes" else "Independent" for v in ctab.index], fontsize=12)
-    ax.set_title("Outcome Distribution by Industry Involvement", fontsize=14, fontweight="bold")
+    ax.set_yticklabels([c for c in CATEGORY_ORDER if c in ctab.index], fontsize=11)
+    ax.set_title("Outcome Distribution by Author Category", fontsize=14, fontweight="bold")
     ax.legend(title="Outcome", bbox_to_anchor=(1.02, 1), loc="upper left", fontsize=10)
     ax.set_xlim(0, 100)
 
@@ -119,8 +139,8 @@ def plot_outcome_proportions(papers_df: pd.DataFrame, output_dir: str):
 
 
 def plot_centrality_distribution(centrality_df: pd.DataFrame, output_dir: str):
-    """Box plot comparing centrality metrics between industry and independent authors."""
-    if centrality_df.empty:
+    """Box plot comparing centrality metrics across three author categories."""
+    if centrality_df.empty or "author_category" not in centrality_df.columns:
         return
 
     metrics = ["degree_centrality", "betweenness_centrality", "eigenvector_centrality"]
@@ -133,34 +153,47 @@ def plot_centrality_distribution(centrality_df: pd.DataFrame, output_dir: str):
         axes = [axes]
 
     for ax, metric in zip(axes, available):
-        data_ind = centrality_df[centrality_df["is_industry"] == True][metric].dropna()
-        data_noind = centrality_df[centrality_df["is_industry"] == False][metric].dropna()
+        data_groups = []
+        labels = []
+        colors = []
+        for cat in CATEGORY_ORDER:
+            vals = centrality_df[centrality_df["author_category"] == cat][metric].dropna()
+            if len(vals) > 0:
+                data_groups.append(vals)
+                labels.append(cat.replace("Tobacco Company", "Tobacco\nCompany").replace("COI Declared", "COI\nDeclared"))
+                colors.append(CATEGORY_COLORS[cat])
+
+        if not data_groups:
+            continue
 
         bp = ax.boxplot(
-            [data_ind, data_noind],
-            labels=["Industry", "Independent"],
+            data_groups,
+            tick_labels=labels,
             patch_artist=True,
             widths=0.5,
         )
-        bp["boxes"][0].set_facecolor(COLORS["industry"])
-        bp["boxes"][0].set_alpha(0.7)
-        bp["boxes"][1].set_facecolor(COLORS["independent"])
-        bp["boxes"][1].set_alpha(0.7)
+        for box, color in zip(bp["boxes"], colors):
+            box.set_facecolor(color)
+            box.set_alpha(0.7)
 
         label = metric.replace("_", " ").title()
         ax.set_title(label, fontsize=12, fontweight="bold")
         ax.set_ylabel(label, fontsize=10)
 
-    fig.suptitle("Network Centrality: Industry vs Independent Authors", fontsize=14, fontweight="bold", y=1.02)
+    fig.suptitle("Network Centrality by Author Category", fontsize=14, fontweight="bold", y=1.02)
     plt.tight_layout()
     plt.savefig(os.path.join(output_dir, "centrality_distribution.png"), dpi=200, bbox_inches="tight")
     plt.close()
 
 
 def plot_community_scatter(comm_df: pd.DataFrame, output_dir: str):
-    """Scatter plot: community % industry vs % positive outcomes."""
+    """Scatter plot: community % tobacco authors vs % positive outcomes."""
     if comm_df.empty:
         return
+
+    # Use pct_tobacco if available, fall back to pct_industry
+    x_col = "pct_tobacco" if "pct_tobacco" in comm_df.columns else "pct_industry"
+    x_label = "% Tobacco Company Authors in Community"
 
     fig, ax = plt.subplots(figsize=(10, 7))
 
@@ -168,42 +201,41 @@ def plot_community_scatter(comm_df: pd.DataFrame, output_dir: str):
     sizes = sizes.clip(lower=20)
 
     scatter = ax.scatter(
-        comm_df["pct_industry"],
+        comm_df[x_col],
         comm_df["pct_positive"],
         s=sizes,
-        c=comm_df["pct_industry"],
+        c=comm_df[x_col],
         cmap="RdYlBu_r",
         alpha=0.7,
         edgecolors="black",
         linewidth=0.5,
     )
 
-    # Add labels for larger communities
     for _, row in comm_df.iterrows():
         if row["n_authors"] >= 5:
             ax.annotate(
                 f"C{row['community_id']} (n={row['n_authors']})",
-                (row["pct_industry"], row["pct_positive"]),
+                (row[x_col], row["pct_positive"]),
                 fontsize=8, ha="center", va="bottom",
             )
 
-    ax.set_xlabel("% Industry-Affiliated Authors in Community", fontsize=12)
+    ax.set_xlabel(x_label, fontsize=12)
     ax.set_ylabel("% Positive Outcomes in Community", fontsize=12)
     fig.suptitle("Community-Level: Industry Concentration vs Positive Outcomes", fontsize=14, fontweight="bold", y=0.98)
     ax.set_title(
         "Each bubble is a Louvain community of co-authors. Size = number of authors.\n"
-        "X-axis shows how concentrated industry affiliations are; Y-axis shows the share of positive findings.",
+        "X-axis shows how concentrated tobacco company affiliations are; Y-axis shows the share of positive findings.",
         fontsize=9.5, color="#555", fontstyle="italic", pad=12,
     )
 
-    plt.colorbar(scatter, ax=ax, label="% Industry", shrink=0.8)
+    plt.colorbar(scatter, ax=ax, label="% Tobacco Company", shrink=0.8)
     plt.tight_layout()
     plt.savefig(os.path.join(output_dir, "community_industry_scatter.png"), dpi=200, bbox_inches="tight")
     plt.close()
 
 
 def plot_timeline(papers_df: pd.DataFrame, output_dir: str):
-    """Timeline: number of industry vs independent papers per year."""
+    """Timeline: number of papers per year by three categories."""
     if "year" not in papers_df.columns:
         return
 
@@ -211,20 +243,19 @@ def plot_timeline(papers_df: pd.DataFrame, output_dir: str):
     df["year"] = df["year"].astype(int)
     df = df[(df["year"] >= 1960) & (df["year"] <= 2026)]
 
-    yearly = df.groupby(["year", "industry_involved"]).size().unstack(fill_value=0)
+    yearly = df.groupby(["year", "industry_category"]).size().unstack(fill_value=0)
 
     fig, ax = plt.subplots(figsize=(14, 6))
 
-    if "Yes" in yearly.columns:
-        ax.fill_between(yearly.index, yearly["Yes"], alpha=0.3, color=COLORS["industry"])
-        ax.plot(yearly.index, yearly["Yes"], color=COLORS["industry"], linewidth=2, label="Industry-Involved")
-    if "No" in yearly.columns:
-        ax.fill_between(yearly.index, yearly["No"], alpha=0.3, color=COLORS["independent"])
-        ax.plot(yearly.index, yearly["No"], color=COLORS["independent"], linewidth=2, label="Independent")
+    for cat in CATEGORY_ORDER:
+        if cat in yearly.columns:
+            color = CATEGORY_COLORS[cat]
+            ax.fill_between(yearly.index, yearly[cat], alpha=0.2, color=color)
+            ax.plot(yearly.index, yearly[cat], color=color, linewidth=2, label=cat)
 
     ax.set_xlabel("Publication Year", fontsize=12)
     ax.set_ylabel("Number of Papers", fontsize=12)
-    ax.set_title("Publication Timeline: Industry vs Independent Papers", fontsize=14, fontweight="bold")
+    ax.set_title("Publication Timeline by Author Category", fontsize=14, fontweight="bold")
     ax.legend(fontsize=11)
 
     plt.tight_layout()
@@ -233,57 +264,68 @@ def plot_timeline(papers_df: pd.DataFrame, output_dir: str):
 
 
 def plot_odds_ratio_forest(stats_path: str, output_dir: str):
-    """Forest plot showing odds ratio with 95% CI."""
+    """Forest plot showing odds ratios for Tobacco Company and COI Declared vs Independent."""
     if not os.path.exists(stats_path):
         return
 
     with open(stats_path) as f:
         stats = json.load(f)
 
-    or_data = stats.get("odds_ratio_positive", {})
-    or_val = or_data.get("odds_ratio")
-    ci_lo = or_data.get("ci_95_lower")
-    ci_hi = or_data.get("ci_95_upper")
+    # Collect OR data for both comparisons
+    comparisons = []
+    for key, label, color in [
+        ("odds_ratio_tobacco_company_vs_independent", "Tobacco Company\nvs Independent", CATEGORY_COLORS["Tobacco Company"]),
+        ("odds_ratio_coi_declared_vs_independent", "COI Declared\nvs Independent", CATEGORY_COLORS["COI Declared"]),
+    ]:
+        or_data = stats.get(key, {})
+        or_val = or_data.get("odds_ratio")
+        ci_lo = or_data.get("ci_95_lower")
+        ci_hi = or_data.get("ci_95_upper")
+        if or_val is not None:
+            comparisons.append((label, or_val, ci_lo, ci_hi, color))
 
-    if or_val is None:
+    if not comparisons:
         return
 
-    fig, ax = plt.subplots(figsize=(10, 4))
+    fig, ax = plt.subplots(figsize=(10, 4 + len(comparisons)))
 
-    ax.errorbar(
-        or_val, 0, xerr=[[or_val - ci_lo], [ci_hi - or_val]],
-        fmt="o", color=COLORS["industry"], markersize=12, capsize=6, linewidth=2.5,
-    )
+    y_positions = list(range(len(comparisons)))
+
+    for i, (label, or_val, ci_lo, ci_hi, color) in enumerate(comparisons):
+        ax.errorbar(
+            or_val, i, xerr=[[or_val - ci_lo], [ci_hi - or_val]],
+            fmt="o", color=color, markersize=12, capsize=6, linewidth=2.5,
+        )
 
     ax.axvline(x=1.0, color="gray", linestyle="--", linewidth=1, alpha=0.7)
 
-    ax.set_yticks([0])
-    ax.set_yticklabels(["Industry vs\nIndependent"], fontsize=12)
+    ax.set_yticks(y_positions)
+    ax.set_yticklabels([c[0] for c in comparisons], fontsize=11)
     ax.set_xlabel("Odds Ratio (Positive Outcome)", fontsize=12)
-    ax.set_title(f"Odds Ratio: {or_val:.2f} (95% CI: {ci_lo:.2f} - {ci_hi:.2f})",
-                 fontsize=13, fontweight="bold")
+    ax.set_title("Odds Ratios vs Independent Authors (with 95% CI)", fontsize=13, fontweight="bold")
 
-    # Reference labels on either side of the null line (below the axis)
-    ax.text(0.82, -0.45, "Favors independent", ha="center", fontsize=10,
-            color=COLORS["independent"], fontstyle="italic")
-    ax.text(1.18, -0.45, "Favors industry", ha="center", fontsize=10,
-            color=COLORS["industry"], fontstyle="italic")
+    # Directional labels
+    y_min = -0.7
+    ax.text(0.82, y_min + 0.1, "Favors independent", ha="center", fontsize=10,
+            color=CATEGORY_COLORS["Independent"], fontstyle="italic")
+    ax.text(1.18, y_min + 0.1, "Favors group", ha="center", fontsize=10,
+            color="#666", fontstyle="italic")
 
-    # Arrow indicators
-    ax.annotate("", xy=(0.72, -0.3), xytext=(0.95, -0.3),
-                arrowprops=dict(arrowstyle="->", color=COLORS["independent"], lw=1.5))
-    ax.annotate("", xy=(1.28, -0.3), xytext=(1.05, -0.3),
-                arrowprops=dict(arrowstyle="->", color=COLORS["industry"], lw=1.5))
+    ax.annotate("", xy=(0.72, y_min + 0.25), xytext=(0.95, y_min + 0.25),
+                arrowprops=dict(arrowstyle="->", color=CATEGORY_COLORS["Independent"], lw=1.5))
+    ax.annotate("", xy=(1.28, y_min + 0.25), xytext=(1.05, y_min + 0.25),
+                arrowprops=dict(arrowstyle="->", color="#666", lw=1.5))
 
-    ax.set_ylim(-0.7, 0.5)
+    ax.set_ylim(y_min, len(comparisons) - 0.3)
 
-    # Color legend
+    # Legend
     legend_elements = [
-        mpatches.Patch(facecolor=COLORS["industry"], edgecolor="black", label="Industry-Involved (OR point & 95% CI)"),
-        mpatches.Patch(facecolor=COLORS["independent"], edgecolor="black", label="Independent (reference group)"),
-        plt.Line2D([0], [0], color="gray", linestyle="--", linewidth=1, label="Null (OR = 1.0, no difference)"),
+        mpatches.Patch(facecolor=CATEGORY_COLORS["Tobacco Company"], edgecolor="black", label="Tobacco Company"),
+        mpatches.Patch(facecolor=CATEGORY_COLORS["COI Declared"], edgecolor="black", label="COI Declared"),
+        mpatches.Patch(facecolor=CATEGORY_COLORS["Independent"], edgecolor="black", label="Independent (reference)"),
+        plt.Line2D([0], [0], color="gray", linestyle="--", linewidth=1, label="Null (OR = 1.0)"),
     ]
-    ax.legend(handles=legend_elements, loc="upper left", fontsize=9, framealpha=0.9)
+    ax.legend(handles=legend_elements, loc="upper right", fontsize=9, framealpha=0.9)
 
     plt.tight_layout()
     plt.savefig(os.path.join(output_dir, "odds_ratio_forest.png"), dpi=200, bbox_inches="tight")
@@ -291,35 +333,29 @@ def plot_odds_ratio_forest(stats_path: str, output_dir: str):
 
 
 def plot_sankey_interactive(papers_df: pd.DataFrame, output_dir: str):
-    """Interactive Sankey diagram: Industry Status -> Outcome."""
+    """Interactive Sankey diagram: three categories -> Outcome."""
     if not HAS_PLOTLY:
         print("[WARN] plotly not installed, skipping Sankey diagram")
         return
 
-    # Nodes: Industry-Involved, Independent, Positive, Negative, Neutral, Mixed, Not coded
-    node_labels = ["Industry-Involved", "Independent"] + OUTCOME_ORDER
-    node_colors = [
-        COLORS["industry"], COLORS["independent"],
-        COLORS["Positive"], COLORS["Negative"], COLORS["Neutral"],
-        COLORS["Mixed"], COLORS["Not coded"],
-    ]
+    node_labels = list(CATEGORY_ORDER) + OUTCOME_ORDER
+    node_colors = [CATEGORY_COLORS[c] for c in CATEGORY_ORDER] + [OUTCOME_COLORS[o] for o in OUTCOME_ORDER]
 
-    # Links
     sources = []
     targets = []
     values = []
     link_colors = []
 
-    for i, group in enumerate(["Yes", "No"]):
-        subset = papers_df[papers_df["industry_involved"] == group]
+    n_cats = len(CATEGORY_ORDER)
+    for i, cat in enumerate(CATEGORY_ORDER):
+        subset = papers_df[papers_df["industry_category"] == cat]
         for j, outcome in enumerate(OUTCOME_ORDER):
             count = (subset["outcome"] == outcome).sum()
             if count > 0:
                 sources.append(i)
-                targets.append(2 + j)
+                targets.append(n_cats + j)
                 values.append(count)
-                link_colors.append(node_colors[i].replace(")", ", 0.4)").replace("rgb", "rgba")
-                                   if "rgb" in node_colors[i] else node_colors[i])
+                link_colors.append(_hex_to_rgba(node_colors[i], 0.4))
 
     fig = go.Figure(go.Sankey(
         node=dict(
@@ -333,21 +369,22 @@ def plot_sankey_interactive(papers_df: pd.DataFrame, output_dir: str):
             source=sources,
             target=targets,
             value=values,
+            color=link_colors,
         ),
     ))
 
     fig.update_layout(
-        title_text="Flow: Industry Involvement to Paper Outcomes",
+        title_text="Flow: Author Category to Paper Outcomes",
         font_size=12,
-        width=900,
-        height=500,
+        width=1000,
+        height=550,
     )
 
     fig.write_html(os.path.join(output_dir, "sankey_funding_outcome.html"))
 
 
 def plot_outcome_heatmap_interactive(papers_df: pd.DataFrame, output_dir: str):
-    """Interactive heatmap: outcome by year and industry status."""
+    """Interactive heatmap: outcome by year and three categories."""
     if not HAS_PLOTLY:
         return
 
@@ -355,19 +392,19 @@ def plot_outcome_heatmap_interactive(papers_df: pd.DataFrame, output_dir: str):
     df["year"] = df["year"].astype(int)
     df = df[(df["year"] >= 1990) & (df["year"] <= 2026)]
 
-    # Compute % positive per year per group
     rows = []
     for year in sorted(df["year"].unique()):
-        for group in ["Yes", "No"]:
-            subset = df[(df["year"] == year) & (df["industry_involved"] == group)]
+        for cat in CATEGORY_ORDER:
+            subset = df[(df["year"] == year) & (df["industry_category"] == cat)]
             total = len(subset)
             n_pos = (subset["outcome"] == "Positive").sum()
             pct = (n_pos / total * 100) if total > 0 else 0
-            label = "Industry" if group == "Yes" else "Independent"
-            rows.append({"year": year, "group": label, "pct_positive": round(pct, 1), "n": total})
+            rows.append({"year": year, "group": cat, "pct_positive": round(pct, 1), "n": total})
 
     plot_df = pd.DataFrame(rows)
     pivot = plot_df.pivot(index="group", columns="year", values="pct_positive").fillna(0)
+    # Reorder rows
+    pivot = pivot.reindex([c for c in CATEGORY_ORDER if c in pivot.index])
 
     fig = px.imshow(
         pivot.values,
@@ -378,9 +415,9 @@ def plot_outcome_heatmap_interactive(papers_df: pd.DataFrame, output_dir: str):
         aspect="auto",
     )
     fig.update_layout(
-        title="% Positive Outcomes Over Time: Industry vs Independent",
+        title="% Positive Outcomes Over Time by Author Category",
         width=1200,
-        height=300,
+        height=350,
     )
     fig.write_html(os.path.join(output_dir, "outcome_heatmap.html"))
 

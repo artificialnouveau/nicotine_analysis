@@ -108,7 +108,11 @@ def permutation_test(
         perm_props.append(perm_prop)
 
     perm_props = np.array(perm_props)
-    p_value = (np.sum(perm_props >= observed) + 1) / (n_permutations + 1)
+    # Two-sided p-value: proportion of permuted differences at least as extreme
+    # as observed in either direction
+    mean_perm = perm_props.mean()
+    observed_diff = abs(observed - mean_perm)
+    p_value = (np.sum(np.abs(perm_props - mean_perm) >= observed_diff) + 1) / (n_permutations + 1)
 
     return {
         "observed_proportion": round(float(observed), 4),
@@ -119,97 +123,155 @@ def permutation_test(
     }
 
 
+CATEGORY_ORDER = ["Tobacco Company", "COI Declared", "Independent"]
+
+
 def run_all_tests(papers_df: pd.DataFrame, centrality_df: pd.DataFrame) -> Dict[str, Any]:
-    """Run all statistical tests and return results dict."""
+    """Run all statistical tests and return results dict.
+
+    Uses three-category classification: Tobacco Company, COI Declared, Independent.
+    """
     results: Dict[str, Any] = {}
 
-    # --- 1. Contingency table: Industry_Involved vs Outcome ---
     outcome_order = ["Positive", "Negative", "Neutral", "Mixed", "Not coded"]
-    ctab = pd.crosstab(papers_df["industry_involved"], papers_df["outcome"])
+
+    # --- 1. Contingency table: industry_category vs Outcome ---
+    ctab = pd.crosstab(papers_df["industry_category"], papers_df["outcome"])
     for col in outcome_order:
         if col not in ctab.columns:
             ctab[col] = 0
     ctab = ctab[outcome_order]
+    # Ensure all categories present
+    for cat in CATEGORY_ORDER:
+        if cat not in ctab.index:
+            ctab.loc[cat] = 0
+    ctab = ctab.loc[[c for c in CATEGORY_ORDER if c in ctab.index]]
 
     results["contingency_table"] = ctab.to_dict()
 
-    # Chi-square
+    # Chi-square — exclude "Not coded" papers
+    coded_outcomes = ["Positive", "Negative", "Neutral", "Mixed"]
+    ctab_coded = ctab[coded_outcomes]
+    ctab_coded = ctab_coded.loc[:, (ctab_coded.sum(axis=0) > 0)]
+    # Drop rows with all zeros
+    ctab_coded = ctab_coded.loc[(ctab_coded.sum(axis=1) > 0)]
+
     try:
-        chi2, p, dof, expected = sp_stats.chi2_contingency(ctab.values)
+        chi2, p, dof, expected = sp_stats.chi2_contingency(ctab_coded.values)
         results["chi_square"] = {
             "chi2": round(chi2, 4),
             "p_value": round(p, 6),
             "dof": int(dof),
+            "note": "3-group test (Tobacco/COI/Independent), excludes 'Not coded'",
         }
     except Exception as e:
         results["chi_square"] = {"error": str(e)}
 
-    # --- 2. 2x2 Odds Ratio: Positive vs Not-Positive by Industry ---
-    a = int(ctab.loc["Yes", "Positive"]) if "Yes" in ctab.index else 0
-    c = int(ctab.loc["No", "Positive"]) if "No" in ctab.index else 0
-    b = int(ctab.loc["Yes", :].sum() - a) if "Yes" in ctab.index else 0
-    d = int(ctab.loc["No", :].sum() - c) if "No" in ctab.index else 0
+    # --- 2. Pairwise Odds Ratios: each group vs Independent ---
+    indep = papers_df[papers_df["industry_category"] == "Independent"]
+    c_indep = (indep["outcome"] == "Positive").sum()
+    d_indep = len(indep) - c_indep
 
-    results["odds_ratio_positive"] = odds_ratio_ci(a, b, c, d)
-    results["odds_ratio_positive"]["table"] = {"a": a, "b": b, "c": c, "d": d}
+    for group_name in ["Tobacco Company", "COI Declared"]:
+        grp = papers_df[papers_df["industry_category"] == group_name]
+        a_grp = (grp["outcome"] == "Positive").sum()
+        b_grp = len(grp) - a_grp
 
-    # Fisher exact
-    try:
-        _, fisher_p = sp_stats.fisher_exact([[a, b], [c, d]])
-        results["fisher_exact_p"] = round(fisher_p, 6)
-    except Exception:
-        results["fisher_exact_p"] = None
+        key = f"odds_ratio_{group_name.lower().replace(' ', '_')}_vs_independent"
+        results[key] = odds_ratio_ci(a_grp, b_grp, c_indep, d_indep)
+        results[key]["table"] = {"a": a_grp, "b": b_grp, "c": c_indep, "d": d_indep}
+        results[key]["comparison"] = f"{group_name} vs Independent"
 
-    # --- 3. Proportion z-test ---
-    ind_yes = papers_df[papers_df["industry_involved"] == "Yes"]
-    ind_no = papers_df[papers_df["industry_involved"] == "No"]
-    results["proportion_ztest_positive"] = proportion_ztest(
-        n1_success=(ind_yes["outcome"] == "Positive").sum(),
-        n1_total=len(ind_yes),
-        n2_success=(ind_no["outcome"] == "Positive").sum(),
-        n2_total=len(ind_no),
-    )
+        # Fisher exact
+        try:
+            _, fisher_p = sp_stats.fisher_exact([[a_grp, b_grp], [c_indep, d_indep]])
+            results[key]["fisher_exact_p"] = round(fisher_p, 6)
+        except Exception:
+            results[key]["fisher_exact_p"] = None
 
-    # --- 4. Permutation test ---
-    results["permutation_test"] = permutation_test(
-        outcomes=papers_df["outcome"],
-        groups=papers_df["industry_involved"],
-        n_permutations=10000,
-    )
+    # --- 3. Proportion z-tests (pairwise vs Independent) ---
+    for group_name in ["Tobacco Company", "COI Declared"]:
+        grp = papers_df[papers_df["industry_category"] == group_name]
+        key = f"proportion_ztest_{group_name.lower().replace(' ', '_')}_vs_independent"
+        results[key] = proportion_ztest(
+            n1_success=(grp["outcome"] == "Positive").sum(),
+            n1_total=len(grp),
+            n2_success=(indep["outcome"] == "Positive").sum(),
+            n2_total=len(indep),
+        )
+        results[key]["comparison"] = f"{group_name} vs Independent"
 
-    # --- 5. Centrality comparison (Mann-Whitney U) ---
-    if not centrality_df.empty and "is_industry" in centrality_df.columns:
-        ind_cent = centrality_df[centrality_df["is_industry"] == True]
-        noind_cent = centrality_df[centrality_df["is_industry"] == False]
+    # --- 4. Permutation tests (pairwise vs Independent) ---
+    for group_name in ["Tobacco Company", "COI Declared"]:
+        # Create a binary grouping for this comparison
+        mask = papers_df["industry_category"].isin([group_name, "Independent"])
+        subset = papers_df[mask]
+        groups_binary = (subset["industry_category"] == group_name).map({True: "target", False: "ref"})
 
+        key = f"permutation_test_{group_name.lower().replace(' ', '_')}_vs_independent"
+        results[key] = permutation_test(
+            outcomes=subset["outcome"],
+            groups=groups_binary,
+            n_permutations=10000,
+            target_group="target",
+        )
+        results[key]["comparison"] = f"{group_name} vs Independent"
+
+    # --- 5. Centrality comparison (Mann-Whitney U, three groups) ---
+    if not centrality_df.empty and "author_category" in centrality_df.columns:
         centrality_results = {}
         for metric in ["degree_centrality", "betweenness_centrality", "closeness_centrality", "eigenvector_centrality"]:
-            if metric in centrality_df.columns:
-                vals_ind = ind_cent[metric].dropna()
-                vals_noind = noind_cent[metric].dropna()
+            if metric not in centrality_df.columns:
+                continue
 
-                if len(vals_ind) > 0 and len(vals_noind) > 0:
-                    u_stat, u_p = sp_stats.mannwhitneyu(vals_ind, vals_noind, alternative="two-sided")
-                    centrality_results[metric] = {
-                        "industry_mean": round(vals_ind.mean(), 6),
-                        "industry_median": round(vals_ind.median(), 6),
-                        "independent_mean": round(vals_noind.mean(), 6),
-                        "independent_median": round(vals_noind.median(), 6),
-                        "mann_whitney_U": round(u_stat, 2),
-                        "p_value": round(u_p, 6),
+            metric_results = {}
+            indep_vals = centrality_df[centrality_df["author_category"] == "Independent"][metric].dropna()
+
+            for group_name in ["Tobacco Company", "COI Declared"]:
+                grp_vals = centrality_df[centrality_df["author_category"] == group_name][metric].dropna()
+                if len(grp_vals) > 0 and len(indep_vals) > 0:
+                    u_stat, u_p = sp_stats.mannwhitneyu(grp_vals, indep_vals, alternative="two-sided")
+                    metric_results[group_name] = {
+                        "mean": round(grp_vals.mean(), 6),
+                        "median": round(grp_vals.median(), 6),
+                        "vs_independent_U": round(u_stat, 2),
+                        "vs_independent_p": round(u_p, 6),
                     }
 
+            metric_results["Independent"] = {
+                "mean": round(indep_vals.mean(), 6),
+                "median": round(indep_vals.median(), 6),
+            }
+            centrality_results[metric] = metric_results
+
+        # Kruskal-Wallis across all three groups
+        kw_results = {}
+        for metric in ["degree_centrality", "betweenness_centrality", "closeness_centrality", "eigenvector_centrality"]:
+            if metric not in centrality_df.columns:
+                continue
+            groups_data = [
+                centrality_df[centrality_df["author_category"] == cat][metric].dropna()
+                for cat in CATEGORY_ORDER
+            ]
+            groups_data = [g for g in groups_data if len(g) > 0]
+            if len(groups_data) >= 2:
+                h_stat, h_p = sp_stats.kruskal(*groups_data)
+                kw_results[metric] = {"H": round(h_stat, 4), "p_value": round(h_p, 6)}
+
         results["centrality_comparison"] = centrality_results
+        results["centrality_kruskal_wallis"] = kw_results
 
     # --- Summary counts ---
     results["counts"] = {
         "total_papers": len(papers_df),
-        "industry_involved_yes": len(ind_yes),
-        "industry_involved_no": len(ind_no),
         "outcome_distribution": papers_df["outcome"].value_counts().to_dict(),
-        "industry_outcome_distribution": ind_yes["outcome"].value_counts().to_dict() if len(ind_yes) > 0 else {},
-        "independent_outcome_distribution": ind_no["outcome"].value_counts().to_dict() if len(ind_no) > 0 else {},
     }
+    for cat in CATEGORY_ORDER:
+        subset = papers_df[papers_df["industry_category"] == cat]
+        results["counts"][f"n_{cat.lower().replace(' ', '_')}"] = len(subset)
+        results["counts"][f"{cat.lower().replace(' ', '_')}_outcomes"] = (
+            subset["outcome"].value_counts().to_dict() if len(subset) > 0 else {}
+        )
 
     return results
 
@@ -234,14 +296,14 @@ def main():
 
     # Outcome comparison table
     outcome_rows = []
-    for group_name, group_label in [("Yes", "Industry-Involved"), ("No", "Independent")]:
-        subset = papers_df[papers_df["industry_involved"] == group_name]
+    for cat in CATEGORY_ORDER:
+        subset = papers_df[papers_df["industry_category"] == cat]
         total = len(subset)
         for outcome in ["Positive", "Negative", "Neutral", "Mixed", "Not coded"]:
             count = (subset["outcome"] == outcome).sum()
             pct = (count / total * 100) if total > 0 else 0
             outcome_rows.append({
-                "group": group_label,
+                "group": cat,
                 "outcome": outcome,
                 "count": count,
                 "total": total,
@@ -252,10 +314,11 @@ def main():
 
     print("Statistical analysis complete.")
     print(f"  Chi-square p-value: {results.get('chi_square', {}).get('p_value', 'N/A')}")
-    print(f"  Odds ratio (Positive): {results.get('odds_ratio_positive', {}).get('odds_ratio', 'N/A')}")
-    print(f"  Fisher exact p-value: {results.get('fisher_exact_p', 'N/A')}")
-    print(f"  Proportion z-test p-value: {results.get('proportion_ztest_positive', {}).get('p_value', 'N/A')}")
-    print(f"  Permutation test p-value: {results.get('permutation_test', {}).get('p_value', 'N/A')}")
+    for grp in ["tobacco_company", "coi_declared"]:
+        key = f"odds_ratio_{grp}_vs_independent"
+        or_data = results.get(key, {})
+        print(f"  OR ({grp} vs independent): {or_data.get('odds_ratio', 'N/A')} "
+              f"(Fisher p={or_data.get('fisher_exact_p', 'N/A')})")
     print(f"  Output: {args.output_dir}")
 
 

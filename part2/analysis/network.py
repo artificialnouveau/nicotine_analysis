@@ -66,11 +66,11 @@ def build_coauthor_graph(
 
     # Index paper outcomes
     paper_outcomes = {}
-    paper_industry = {}
+    paper_category = {}
     for _, row in papers_df.iterrows():
         pid = row["paper_id"]
         paper_outcomes[pid] = row.get("outcome", "Not coded")
-        paper_industry[pid] = row.get("industry_involved", "No")
+        paper_category[pid] = row.get("industry_category", "Independent")
 
     # Map author -> papers and compute per-author outcome stats
     author_papers_map: Dict[str, List[str]] = defaultdict(list)
@@ -87,7 +87,9 @@ def build_coauthor_graph(
         pct_negative = (n_negative / len(outcomes) * 100) if outcomes else 0.0
 
         # Determine if author is ever on an industry-involved paper
-        any_industry_paper = any(paper_industry.get(p) == "Yes" for p in papers)
+        any_industry_paper = any(paper_category.get(p) == "Tobacco Company" for p in papers)
+        # Determine if author is ever on a COI-declared paper (but not tobacco)
+        any_coi_paper = any(paper_category.get(p) == "COI Declared" for p in papers)
 
         G.add_node(
             aid,
@@ -100,6 +102,8 @@ def build_coauthor_graph(
             n_positive=n_positive,
             n_negative=n_negative,
             any_industry_paper=any_industry_paper,
+            any_coi_paper=any_coi_paper,
+            author_category="Tobacco Company" if info["is_industry"] else ("COI Declared" if any_coi_paper else "Independent"),
         )
 
     # Build co-authorship edges
@@ -120,10 +124,20 @@ def build_coauthor_graph(
 
     for (a1, a2), weight in edge_weights.items():
         if a1 in G.nodes and a2 in G.nodes:
-            # Edge type: both industry, one industry, neither
-            both_ind = G.nodes[a1]["is_industry"] and G.nodes[a2]["is_industry"]
-            any_ind = G.nodes[a1]["is_industry"] or G.nodes[a2]["is_industry"]
-            edge_type = "both_industry" if both_ind else ("mixed" if any_ind else "independent")
+            cat1 = G.nodes[a1].get("author_category", "Independent")
+            cat2 = G.nodes[a2].get("author_category", "Independent")
+            cats = sorted([cat1, cat2])
+
+            if cats == ["Tobacco Company", "Tobacco Company"]:
+                edge_type = "both_tobacco"
+            elif "Tobacco Company" in cats:
+                edge_type = "tobacco_mixed"
+            elif cats == ["COI Declared", "COI Declared"]:
+                edge_type = "both_coi"
+            elif "COI Declared" in cats:
+                edge_type = "coi_mixed"
+            else:
+                edge_type = "independent"
 
             G.add_edge(
                 a1, a2,
@@ -141,10 +155,18 @@ def compute_centrality(G: nx.Graph) -> pd.DataFrame:
         return pd.DataFrame()
 
     degree_cent = nx.degree_centrality(G)
-    betweenness = nx.betweenness_centrality(G, weight="weight")
-    closeness = nx.closeness_centrality(G)
+
+    # For betweenness and closeness, NetworkX treats weight as distance/cost.
+    # In a co-authorship network, weight = number of shared papers (strength).
+    # We invert the weight so stronger ties = shorter paths.
+    inv_weight = {(u, v): 1.0 / d["weight"] for u, v, d in G.edges(data=True) if d.get("weight", 0) > 0}
+    nx.set_edge_attributes(G, inv_weight, "inv_weight")
+
+    betweenness = nx.betweenness_centrality(G, weight="inv_weight")
+    closeness = nx.closeness_centrality(G, distance="inv_weight")
 
     try:
+        # Eigenvector centrality correctly treats weight as strength in NetworkX
         eigenvector = nx.eigenvector_centrality(G, max_iter=1000, weight="weight")
     except nx.PowerIterationFailedConvergence:
         eigenvector = {n: 0.0 for n in G.nodes}
@@ -156,6 +178,7 @@ def compute_centrality(G: nx.Graph) -> pd.DataFrame:
             "author_id": node,
             "name": data.get("label", ""),
             "is_industry": data.get("is_industry", False),
+            "author_category": data.get("author_category", "Independent"),
             "paper_count": data.get("paper_count", 0),
             "pct_positive": data.get("pct_positive", 0),
             "degree": G.degree(node),
@@ -184,40 +207,78 @@ def detect_communities(G: nx.Graph) -> Dict[str, int]:
     return partition
 
 
-def community_summary(G: nx.Graph, partition: Dict[str, int]) -> pd.DataFrame:
-    """Summarize each community by industry presence and outcome tendency."""
+def community_summary(
+    G: nx.Graph,
+    partition: Dict[str, int],
+    edges_df: pd.DataFrame = None,
+    papers_df: pd.DataFrame = None,
+) -> pd.DataFrame:
+    """Summarize each community by industry presence and outcome tendency.
+
+    Bug fix: counts unique papers per community instead of summing per-author
+    paper counts, which double-counted papers shared by co-authors.
+    """
+    # Map author -> community
+    author_comm = partition
+
+    # Build community -> unique papers mapping if edge/paper data available
+    comm_papers: Dict[int, set] = defaultdict(set)
+    paper_outcomes_map: Dict[str, str] = {}
+
+    if edges_df is not None and papers_df is not None:
+        # Index paper outcomes
+        for _, row in papers_df.iterrows():
+            paper_outcomes_map[str(row["paper_id"])] = row.get("outcome", "Not coded")
+
+        # Map each paper to the community of its authors
+        for _, row in edges_df.iterrows():
+            aid = row["author_id"]
+            pid = str(row["paper_id"])
+            if aid in author_comm:
+                comm_papers[author_comm[aid]].add(pid)
+
     comm_data: Dict[int, Dict] = defaultdict(lambda: {
         "n_authors": 0,
-        "n_industry": 0,
-        "total_papers": 0,
-        "n_positive": 0,
-        "n_negative": 0,
+        "n_tobacco": 0,
+        "n_coi": 0,
+        "n_independent": 0,
     })
 
     for node, comm_id in partition.items():
         data = G.nodes[node]
         d = comm_data[comm_id]
         d["n_authors"] += 1
-        if data.get("is_industry"):
-            d["n_industry"] += 1
-        d["total_papers"] += data.get("paper_count", 0)
-        d["n_positive"] += data.get("n_positive", 0)
-        d["n_negative"] += data.get("n_negative", 0)
+        cat = data.get("author_category", "Independent")
+        if cat == "Tobacco Company":
+            d["n_tobacco"] += 1
+        elif cat == "COI Declared":
+            d["n_coi"] += 1
+        else:
+            d["n_independent"] += 1
 
     rows = []
     for comm_id, d in sorted(comm_data.items()):
-        pct_industry = (d["n_industry"] / d["n_authors"] * 100) if d["n_authors"] else 0
-        total_coded = d["n_positive"] + d["n_negative"]
-        pct_positive = (d["n_positive"] / total_coded * 100) if total_coded else 0
+        pct_tobacco = (d["n_tobacco"] / d["n_authors"] * 100) if d["n_authors"] else 0
+        pct_coi = (d["n_coi"] / d["n_authors"] * 100) if d["n_authors"] else 0
+
+        # Count unique papers and their outcomes
+        unique_papers = comm_papers.get(comm_id, set())
+        n_positive = sum(1 for p in unique_papers if paper_outcomes_map.get(p) == "Positive")
+        n_negative = sum(1 for p in unique_papers if paper_outcomes_map.get(p) == "Negative")
+        total_coded = n_positive + n_negative
+        pct_positive = (n_positive / total_coded * 100) if total_coded else 0
 
         rows.append({
             "community_id": comm_id,
             "n_authors": d["n_authors"],
-            "n_industry_authors": d["n_industry"],
-            "pct_industry": round(pct_industry, 1),
-            "total_papers": d["total_papers"],
-            "n_positive_outcomes": d["n_positive"],
-            "n_negative_outcomes": d["n_negative"],
+            "n_tobacco_authors": d["n_tobacco"],
+            "n_coi_authors": d["n_coi"],
+            "n_independent_authors": d["n_independent"],
+            "pct_tobacco": round(pct_tobacco, 1),
+            "pct_coi": round(pct_coi, 1),
+            "total_papers": len(unique_papers),
+            "n_positive_outcomes": n_positive,
+            "n_negative_outcomes": n_negative,
             "pct_positive": round(pct_positive, 1),
         })
 
@@ -255,12 +316,15 @@ def global_stats(G: nx.Graph) -> Dict[str, Any]:
     # Transitivity
     stats["transitivity"] = round(nx.transitivity(G), 4)
 
-    # Industry vs non-industry node counts
-    n_industry = sum(1 for n in G.nodes if G.nodes[n].get("is_industry"))
-    stats["n_industry_nodes"] = n_industry
-    stats["n_independent_nodes"] = G.number_of_nodes() - n_industry
+    # Node counts by category
+    n_tobacco = sum(1 for n in G.nodes if G.nodes[n].get("author_category") == "Tobacco Company")
+    n_coi = sum(1 for n in G.nodes if G.nodes[n].get("author_category") == "COI Declared")
+    n_independent = sum(1 for n in G.nodes if G.nodes[n].get("author_category") == "Independent")
+    stats["n_tobacco_nodes"] = n_tobacco
+    stats["n_coi_nodes"] = n_coi
+    stats["n_independent_nodes"] = n_independent
 
-    # Assortativity by industry flag
+    # Assortativity by industry flag (tobacco vs non-tobacco)
     try:
         nx.set_node_attributes(G, {n: 1 if G.nodes[n].get("is_industry") else 0 for n in G.nodes}, "industry_int")
         stats["industry_assortativity"] = round(
@@ -300,8 +364,8 @@ def main():
     # Centrality
     centrality_df = compute_centrality(G)
 
-    # Community summary
-    comm_df = community_summary(G, partition)
+    # Community summary (pass edges_df and papers_df for accurate unique-paper counts)
+    comm_df = community_summary(G, partition, edges_df=edges_df, papers_df=papers_df)
 
     # Global stats
     stats = global_stats(G)

@@ -1,11 +1,16 @@
 group,outcome,count,total,percentage
-Industry-Involved,Positive,106,699,15.2
-Industry-Involved,Negative,46,699,6.6
-Industry-Involved,Neutral,13,699,1.9
-Industry-Involved,Mixed,24,699,3.4
-Industry-Involved,Not coded,510,699,73.0
-Independent,Positive,238,1476,16.1
-Independent,Negative,139,1476,9.4
-Independent,Neutral,14,1476,0.9
-Independent,Mixed,79,1476,5.4
-Independent,Not coded,1006,1476,68.2
+Tobacco Company,Positive,13,113,11.5
+Tobacco Company,Negative,8,113,7.1
+Tobacco Company,Neutral,2,113,1.8
+Tobacco Company,Mixed,5,113,4.4
+Tobacco Company,Not coded,85,113,75.2
+COI Declared,Positive,99,414,23.9
+COI Declared,Negative,33,414,8.0
+COI Declared,Neutral,13,414,3.1
+COI Declared,Mixed,20,414,4.8
+COI Declared,Not coded,249,414,60.1
+Independent,Positive,223,1648,13.5
+Independent,Negative,138,1648,8.4
+Independent,Neutral,27,1648,1.6
+Independent,Mixed,78,1648,4.7
+Independent,Not coded,1182,1648,71.7

@@ -9,8 +9,9 @@
   "largest_component_pct": 89.0,
   "avg_clustering_coefficient": 0.0274,
   "transitivity": 0.6258,
-  "n_industry_nodes": 75,
-  "n_independent_nodes": 1576,
+  "n_tobacco_nodes": 75,
+  "n_coi_nodes": 824,
+  "n_independent_nodes": 752,
   "industry_assortativity": 0.8086,
   "communities": 92
 }
