@@ -181,12 +181,12 @@ def code_outcome(sentences: List[str]) -> str:
     neg = any(re.search(p, s.lower()) for s in sentences for p in NEG_PATTERNS)
     neu = any(re.search(p, s.lower()) for s in sentences for p in NEUTRAL_PATTERNS)
 
-    if pos and neg:
-        return "Mixed"
     # Neutral overrides individual pos/neg — "no significant improvement"
-    # should be Neutral, not Positive
+    # should be Neutral, not Positive. Check neutral first.
     if neu:
         return "Neutral"
+    if pos and neg:
+        return "Mixed"
     if neg:
         return "Negative"
     if pos:

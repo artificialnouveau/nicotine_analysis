@@ -40,8 +40,8 @@ Papers are classified into three mutually exclusive groups:
 |---|---|---|---|
 | Positive | 12 (10.8%) | 99 (23.9%) | 224 (13.6%) |
 | Negative | 8 (7.2%) | 33 (8.0%) | 138 (8.4%) |
-| Neutral | 2 (1.8%) | 13 (3.1%) | 27 (1.6%) |
-| Mixed | 5 (4.5%) | 20 (4.8%) | 78 (4.7%) |
+| Neutral | 3 (2.7%) | 14 (3.4%) | 27 (1.6%) |
+| Mixed | 4 (3.6%) | 19 (4.6%) | 78 (4.7%) |
 | Not coded | 84 (75.7%) | 249 (60.1%) | 1,183 (71.7%) |
 
 ### Statistical Tests
@@ -68,7 +68,7 @@ Papers are classified into three mutually exclusive groups:
 
 | Test | Statistic | p-value | Interpretation |
 |---|---|---|---|
-| Chi-square (coded only, 3×4) | 10.53 | 0.104 | Borderline — not significant at α = 0.05 |
+| Chi-square (coded only, 3×4) | 10.72 | 0.058 | Borderline — approaching significance at α = 0.05 |
 
 **Bottom line:** Papers with actual **tobacco company ties do not** show significantly more positive outcomes (OR = 0.87, p = 0.84). However, papers where authors **declared a non-tobacco COI** are **significantly more likely** to report positive findings (OR = 1.63, p = 0.009). This suggests the positive-outcome signal comes not from tobacco industry influence specifically, but from the broader category of researchers who declare conflicts of interest — potentially reflecting publication norms in industry-adjacent research or funding-related reporting biases that are not tobacco-specific.
 

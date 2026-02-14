@@ -11,13 +11,13 @@
       "Independent": 138
     },
     "Neutral": {
-      "Tobacco Company": 2,
-      "COI Declared": 13,
+      "Tobacco Company": 3,
+      "COI Declared": 14,
       "Independent": 27
     },
     "Mixed": {
-      "Tobacco Company": 5,
-      "COI Declared": 20,
+      "Tobacco Company": 4,
+      "COI Declared": 19,
       "Independent": 78
     },
     "Not coded": {
@@ -27,8 +27,8 @@
     }
   },
   "chi_square": {
-    "chi2": 10.5328,
-    "p_value": 0.103934,
+    "chi2": 12.1656,
+    "p_value": 0.058375,
     "dof": 6,
     "note": "3-group test (Tobacco/COI/Independent), excludes 'Not coded'"
   },
@@ -190,24 +190,24 @@
       "Not coded": 1516,
       "Positive": 335,
       "Negative": 179,
-      "Mixed": 103,
-      "Neutral": 42
+      "Mixed": 101,
+      "Neutral": 44
     },
     "n_tobacco_company": 111,
     "tobacco_company_outcomes": {
       "Not coded": 84,
       "Positive": 12,
       "Negative": 8,
-      "Mixed": 5,
-      "Neutral": 2
+      "Mixed": 4,
+      "Neutral": 3
     },
     "n_coi_declared": 414,
     "coi_declared_outcomes": {
       "Not coded": 249,
       "Positive": 99,
       "Negative": 33,
-      "Mixed": 20,
-      "Neutral": 13
+      "Mixed": 19,
+      "Neutral": 14
     },
     "n_independent": 1650,
     "independent_outcomes": {

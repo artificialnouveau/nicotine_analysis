@@ -240,10 +240,11 @@ def run_all_tests(papers_df: pd.DataFrame, centrality_df: pd.DataFrame) -> Dict[
                         "vs_independent_p": round(u_p, 6),
                     }
 
-            metric_results["Independent"] = {
-                "mean": round(indep_vals.mean(), 6),
-                "median": round(indep_vals.median(), 6),
-            }
+            if len(indep_vals) > 0:
+                metric_results["Independent"] = {
+                    "mean": round(indep_vals.mean(), 6),
+                    "median": round(indep_vals.median(), 6),
+                }
             centrality_results[metric] = metric_results
 
         # Kruskal-Wallis across all three groups
