@@ -189,7 +189,12 @@ def plot_community_scatter(comm_df: pd.DataFrame, output_dir: str):
 
     ax.set_xlabel("% Industry-Affiliated Authors in Community", fontsize=12)
     ax.set_ylabel("% Positive Outcomes in Community", fontsize=12)
-    ax.set_title("Community-Level: Industry Concentration vs Positive Outcomes", fontsize=14, fontweight="bold")
+    fig.suptitle("Community-Level: Industry Concentration vs Positive Outcomes", fontsize=14, fontweight="bold", y=0.98)
+    ax.set_title(
+        "Each bubble is a Louvain community of co-authors. Size = number of authors.\n"
+        "X-axis shows how concentrated industry affiliations are; Y-axis shows the share of positive findings.",
+        fontsize=9.5, color="#555", fontstyle="italic", pad=12,
+    )
 
     plt.colorbar(scatter, ax=ax, label="% Industry", shrink=0.8)
     plt.tight_layout()
