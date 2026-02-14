@@ -106,13 +106,13 @@ The interactive co-authorship network reveals a highly clustered research landsc
 
 Open these files in a browser for full interactivity:
 
-- **[Co-Authorship Network (pyvis)](https://htmlpreview.github.io/?https://github.com/artificialnouveau/nicotine_analysis/blob/main/part2/output/viz/coauthor_network_interactive.html)** — Drag, zoom, and hover over the network. Industry authors are red diamonds, independent are blue circles. Includes a color legend. Node size reflects paper count; edge thickness reflects shared publications.
+- **[Co-Authorship Network (pyvis)](https://artificialnouveau.github.io/nicotine_analysis/part2/output/viz/coauthor_network_interactive.html)** — Drag, zoom, and hover over the network. Industry authors are red diamonds, independent are blue circles. Includes a color legend. Node size reflects paper count; edge thickness reflects shared publications.
 
-- **[Co-Authorship Network (plotly)](https://htmlpreview.github.io/?https://github.com/artificialnouveau/nicotine_analysis/blob/main/part2/output/viz/coauthor_network_plotly.html)** — Spring-layout network with hover tooltips showing author name, paper count, % positive outcomes, and industry status.
+- **[Co-Authorship Network (plotly)](https://artificialnouveau.github.io/nicotine_analysis/part2/output/viz/coauthor_network_plotly.html)** — Spring-layout network with hover tooltips showing author name, paper count, % positive outcomes, and industry status.
 
-- **[Sankey Diagram: Industry Status to Outcomes](https://htmlpreview.github.io/?https://github.com/artificialnouveau/nicotine_analysis/blob/main/part2/output/viz/figures/sankey_funding_outcome.html)** — Flow diagram showing how papers from industry-involved vs independent groups distribute across outcome categories.
+- **[Sankey Diagram: Industry Status to Outcomes](https://artificialnouveau.github.io/nicotine_analysis/part2/output/viz/figures/sankey_funding_outcome.html)** — Flow diagram showing how papers from industry-involved vs independent groups distribute across outcome categories.
 
-- **[Outcome Heatmap Over Time](https://htmlpreview.github.io/?https://github.com/artificialnouveau/nicotine_analysis/blob/main/part2/output/viz/figures/outcome_heatmap.html)** — Year-by-year heatmap of % positive outcomes for industry vs independent papers from 1990–present.
+- **[Outcome Heatmap Over Time](https://artificialnouveau.github.io/nicotine_analysis/part2/output/viz/figures/outcome_heatmap.html)** — Year-by-year heatmap of % positive outcomes for industry vs independent papers from 1990–present.
 
 ### Streamlit Dashboard
 
