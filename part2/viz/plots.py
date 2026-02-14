@@ -272,6 +272,14 @@ def plot_odds_ratio_forest(stats_path: str, output_dir: str):
 
     ax.set_ylim(-0.7, 0.5)
 
+    # Color legend
+    legend_elements = [
+        mpatches.Patch(facecolor=COLORS["industry"], edgecolor="black", label="Industry-Involved (OR point & 95% CI)"),
+        mpatches.Patch(facecolor=COLORS["independent"], edgecolor="black", label="Independent (reference group)"),
+        plt.Line2D([0], [0], color="gray", linestyle="--", linewidth=1, label="Null (OR = 1.0, no difference)"),
+    ]
+    ax.legend(handles=legend_elements, loc="upper left", fontsize=9, framealpha=0.9)
+
     plt.tight_layout()
     plt.savefig(os.path.join(output_dir, "odds_ratio_forest.png"), dpi=200, bbox_inches="tight")
     plt.close()
