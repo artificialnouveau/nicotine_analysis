@@ -243,11 +243,11 @@ def plot_odds_ratio_forest(stats_path: str, output_dir: str):
     if or_val is None:
         return
 
-    fig, ax = plt.subplots(figsize=(8, 3))
+    fig, ax = plt.subplots(figsize=(10, 4))
 
     ax.errorbar(
         or_val, 0, xerr=[[or_val - ci_lo], [ci_hi - or_val]],
-        fmt="o", color=COLORS["industry"], markersize=10, capsize=5, linewidth=2,
+        fmt="o", color=COLORS["industry"], markersize=12, capsize=6, linewidth=2.5,
     )
 
     ax.axvline(x=1.0, color="gray", linestyle="--", linewidth=1, alpha=0.7)
@@ -258,11 +258,19 @@ def plot_odds_ratio_forest(stats_path: str, output_dir: str):
     ax.set_title(f"Odds Ratio: {or_val:.2f} (95% CI: {ci_lo:.2f} - {ci_hi:.2f})",
                  fontsize=13, fontweight="bold")
 
-    # Annotations
-    if or_val > 1:
-        ax.text(or_val, 0.15, "Favors industry\n(more positive)", ha="center", fontsize=9, color=COLORS["industry"])
-    else:
-        ax.text(or_val, 0.15, "Favors independent\n(more positive)", ha="center", fontsize=9, color=COLORS["independent"])
+    # Reference labels on either side of the null line (below the axis)
+    ax.text(0.82, -0.45, "Favors independent", ha="center", fontsize=10,
+            color=COLORS["independent"], fontstyle="italic")
+    ax.text(1.18, -0.45, "Favors industry", ha="center", fontsize=10,
+            color=COLORS["industry"], fontstyle="italic")
+
+    # Arrow indicators
+    ax.annotate("", xy=(0.72, -0.3), xytext=(0.95, -0.3),
+                arrowprops=dict(arrowstyle="->", color=COLORS["independent"], lw=1.5))
+    ax.annotate("", xy=(1.28, -0.3), xytext=(1.05, -0.3),
+                arrowprops=dict(arrowstyle="->", color=COLORS["industry"], lw=1.5))
+
+    ax.set_ylim(-0.7, 0.5)
 
     plt.tight_layout()
     plt.savefig(os.path.join(output_dir, "odds_ratio_forest.png"), dpi=200, bbox_inches="tight")
