@@ -55,10 +55,10 @@ NO_COI_PHRASES = [
 ]
 
 YES_COI_PHRASES = [
-    "received funding from", "funded by", "supported by", "grant from",
     "consultant", "honoraria", "speaker", "advisory board",
     "employee of", "employment", "stock", "equity", "patent",
     "royalties", "expert witness", "litigation",
+    "personal fees", "received fees",
 ]
 
 
@@ -173,20 +173,20 @@ def extract_conclusion_sentences(abstract: str, max_sents: int = 6) -> List[str]
 def code_outcome(sentences: List[str]) -> str:
     """Code outcome direction from conclusion sentences.
 
-    Bug fix: Neutral patterns (e.g., "no significant") now take priority
-    over Positive, so "no significant improvement" is coded Neutral, not
-    Positive. Order: Mixed > Neutral > Negative > Positive > Not coded.
+    Neutral overrides individual pos or neg signals (e.g., "no significant
+    improvement" is Neutral, not Positive), but Mixed (pos AND neg) takes
+    priority over Neutral. Order: Mixed > Neutral > Negative > Positive > Not coded.
     """
     pos = any(re.search(p, s.lower()) for s in sentences for p in POS_PATTERNS)
     neg = any(re.search(p, s.lower()) for s in sentences for p in NEG_PATTERNS)
     neu = any(re.search(p, s.lower()) for s in sentences for p in NEUTRAL_PATTERNS)
 
-    # Neutral overrides individual pos/neg — "no significant improvement"
-    # should be Neutral, not Positive. Check neutral first.
-    if neu:
-        return "Neutral"
     if pos and neg:
         return "Mixed"
+    # Neutral overrides individual pos/neg — "no significant improvement"
+    # should be Neutral, not Positive.
+    if neu:
+        return "Neutral"
     if neg:
         return "Negative"
     if pos:
@@ -233,6 +233,7 @@ def process_records(records: List[Dict]) -> Tuple[pd.DataFrame, pd.DataFrame, pd
         paper_has_industry_author = False
         paper_industry_orgs: List[str] = []
         paper_author_ids: List[str] = []
+        seen_author_ids: set = set()
 
         for auth in authors_raw:
             if not isinstance(auth, dict):
@@ -273,6 +274,11 @@ def process_records(records: List[Dict]) -> Tuple[pd.DataFrame, pd.DataFrame, pd
             if is_industry:
                 entry["is_industry_affiliated"] = True
                 entry["industry_orgs"].update(matched_orgs)
+
+            # Deduplicate: skip if this author already seen on this paper
+            if aid in seen_author_ids:
+                continue
+            seen_author_ids.add(aid)
 
             paper_author_ids.append(aid)
 

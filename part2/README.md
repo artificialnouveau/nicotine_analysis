@@ -1,8 +1,8 @@
 # Part 2: Tobacco/Nicotine Industry Influence — Network Analysis & Visualization
 
-In total, 2,175 tobacco and nicotine research papers published (and sourced on PubMed) between 1964 and 2025 were analyzed. In total, 7,006 authors were identified, and I mapped their co-authorship relationships into a network of 13,405 connections. Papers were classified into three categories based on the nature of their industry ties: **Tobacco Company** (111 papers, 5.1%) where at least one author had a direct affiliation with a known tobacco or nicotine company (e.g., Philip Morris, BAT, JUUL, R.J. Reynolds); **COI Declared** (414 papers, 19.0%) where authors disclosed financial conflicts of interest — such as consulting fees, advisory board membership, or industry funding — but were not directly employed by a tobacco company; and **Independent** (1,650 papers, 75.9%) with no disclosed industry ties. Industry affiliations were identified by matching author affiliations against known tobacco and nicotine companies using pattern-matching, and conflict-of-interest disclosure statements embedded in the publications were classified using keyword detection for phrases like "employee of," "funded by," "consultant," and "advisory board." The co-authorship network exhibits high industry assortativity (0.79), meaning tobacco-affiliated authors form tightly insular clusters, while the most central bridge scientists connecting disparate communities tend to be independent or COI-declaring researchers.
+In total, 2,175 tobacco and nicotine research papers published (and sourced on PubMed) between 1964 and 2025 were analyzed. In total, 7,006 authors were identified, and I mapped their co-authorship relationships into a network of 13,405 connections. Papers were classified into three categories based on the nature of their industry ties: **Tobacco Company** (111 papers, 5.1%) where at least one author had a direct affiliation with a known tobacco or nicotine company (e.g., Philip Morris, BAT, JUUL, R.J. Reynolds); **COI Declared** (401 papers, 18.4%) where authors disclosed financial conflicts of interest — such as consulting fees, advisory board membership, or honoraria — but were not directly employed by a tobacco company; and **Independent** (1,663 papers, 76.5%) with no disclosed industry ties. Industry affiliations were identified by matching author affiliations against known tobacco and nicotine companies using pattern-matching, and conflict-of-interest disclosure statements embedded in the publications were classified using keyword detection for phrases like "employee of," "consultant," "honoraria," and "advisory board." The co-authorship network exhibits high industry assortativity (0.79), meaning tobacco-affiliated authors form tightly insular clusters, while the most central bridge scientists connecting disparate communities tend to be independent or COI-declaring researchers.
 
-Outcome direction (positive, negative, neutral, or mixed) was determined by extracting conclusion-like sentences from abstracts and classifying them using directional keyword patterns (e.g., "harm reduction," "cessation," "safer" = positive; "carcinogen," "increased risk," "addiction" = negative). Of the 659 papers with codeable outcomes, the most striking finding was a split between the two industry-linked groups. Papers with **direct tobacco company ties showed no significant bias** — their rate of positive outcomes (44.4%) was comparable to independent papers (48.0%), with an odds ratio of 0.87 (p = 0.84). However, **COI-declared papers were significantly more likely to report positive outcomes** (60.0% vs 48.0%, OR = 1.63, p = 0.009). This suggests that the bias in tobacco and nicotine research may not originate from researchers directly employed by tobacco companies, but rather from the broader ecosystem of industry-funded consultants, grant recipients, and advisory board members whose financial relationships are disclosed but whose findings nonetheless skew favorably.
+Outcome direction (positive, negative, neutral, or mixed) was determined by extracting conclusion-like sentences from abstracts and classifying them using directional keyword patterns (e.g., "harm reduction," "cessation," "safer" = positive; "carcinogen," "increased risk," "addiction" = negative). Of the 659 papers with codeable outcomes, the most striking finding was a split between the two industry-linked groups. Papers with **direct tobacco company ties showed no significant bias** — their rate of positive outcomes (44.4%) was comparable to independent papers (48.1%), with an odds ratio of 0.86 (p = 0.84). However, **COI-declared papers were significantly more likely to report positive outcomes** (60.3% vs 48.1%, OR = 1.64, p = 0.010). This suggests that the bias in tobacco and nicotine research may not originate from researchers directly employed by tobacco companies, but rather from the broader ecosystem of industry-funded consultants, grant recipients, and advisory board members whose financial relationships are disclosed but whose findings nonetheless skew favorably.
 
 ---
 
@@ -27,8 +27,8 @@ Papers are classified into three mutually exclusive groups:
 | Category | Definition | Papers |
 |---|---|---|
 | **Tobacco Company** | Author has verified affiliation with a known tobacco/nicotine company (Philip Morris, BAT, JUUL, R.J. Reynolds, Altria, etc.) OR the COI statement specifically names a tobacco company | 111 (5.1%) |
-| **COI Declared** | Author declared a conflict of interest (pharma consulting, grants, advisory boards, etc.) but NOT tied to a tobacco company | 414 (19.0%) |
-| **Independent** | No conflict of interest declared | 1,650 (75.9%) |
+| **COI Declared** | Author declared a conflict of interest (consulting, honoraria, advisory boards, etc.) but NOT tied to a tobacco company | 401 (18.4%) |
+| **Independent** | No conflict of interest declared | 1,663 (76.5%) |
 
 ---
 
@@ -38,11 +38,11 @@ Papers are classified into three mutually exclusive groups:
 
 | Outcome | Tobacco Company | COI Declared | Independent |
 |---|---|---|---|
-| Positive | 12 (10.8%) | 99 (23.9%) | 224 (13.6%) |
-| Negative | 8 (7.2%) | 33 (8.0%) | 138 (8.4%) |
-| Neutral | 3 (2.7%) | 14 (3.4%) | 27 (1.6%) |
-| Mixed | 4 (3.6%) | 19 (4.6%) | 78 (4.7%) |
-| Not coded | 84 (75.7%) | 249 (60.1%) | 1,183 (71.7%) |
+| Positive | 12 (10.8%) | 94 (23.4%) | 229 (13.8%) |
+| Negative | 8 (7.2%) | 29 (7.2%) | 142 (8.5%) |
+| Neutral | 2 (1.8%) | 12 (3.0%) | 28 (1.7%) |
+| Mixed | 5 (4.5%) | 21 (5.2%) | 77 (4.6%) |
+| Not coded | 84 (75.7%) | 245 (61.1%) | 1,187 (71.4%) |
 
 ### Statistical Tests
 
@@ -50,27 +50,27 @@ Papers are classified into three mutually exclusive groups:
 
 | Test | Statistic | p-value | Interpretation |
 |---|---|---|---|
-| Odds ratio (Positive) | 0.87 (95% CI: 0.40–1.89) | — | CI spans 1.0 — no significant association |
+| Odds ratio (Positive) | 0.86 (95% CI: 0.40–1.88) | — | CI spans 1.0 — no significant association |
 | Fisher exact | — | 0.844 | No significant difference |
-| Proportion z-test | z = −0.36 | 0.722 | 44.4% vs 48.0% positive — not significant |
+| Proportion z-test | z = −0.35 | 0.727 | 44.4% vs 48.1% positive — not significant |
 | Permutation test (two-sided) | — | 0.841 | Consistent with random assignment |
 
 #### COI Declared vs Independent
 
 | Test | Statistic | p-value | Interpretation |
 |---|---|---|---|
-| Odds ratio (Positive) | **1.63** (95% CI: 1.13–2.33) | — | **Significant: CI does not span 1.0** |
-| Fisher exact | — | **0.009** | **Significant difference** |
-| Proportion z-test | z = 2.66 | **0.008** | 60.0% vs 48.0% positive — **significant** |
-| Permutation test (two-sided) | — | **0.009** | **Not consistent with random assignment** |
+| Odds ratio (Positive) | **1.64** (95% CI: 1.13–2.36) | — | **Significant: CI does not span 1.0** |
+| Fisher exact | — | **0.010** | **Significant difference** |
+| Proportion z-test | z = 2.60 | **0.009** | 60.3% vs 48.1% positive — **significant** |
+| Permutation test (two-sided) | — | **0.010** | **Not consistent with random assignment** |
 
 #### Overall (3-group)
 
 | Test | Statistic | p-value | Interpretation |
 |---|---|---|---|
-| Chi-square (coded only, 3×4) | 10.72 | 0.058 | Borderline — approaching significance at α = 0.05 |
+| Chi-square (coded only, 3×4) | 10.42 | 0.104 | Not significant at α = 0.05 |
 
-**Bottom line:** Papers with actual **tobacco company ties do not** show significantly more positive outcomes (OR = 0.87, p = 0.84). However, papers where authors **declared a non-tobacco COI** are **significantly more likely** to report positive findings (OR = 1.63, p = 0.009). This suggests the positive-outcome signal comes not from tobacco industry influence specifically, but from the broader category of researchers who declare conflicts of interest — potentially reflecting publication norms in industry-adjacent research or funding-related reporting biases that are not tobacco-specific.
+**Bottom line:** Papers with actual **tobacco company ties do not** show significantly more positive outcomes (OR = 0.86, p = 0.84). However, papers where authors **declared a non-tobacco COI** are **significantly more likely** to report positive findings (OR = 1.64, p = 0.010). This suggests the positive-outcome signal comes not from tobacco industry influence specifically, but from the broader category of researchers who declare conflicts of interest — potentially reflecting publication norms in industry-adjacent research or funding-related reporting biases that are not tobacco-specific.
 
 ### Network Structure
 

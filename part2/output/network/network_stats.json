@@ -10,8 +10,8 @@
   "avg_clustering_coefficient": 0.0274,
   "transitivity": 0.6258,
   "n_tobacco_nodes": 73,
-  "n_coi_nodes": 824,
-  "n_independent_nodes": 754,
+  "n_coi_nodes": 812,
+  "n_independent_nodes": 766,
   "industry_assortativity": 0.791,
   "communities": 92
 }
