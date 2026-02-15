@@ -2,7 +2,7 @@
 
 In total, 2,175 tobacco and nicotine research papers published (and sourced on PubMed) between 1964 and 2025 were analyzed. In total, 7,006 authors were identified, and I mapped their co-authorship relationships into a network of 13,405 connections. Papers were classified into three categories based on the nature of their industry ties: **Tobacco Company** (111 papers, 5.1%) where at least one author had a direct affiliation with a known tobacco or nicotine company (e.g., Philip Morris, BAT, JUUL, R.J. Reynolds); **COI Declared** (425 papers, 19.5%) where authors disclosed financial conflicts of interest — such as consulting fees, advisory board membership, or industry funding — but were not directly employed by a tobacco company; and **Independent** (1,639 papers, 75.4%) with no disclosed industry ties. Industry affiliations were identified by matching author affiliations against known tobacco and nicotine companies using pattern-matching, and conflict-of-interest disclosure statements embedded in the publications were classified using keyword detection for phrases like "employee of," "funded by," "consultant," and "advisory board." The co-authorship network exhibits high industry assortativity (0.79), meaning tobacco-affiliated authors form tightly insular clusters, while the most central bridge scientists connecting disparate communities tend to be independent or COI-declaring researchers.
 
-Outcome direction (positive, negative, neutral, or mixed) was determined by extracting conclusion-like sentences from abstracts and classifying them using directional keyword patterns (e.g., "harm reduction," "cessation," "safer" = positive; "carcinogen," "increased risk," "addiction" = negative). Of the 659 papers with codeable outcomes, the most striking finding was a split between the two industry-linked groups. Papers with **direct tobacco company ties showed no significant bias** — their rate of positive outcomes (44.4%) was comparable to independent papers (48.1%), with an odds ratio of 0.86 (p = 0.84). However, **COI-declared papers were significantly more likely to report positive outcomes** (59.6% vs 48.1%, OR = 1.60, p = 0.011). This suggests that the bias in tobacco and nicotine research may not originate from researchers directly employed by tobacco companies, but rather from the broader ecosystem of industry-funded consultants, grant recipients, and advisory board members whose financial relationships are disclosed but whose findings nonetheless skew favorably.
+Outcome direction (positive, negative, neutral, or mixed) was determined using an enhanced keyword classifier that extracts conclusion-like sentences from full-text abstracts and classifies them using ~100 directional keyword patterns covering health outcomes, policy, epidemiology, marketing, cessation programs, and regulatory findings. Of the 1,075 papers with classifiable outcomes (49.4% of all papers — a substantial improvement over the initial 659 papers classified by the baseline keyword approach), the most striking finding was a split between the two industry-linked groups. Papers with **direct tobacco company ties showed no significant bias** — their rate of positive outcomes (36.5%) was comparable to independent papers (34.3%), with an odds ratio of 1.10 (p = 0.78). However, **COI-declared papers were significantly more likely to report positive outcomes** (43.2% vs 34.3%, OR = 1.46, p = 0.012). The overall 3-group chi-square test was also significant (chi2 = 14.03, p = 0.029), confirming that outcome distributions differ across the three categories. This suggests that the bias in tobacco and nicotine research may not originate from researchers directly employed by tobacco companies, but rather from the broader ecosystem of industry-funded consultants, grant recipients, and advisory board members whose financial relationships are disclosed but whose findings nonetheless skew favorably.
 
 ---
 
@@ -10,13 +10,15 @@ Outcome direction (positive, negative, neutral, or mixed) was determined by extr
 
 1. **Data Loading & COI Identification** — Ingests 2,175 PubMed records from Part 1, extracts 7,006 unique authors and their affiliations, and classifies each paper into one of three categories: Tobacco Company ties, COI Declared (non-tobacco), or Independent.
 
-2. **Co-Authorship Network Construction** — Builds an undirected weighted graph where nodes are authors and edges represent co-publication. Computes degree, betweenness, closeness, and eigenvector centrality for every author. Detects research communities via Louvain clustering.
+2. **Enhanced Outcome Classification** — Uses an expanded keyword classifier with ~100 directional patterns applied to conclusion-like sentences extracted from full-text abstracts (not truncated). Covers health outcomes, policy/regulatory findings, cessation program effectiveness, industry criticism, and more. Classifies 1,075 papers (49.4%), up from 659 (30.3%) with the baseline approach.
 
-3. **Statistical Testing** — Runs tests comparing all three groups: chi-square (3-group), pairwise Fisher exact tests, odds ratios with 95% CI, proportion z-tests, permutation tests, and Kruskal-Wallis + Mann-Whitney U for centrality metrics.
+3. **Co-Authorship Network Construction** — Builds an undirected weighted graph where nodes are authors and edges represent co-publication. Computes degree, betweenness, closeness, and eigenvector centrality for every author. Detects research communities via Louvain clustering.
 
-4. **Visualizations** — Generates six static plots (PNG), four interactive charts (HTML), and an interactive co-authorship network with color-coded nodes (three categories) and a legend.
+4. **Statistical Testing** — Runs tests comparing all three groups: chi-square (3-group), pairwise Fisher exact tests, odds ratios with 95% CI, proportion z-tests, permutation tests, and Kruskal-Wallis + Mann-Whitney U for centrality metrics.
 
-5. **Streamlit Dashboard** — A full interactive dashboard for exploring all results, with filterable paper/author browsers, network views, and outcome charts.
+5. **Visualizations** — Generates six static plots (PNG), four interactive charts (HTML), and an interactive co-authorship network with color-coded nodes (three categories) and a legend.
+
+6. **Streamlit Dashboard** — A full interactive dashboard for exploring all results, with filterable paper/author browsers, network views, and outcome charts.
 
 ---
 
@@ -34,43 +36,47 @@ Papers are classified into three mutually exclusive groups:
 
 ## Key Results
 
-### Outcome Distribution
+### Enhanced Outcome Classification
+
+The enhanced classifier uses ~100 keyword patterns applied to conclusion-like sentences extracted from full abstracts. It classifies 1,075 of 2,175 papers (49.4%), compared to 659 (30.3%) with the original baseline approach. The remaining 1,100 papers either lack abstracts (296) or contain purely descriptive/methodological content without directional health or policy findings.
+
+### Outcome Distribution (Enhanced Classifier)
 
 | Outcome | Tobacco Company | COI Declared | Independent |
 |---|---|---|---|
-| Positive | 12 (10.8%) | 99 (23.3%) | 224 (13.7%) |
-| Negative | 8 (7.2%) | 33 (7.8%) | 138 (8.4%) |
-| Neutral | 2 (1.8%) | 13 (3.1%) | 27 (1.6%) |
-| Mixed | 5 (4.5%) | 21 (4.9%) | 77 (4.7%) |
-| Not coded | 84 (75.7%) | 259 (60.9%) | 1,173 (71.6%) |
+| Positive | 23 (20.7%) | 108 (25.4%) | 261 (15.9%) |
+| Negative | 21 (18.9%) | 61 (14.4%) | 249 (15.2%) |
+| Neutral | 3 (2.7%) | 21 (4.9%) | 37 (2.3%) |
+| Mixed | 16 (14.4%) | 60 (14.1%) | 215 (13.1%) |
+| Not applicable | 48 (43.2%) | 175 (41.2%) | 877 (53.5%) |
 
-### Statistical Tests
+### Statistical Tests (Enhanced Classifier)
 
 #### Tobacco Company vs Independent
 
 | Test | Statistic | p-value | Interpretation |
 |---|---|---|---|
-| Odds ratio (Positive) | 0.86 (95% CI: 0.40–1.89) | — | CI spans 1.0 — no significant association |
-| Fisher exact | — | 0.843 | No significant difference |
-| Proportion z-test | z = −0.35 | 0.727 | 44.4% vs 48.1% positive — not significant |
-| Permutation test (two-sided) | — | 0.841 | Consistent with random assignment |
+| Odds ratio (Positive) | 1.10 (95% CI: 0.65–1.88) | — | CI spans 1.0 — no significant association |
+| Fisher exact | — | 0.783 | No significant difference |
+| Proportion z-test | z = 0.36 | 0.717 | 36.5% vs 34.3% positive — not significant |
+| Permutation test (two-sided) | — | 0.779 | Consistent with random assignment |
 
 #### COI Declared vs Independent
 
 | Test | Statistic | p-value | Interpretation |
 |---|---|---|---|
-| Odds ratio (Positive) | **1.60** (95% CI: 1.11–2.29) | — | **Significant: CI does not span 1.0** |
-| Fisher exact | — | **0.011** | **Significant difference** |
-| Proportion z-test | z = 2.52 | **0.012** | 59.6% vs 48.1% positive — **significant** |
-| Permutation test (two-sided) | — | **0.011** | **Not consistent with random assignment** |
+| Odds ratio (Positive) | **1.46** (95% CI: 1.09–1.95) | — | **Significant: CI does not span 1.0** |
+| Fisher exact | — | **0.012** | **Significant difference** |
+| Proportion z-test | z = 2.55 | **0.011** | 43.2% vs 34.3% positive — **significant** |
+| Permutation test (two-sided) | — | **0.012** | **Not consistent with random assignment** |
 
 #### Overall (3-group)
 
 | Test | Statistic | p-value | Interpretation |
 |---|---|---|---|
-| Chi-square (coded only, 3×4) | 9.67 | 0.139 | Not significant at α = 0.05 |
+| Chi-square (coded only, 3×4) | **14.03** | **0.029** | **Significant at α = 0.05** |
 
-**Bottom line:** Papers with actual **tobacco company ties do not** show significantly more positive outcomes (OR = 0.86, p = 0.84). However, papers where authors **declared a non-tobacco COI** are **significantly more likely** to report positive findings (OR = 1.60, p = 0.011). This suggests the positive-outcome signal comes not from tobacco industry influence specifically, but from the broader category of researchers who declare conflicts of interest — potentially reflecting publication norms in industry-adjacent research or funding-related reporting biases that are not tobacco-specific.
+**Bottom line:** Papers with actual **tobacco company ties do not** show significantly more positive outcomes (OR = 1.10, p = 0.78). However, papers where authors **declared a non-tobacco COI** are **significantly more likely** to report positive findings (OR = 1.46, p = 0.012). With the enhanced classifier covering 1,075 papers (vs 659 previously), the overall 3-group chi-square is now significant (p = 0.029), confirming that outcome distributions genuinely differ across the three categories. This suggests the positive-outcome signal comes not from tobacco industry employment specifically, but from the broader category of researchers who declare financial conflicts of interest — potentially reflecting publication norms in industry-adjacent research or funding-related reporting biases that are not tobacco-specific.
 
 ### Network Structure
 
@@ -156,7 +162,8 @@ part2/
 ├── requirements.txt
 ├── run_pipeline.py                  # Master pipeline (runs all steps)
 ├── data/
-│   └── load_and_identify.py         # Load part1 data, identify COI/industry ties
+│   ├── load_and_identify.py         # Load part1 data, identify COI/industry ties
+│   └── enhanced_classifier.py       # Enhanced outcome classification (~100 patterns)
 ├── analysis/
 │   ├── network.py                   # Build co-authorship network + communities
 │   └── statistics.py                # Chi-square, Fisher, OR, permutation tests
@@ -167,7 +174,8 @@ part2/
 └── output/
     ├── data/                        # authors.csv, papers.csv, author_papers.csv
     ├── network/                     # GraphML, GEXF, centrality, communities
-    ├── stats/                       # full_statistics.json, outcome_comparison.csv
+    ├── stats/                       # full_statistics.json, outcome_comparison.csv,
+    │                                # enhanced_outcome_classifications.csv
     └── viz/                         # PNG plots + interactive HTML charts
 ```
 
@@ -180,6 +188,12 @@ pip install -r requirements.txt
 # Run the full pipeline (reads from part1 output)
 python run_pipeline.py --part1_dir ../part1/study_dump --output_dir ./output
 
+# Run enhanced outcome classification
+python data/enhanced_classifier.py \
+  --papers_csv output/data/papers.csv \
+  --jsonl_path ../part1/study_dump/data/pubmed_records.jsonl \
+  --output_csv output/stats/enhanced_outcome_classifications.csv
+
 # Launch the dashboard
 streamlit run viz/app.py
 ```
@@ -189,6 +203,6 @@ streamlit run viz/app.py
 ## Methods
 
 - **Three-category classification**: Papers are classified as "Tobacco Company" (author has verified affiliation with one of 15 known tobacco/nicotine organizations, or COI statement names a tobacco company), "COI Declared" (author disclosed a conflict of interest that is not tobacco-specific), or "Independent" (no COI declared).
-- **Outcome coding**: Conclusion-like sentences are extracted from abstracts, then classified as Positive/Negative/Neutral/Mixed using directional keyword patterns. Neutral patterns (e.g., "no significant") take priority over individual positive/negative signals to prevent misclassification.
+- **Enhanced outcome classification**: An expanded keyword classifier extracts conclusion-like sentences from full-text abstracts using 30+ cue phrases (e.g., "we conclude," "our findings suggest," "results indicate"), then matches them against ~100 directional patterns covering health outcomes (harm reduction, cessation, toxicity, cancer), policy/regulatory findings, industry criticism, and epidemiological trends. Conclusion-only matching prevents background/introduction text from polluting results. Priority order: Mixed > Neutral > Negative > Positive > Not applicable.
 - **Network analysis**: Co-authorship graph built with NetworkX; community detection via Louvain algorithm; centrality metrics include degree, betweenness (with inverted weights so stronger ties = shorter paths), closeness, and eigenvector centrality.
 - **Statistical tests**: Chi-square test on the 3×4 table (coded outcomes only); pairwise Fisher exact, odds ratio with 95% CI, proportion z-test, and two-sided permutation test (10,000 iterations) for each group vs Independent; Kruskal-Wallis and Mann-Whitney U for centrality comparisons.

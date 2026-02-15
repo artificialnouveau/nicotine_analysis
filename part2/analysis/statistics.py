@@ -276,6 +276,97 @@ def run_all_tests(papers_df: pd.DataFrame, centrality_df: pd.DataFrame) -> Dict[
             subset["outcome"].value_counts().to_dict() if len(subset) > 0 else {}
         )
 
+    # --- Enhanced outcome analysis (if outcome_enhanced column exists) ---
+    if "outcome_enhanced" in papers_df.columns:
+        enhanced = {}
+        enh_outcome_order = ["Positive", "Negative", "Neutral", "Mixed", "Not applicable"]
+
+        # Contingency table
+        ectab = pd.crosstab(papers_df["industry_category"], papers_df["outcome_enhanced"])
+        for col in enh_outcome_order:
+            if col not in ectab.columns:
+                ectab[col] = 0
+        ectab = ectab[enh_outcome_order]
+        for cat in CATEGORY_ORDER:
+            if cat not in ectab.index:
+                ectab.loc[cat] = 0
+        ectab = ectab.loc[[c for c in CATEGORY_ORDER if c in ectab.index]]
+        enhanced["contingency_table"] = ectab.to_dict()
+
+        # Chi-square on coded outcomes
+        enh_coded_outcomes = ["Positive", "Negative", "Neutral", "Mixed"]
+        ectab_coded = ectab[enh_coded_outcomes]
+        ectab_coded = ectab_coded.loc[:, (ectab_coded.sum(axis=0) > 0)]
+        ectab_coded = ectab_coded.loc[(ectab_coded.sum(axis=1) > 0)]
+        try:
+            chi2, p, dof, _ = sp_stats.chi2_contingency(ectab_coded.values)
+            enhanced["chi_square"] = {
+                "chi2": round(chi2, 4),
+                "p_value": round(p, 6),
+                "dof": int(dof),
+                "note": "Enhanced classifier, 3-group, excludes 'Not applicable'",
+            }
+        except Exception as e:
+            enhanced["chi_square"] = {"error": str(e)}
+
+        # Pairwise ORs, z-tests, permutation tests
+        enh_coded = papers_df[papers_df["outcome_enhanced"] != "Not applicable"]
+        enh_indep = enh_coded[enh_coded["industry_category"] == "Independent"]
+        c_enh_indep = (enh_indep["outcome_enhanced"] == "Positive").sum()
+        d_enh_indep = len(enh_indep) - c_enh_indep
+
+        for group_name in ["Tobacco Company", "COI Declared"]:
+            grp = enh_coded[enh_coded["industry_category"] == group_name]
+            a_grp = (grp["outcome_enhanced"] == "Positive").sum()
+            b_grp = len(grp) - a_grp
+
+            key = f"odds_ratio_{group_name.lower().replace(' ', '_')}_vs_independent"
+            enhanced[key] = odds_ratio_ci(a_grp, b_grp, c_enh_indep, d_enh_indep)
+            enhanced[key]["table"] = {"a": a_grp, "b": b_grp, "c": c_enh_indep, "d": d_enh_indep}
+            enhanced[key]["comparison"] = f"{group_name} vs Independent"
+
+            try:
+                _, fisher_p = sp_stats.fisher_exact([[a_grp, b_grp], [c_enh_indep, d_enh_indep]])
+                enhanced[key]["fisher_exact_p"] = round(fisher_p, 6)
+            except Exception:
+                enhanced[key]["fisher_exact_p"] = None
+
+            # Proportion z-test
+            zkey = f"proportion_ztest_{group_name.lower().replace(' ', '_')}_vs_independent"
+            enhanced[zkey] = proportion_ztest(
+                n1_success=a_grp, n1_total=len(grp),
+                n2_success=c_enh_indep, n2_total=len(enh_indep),
+            )
+            enhanced[zkey]["comparison"] = f"{group_name} vs Independent"
+
+            # Permutation test
+            pkey = f"permutation_test_{group_name.lower().replace(' ', '_')}_vs_independent"
+            mask = enh_coded["industry_category"].isin([group_name, "Independent"])
+            subset = enh_coded[mask]
+            groups_binary = (subset["industry_category"] == group_name).map({True: "target", False: "ref"})
+            enhanced[pkey] = permutation_test(
+                outcomes=subset["outcome_enhanced"],
+                groups=groups_binary,
+                n_permutations=10000,
+                target_group="target",
+            )
+            enhanced[pkey]["comparison"] = f"{group_name} vs Independent"
+
+        # Counts
+        enhanced["counts"] = {
+            "total_papers": len(papers_df),
+            "total_coded": int((papers_df["outcome_enhanced"] != "Not applicable").sum()),
+            "outcome_distribution": papers_df["outcome_enhanced"].value_counts().to_dict(),
+        }
+        for cat in CATEGORY_ORDER:
+            subset = papers_df[papers_df["industry_category"] == cat]
+            enhanced["counts"][f"n_{cat.lower().replace(' ', '_')}"] = len(subset)
+            enhanced["counts"][f"{cat.lower().replace(' ', '_')}_outcomes"] = (
+                subset["outcome_enhanced"].value_counts().to_dict() if len(subset) > 0 else {}
+            )
+
+        results["enhanced_outcomes"] = enhanced
+
     return results
 
 
@@ -314,6 +405,25 @@ def main():
             })
     outcome_df = pd.DataFrame(outcome_rows)
     outcome_df.to_csv(os.path.join(args.output_dir, "outcome_comparison.csv"), index=False)
+
+    # Enhanced outcome comparison table (if available)
+    if "outcome_enhanced" in papers_df.columns:
+        enh_rows = []
+        for cat in CATEGORY_ORDER:
+            subset = papers_df[papers_df["industry_category"] == cat]
+            total = len(subset)
+            for outcome in ["Positive", "Negative", "Neutral", "Mixed", "Not applicable"]:
+                count = (subset["outcome_enhanced"] == outcome).sum()
+                pct = (count / total * 100) if total > 0 else 0
+                enh_rows.append({
+                    "group": cat,
+                    "outcome": outcome,
+                    "count": count,
+                    "total": total,
+                    "percentage": round(pct, 1),
+                })
+        enh_df = pd.DataFrame(enh_rows)
+        enh_df.to_csv(os.path.join(args.output_dir, "enhanced_outcome_comparison.csv"), index=False)
 
     print("Statistical analysis complete.")
     print(f"  Chi-square p-value: {results.get('chi_square', {}).get('p_value', 'N/A')}")

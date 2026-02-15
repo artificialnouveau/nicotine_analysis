@@ -54,13 +54,29 @@ CATEGORY_COLORS = {
 }
 
 OUTCOME_ORDER = ["Positive", "Negative", "Neutral", "Mixed", "Not coded"]
+OUTCOME_ORDER_ENHANCED = ["Positive", "Negative", "Neutral", "Mixed", "Not applicable"]
 OUTCOME_COLORS = {
     "Positive": "#2ecc71",
     "Negative": "#e74c3c",
     "Neutral": "#95a5a6",
     "Mixed": "#f39c12",
     "Not coded": "#bdc3c7",
+    "Not applicable": "#bdc3c7",
 }
+
+
+def _get_outcome_col(papers_df: pd.DataFrame) -> str:
+    """Return the outcome column to use: prefer outcome_enhanced if available."""
+    if "outcome_enhanced" in papers_df.columns:
+        return "outcome_enhanced"
+    return "outcome"
+
+
+def _get_outcome_order(outcome_col: str) -> list:
+    """Return the appropriate outcome order for the column."""
+    if outcome_col == "outcome_enhanced":
+        return OUTCOME_ORDER_ENHANCED
+    return OUTCOME_ORDER
 
 
 def _hex_to_rgba(hex_color: str, alpha: float = 0.4) -> str:
@@ -75,29 +91,31 @@ def _hex_to_rgba(hex_color: str, alpha: float = 0.4) -> str:
 
 def plot_outcome_by_industry(papers_df: pd.DataFrame, output_dir: str):
     """Grouped bar chart: outcome counts by three categories."""
-    ctab = pd.crosstab(papers_df["industry_category"], papers_df["outcome"])
-    for col in OUTCOME_ORDER:
+    outcome_col = _get_outcome_col(papers_df)
+    outcome_order = _get_outcome_order(outcome_col)
+    ctab = pd.crosstab(papers_df["industry_category"], papers_df[outcome_col])
+    for col in outcome_order:
         if col not in ctab.columns:
             ctab[col] = 0
-    ctab = ctab[OUTCOME_ORDER]
+    ctab = ctab[outcome_order]
 
     fig, ax = plt.subplots(figsize=(14, 6))
-    x = np.arange(len(OUTCOME_ORDER))
+    x = np.arange(len(outcome_order))
     width = 0.25
     offsets = [-width, 0, width]
 
     all_bars = []
     for i, cat in enumerate(CATEGORY_ORDER):
-        vals = ctab.loc[cat].values if cat in ctab.index else np.zeros(len(OUTCOME_ORDER))
+        vals = ctab.loc[cat].values if cat in ctab.index else np.zeros(len(outcome_order))
         bars = ax.bar(x + offsets[i], vals, width, label=cat,
                       color=CATEGORY_COLORS[cat], alpha=0.85, edgecolor="white")
         all_bars.append(bars)
 
     ax.set_xlabel("Outcome Direction", fontsize=12)
     ax.set_ylabel("Number of Papers", fontsize=12)
-    ax.set_title("Paper Outcomes by Author Category", fontsize=14, fontweight="bold")
+    ax.set_title("Paper Outcomes by Author Category (Enhanced Classification)", fontsize=14, fontweight="bold")
     ax.set_xticks(x)
-    ax.set_xticklabels(OUTCOME_ORDER, fontsize=11)
+    ax.set_xticklabels(outcome_order, fontsize=11)
     ax.legend(fontsize=10)
 
     for bars in all_bars:
@@ -114,17 +132,19 @@ def plot_outcome_by_industry(papers_df: pd.DataFrame, output_dir: str):
 
 def plot_outcome_proportions(papers_df: pd.DataFrame, output_dir: str):
     """Stacked bar chart showing proportions for three categories."""
-    ctab = pd.crosstab(papers_df["industry_category"], papers_df["outcome"], normalize="index") * 100
-    for col in OUTCOME_ORDER:
+    outcome_col = _get_outcome_col(papers_df)
+    outcome_order = _get_outcome_order(outcome_col)
+    ctab = pd.crosstab(papers_df["industry_category"], papers_df[outcome_col], normalize="index") * 100
+    for col in outcome_order:
         if col not in ctab.columns:
             ctab[col] = 0
-    ctab = ctab[OUTCOME_ORDER]
+    ctab = ctab[outcome_order]
     # Reorder rows
     ctab = ctab.reindex([c for c in CATEGORY_ORDER if c in ctab.index])
 
     fig, ax = plt.subplots(figsize=(10, 6))
     ctab.plot(kind="barh", stacked=True, ax=ax,
-              color=[OUTCOME_COLORS.get(o, "#999") for o in OUTCOME_ORDER], edgecolor="white")
+              color=[OUTCOME_COLORS.get(o, "#999") for o in outcome_order], edgecolor="white")
 
     ax.set_xlabel("Percentage of Papers (%)", fontsize=12)
     ax.set_ylabel("")
@@ -273,13 +293,17 @@ def plot_odds_ratio_forest(stats_path: str, output_dir: str):
     with open(stats_path) as f:
         stats = json.load(f)
 
-    # Collect OR data for both comparisons
+    # Collect OR data — both keyword-based and enhanced
     comparisons = []
+    enh = stats.get("enhanced_outcomes", {})
     for key, label, color in [
-        ("odds_ratio_tobacco_company_vs_independent", "Tobacco Company\nvs Independent", CATEGORY_COLORS["Tobacco Company"]),
+        ("odds_ratio_tobacco_company_vs_independent", "Tobacco Co.\nvs Independent", CATEGORY_COLORS["Tobacco Company"]),
         ("odds_ratio_coi_declared_vs_independent", "COI Declared\nvs Independent", CATEGORY_COLORS["COI Declared"]),
     ]:
-        or_data = stats.get(key, {})
+        # Enhanced OR (primary)
+        or_data = enh.get(key, {}) if enh else {}
+        if not or_data:
+            or_data = stats.get(key, {})
         or_val = or_data.get("odds_ratio")
         ci_lo = or_data.get("ci_95_lower")
         ci_hi = or_data.get("ci_95_upper")
@@ -340,8 +364,11 @@ def plot_sankey_interactive(papers_df: pd.DataFrame, output_dir: str):
         print("[WARN] plotly not installed, skipping Sankey diagram")
         return
 
-    node_labels = list(CATEGORY_ORDER) + OUTCOME_ORDER
-    node_colors = [CATEGORY_COLORS[c] for c in CATEGORY_ORDER] + [OUTCOME_COLORS[o] for o in OUTCOME_ORDER]
+    outcome_col = _get_outcome_col(papers_df)
+    outcome_order = _get_outcome_order(outcome_col)
+
+    node_labels = list(CATEGORY_ORDER) + outcome_order
+    node_colors = [CATEGORY_COLORS[c] for c in CATEGORY_ORDER] + [OUTCOME_COLORS[o] for o in outcome_order]
 
     sources = []
     targets = []
@@ -351,8 +378,8 @@ def plot_sankey_interactive(papers_df: pd.DataFrame, output_dir: str):
     n_cats = len(CATEGORY_ORDER)
     for i, cat in enumerate(CATEGORY_ORDER):
         subset = papers_df[papers_df["industry_category"] == cat]
-        for j, outcome in enumerate(OUTCOME_ORDER):
-            count = (subset["outcome"] == outcome).sum()
+        for j, outcome in enumerate(outcome_order):
+            count = (subset[outcome_col] == outcome).sum()
             if count > 0:
                 sources.append(i)
                 targets.append(n_cats + j)
@@ -396,12 +423,14 @@ def plot_outcome_heatmap_interactive(papers_df: pd.DataFrame, output_dir: str):
     df["year"] = df["year"].astype(int)
     df = df[(df["year"] >= 1990) & (df["year"] <= 2026)]
 
+    outcome_col = _get_outcome_col(df)
+
     rows = []
     for year in sorted(df["year"].unique()):
         for cat in CATEGORY_ORDER:
             subset = df[(df["year"] == year) & (df["industry_category"] == cat)]
             total = len(subset)
-            n_pos = (subset["outcome"] == "Positive").sum()
+            n_pos = (subset[outcome_col] == "Positive").sum()
             pct = (n_pos / total * 100) if total > 0 else 0
             rows.append({"year": year, "group": cat, "pct_positive": round(pct, 1), "n": total})
 
