@@ -6787,8 +6787,8 @@
   <data key="d6">0</data>
   <data key="d7">1</data>
   <data key="d8">False</data>
-  <data key="d9">False</data>
-  <data key="d10">Independent</data>
+  <data key="d9">True</data>
+  <data key="d10">COI Declared</data>
   <data key="d11">49</data>
 </node>
 <node id="91b6edcd0bc6">
@@ -7669,8 +7669,8 @@
   <data key="d6">1</data>
   <data key="d7">0</data>
   <data key="d8">True</data>
-  <data key="d9">False</data>
-  <data key="d10">Independent</data>
+  <data key="d9">True</data>
+  <data key="d10">COI Declared</data>
   <data key="d11">47</data>
 </node>
 <node id="2a7382fac9ed">
@@ -7683,8 +7683,8 @@
   <data key="d6">1</data>
   <data key="d7">0</data>
   <data key="d8">False</data>
-  <data key="d9">False</data>
-  <data key="d10">Independent</data>
+  <data key="d9">True</data>
+  <data key="d10">COI Declared</data>
   <data key="d11">47</data>
 </node>
 <node id="c66300a6395e">
@@ -9181,8 +9181,8 @@
   <data key="d6">0</data>
   <data key="d7">0</data>
   <data key="d8">False</data>
-  <data key="d9">False</data>
-  <data key="d10">Independent</data>
+  <data key="d9">True</data>
+  <data key="d10">COI Declared</data>
   <data key="d11">25</data>
 </node>
 <node id="eeb6d7e53bef">
@@ -12261,8 +12261,8 @@
   <data key="d6">1</data>
   <data key="d7">0</data>
   <data key="d8">True</data>
-  <data key="d9">False</data>
-  <data key="d10">Independent</data>
+  <data key="d9">True</data>
+  <data key="d10">COI Declared</data>
   <data key="d11">35</data>
 </node>
 <node id="e45dbc614b75">
@@ -12275,8 +12275,8 @@
   <data key="d6">0</data>
   <data key="d7">0</data>
   <data key="d8">False</data>
-  <data key="d9">False</data>
-  <data key="d10">Independent</data>
+  <data key="d9">True</data>
+  <data key="d10">COI Declared</data>
   <data key="d11">14</data>
 </node>
 <node id="cbb09d2fd0e6">
@@ -16685,8 +16685,8 @@
   <data key="d6">0</data>
   <data key="d7">0</data>
   <data key="d8">False</data>
-  <data key="d9">False</data>
-  <data key="d10">Independent</data>
+  <data key="d9">True</data>
+  <data key="d10">COI Declared</data>
   <data key="d11">68</data>
 </node>
 <node id="cb754e779b83">
@@ -16699,8 +16699,8 @@
   <data key="d6">0</data>
   <data key="d7">0</data>
   <data key="d8">False</data>
-  <data key="d9">False</data>
-  <data key="d10">Independent</data>
+  <data key="d9">True</data>
+  <data key="d10">COI Declared</data>
   <data key="d11">68</data>
 </node>
 <node id="756ff30e952f">
@@ -16811,8 +16811,8 @@
   <data key="d6">0</data>
   <data key="d7">0</data>
   <data key="d8">False</data>
-  <data key="d9">False</data>
-  <data key="d10">Independent</data>
+  <data key="d9">True</data>
+  <data key="d10">COI Declared</data>
   <data key="d11">68</data>
 </node>
 <node id="48e8e7ccd9a0">
@@ -16825,8 +16825,8 @@
   <data key="d6">0</data>
   <data key="d7">0</data>
   <data key="d8">False</data>
-  <data key="d9">False</data>
-  <data key="d10">Independent</data>
+  <data key="d9">True</data>
+  <data key="d10">COI Declared</data>
   <data key="d11">68</data>
 </node>
 <node id="964d2dcc7460">
@@ -16839,8 +16839,8 @@
   <data key="d6">0</data>
   <data key="d7">0</data>
   <data key="d8">False</data>
-  <data key="d9">False</data>
-  <data key="d10">Independent</data>
+  <data key="d9">True</data>
+  <data key="d10">COI Declared</data>
   <data key="d11">68</data>
 </node>
 <node id="f7ea4628803e">
@@ -18253,8 +18253,8 @@
   <data key="d6">0</data>
   <data key="d7">0</data>
   <data key="d8">False</data>
-  <data key="d9">False</data>
-  <data key="d10">Independent</data>
+  <data key="d9">True</data>
+  <data key="d10">COI Declared</data>
   <data key="d11">91</data>
 </node>
 <node id="c833ae7b0540">
@@ -18267,8 +18267,8 @@
   <data key="d6">0</data>
   <data key="d7">0</data>
   <data key="d8">False</data>
-  <data key="d9">False</data>
-  <data key="d10">Independent</data>
+  <data key="d9">True</data>
+  <data key="d10">COI Declared</data>
   <data key="d11">91</data>
 </node>
 <node id="0663c41a102f">
@@ -18281,8 +18281,8 @@
   <data key="d6">0</data>
   <data key="d7">0</data>
   <data key="d8">False</data>
-  <data key="d9">False</data>
-  <data key="d10">Independent</data>
+  <data key="d9">True</data>
+  <data key="d10">COI Declared</data>
   <data key="d11">91</data>
 </node>
 <node id="9514be5a09ee">
@@ -18827,8 +18827,8 @@
   <data key="d6">1</data>
   <data key="d7">0</data>
   <data key="d8">True</data>
-  <data key="d9">False</data>
-  <data key="d10">Independent</data>
+  <data key="d9">True</data>
+  <data key="d10">COI Declared</data>
   <data key="d11">47</data>
 </node>
 <node id="cb525e3555ef">
@@ -19317,8 +19317,8 @@
   <data key="d6">0</data>
   <data key="d7">1</data>
   <data key="d8">False</data>
-  <data key="d9">False</data>
-  <data key="d10">Independent</data>
+  <data key="d9">True</data>
+  <data key="d10">COI Declared</data>
   <data key="d11">91</data>
 </node>
 <node id="2feb643322ee">
@@ -19709,8 +19709,8 @@
   <data key="d6">0</data>
   <data key="d7">0</data>
   <data key="d8">False</data>
-  <data key="d9">False</data>
-  <data key="d10">Independent</data>
+  <data key="d9">True</data>
+  <data key="d10">COI Declared</data>
   <data key="d11">70</data>
 </node>
 <node id="7338651c98ac">
@@ -19723,8 +19723,8 @@
   <data key="d6">0</data>
   <data key="d7">0</data>
   <data key="d8">False</data>
-  <data key="d9">False</data>
-  <data key="d10">Independent</data>
+  <data key="d9">True</data>
+  <data key="d10">COI Declared</data>
   <data key="d11">70</data>
 </node>
 <node id="d0ebf8a607d4">
@@ -19737,8 +19737,8 @@
   <data key="d6">0</data>
   <data key="d7">0</data>
   <data key="d8">False</data>
-  <data key="d9">False</data>
-  <data key="d10">Independent</data>
+  <data key="d9">True</data>
+  <data key="d10">COI Declared</data>
   <data key="d11">70</data>
 </node>
 <node id="7da19163b63f">
@@ -19751,8 +19751,8 @@
   <data key="d6">0</data>
   <data key="d7">0</data>
   <data key="d8">False</data>
-  <data key="d9">False</data>
-  <data key="d10">Independent</data>
+  <data key="d9">True</data>
+  <data key="d10">COI Declared</data>
   <data key="d11">70</data>
 </node>
 <node id="a8e7cbc049c2">
@@ -19765,8 +19765,8 @@
   <data key="d6">0</data>
   <data key="d7">0</data>
   <data key="d8">False</data>
-  <data key="d9">False</data>
-  <data key="d10">Independent</data>
+  <data key="d9">True</data>
+  <data key="d10">COI Declared</data>
   <data key="d11">70</data>
 </node>
 <node id="898c4a78b0e0">
@@ -21039,8 +21039,8 @@
   <data key="d6">0</data>
   <data key="d7">0</data>
   <data key="d8">False</data>
-  <data key="d9">False</data>
-  <data key="d10">Independent</data>
+  <data key="d9">True</data>
+  <data key="d10">COI Declared</data>
   <data key="d11">44</data>
 </node>
 <node id="48d67e57f8df">
@@ -21501,8 +21501,8 @@
   <data key="d6">0</data>
   <data key="d7">0</data>
   <data key="d8">False</data>
-  <data key="d9">False</data>
-  <data key="d10">Independent</data>
+  <data key="d9">True</data>
+  <data key="d10">COI Declared</data>
   <data key="d11">91</data>
 </node>
 <node id="920747080390">
@@ -21515,8 +21515,8 @@
   <data key="d6">0</data>
   <data key="d7">0</data>
   <data key="d8">False</data>
-  <data key="d9">False</data>
-  <data key="d10">Independent</data>
+  <data key="d9">True</data>
+  <data key="d10">COI Declared</data>
   <data key="d11">91</data>
 </node>
 <node id="db8873f94474">
@@ -21529,8 +21529,8 @@
   <data key="d6">0</data>
   <data key="d7">0</data>
   <data key="d8">False</data>
-  <data key="d9">False</data>
-  <data key="d10">Independent</data>
+  <data key="d9">True</data>
+  <data key="d10">COI Declared</data>
   <data key="d11">91</data>
 </node>
 <node id="9dbcc2f916bd">
@@ -21543,8 +21543,8 @@
   <data key="d6">0</data>
   <data key="d7">0</data>
   <data key="d8">False</data>
-  <data key="d9">False</data>
-  <data key="d10">Independent</data>
+  <data key="d9">True</data>
+  <data key="d10">COI Declared</data>
   <data key="d11">91</data>
 </node>
 <node id="dd2ec542d4b8">
@@ -21557,8 +21557,8 @@
   <data key="d6">0</data>
   <data key="d7">0</data>
   <data key="d8">False</data>
-  <data key="d9">False</data>
-  <data key="d10">Independent</data>
+  <data key="d9">True</data>
+  <data key="d10">COI Declared</data>
   <data key="d11">91</data>
 </node>
 <node id="9c6590ccc8da">
@@ -22859,8 +22859,8 @@
   <data key="d6">1</data>
   <data key="d7">1</data>
   <data key="d8">False</data>
-  <data key="d9">False</data>
-  <data key="d10">Independent</data>
+  <data key="d9">True</data>
+  <data key="d10">COI Declared</data>
   <data key="d11">68</data>
 </node>
 <node id="f2d06c46ab65">
@@ -24877,7 +24877,7 @@
 <edge source="98ebc589204d" target="0dca2ee7d601">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="98ebc589204d" target="1fdf77cabb17">
   <data key="d13">1</data>
@@ -29877,12 +29877,12 @@
 <edge source="3bcc52e488c3" target="0dca2ee7d601">
   <data key="d13">2</data>
   <data key="d14">2</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="3bcc52e488c3" target="2a7382fac9ed">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="3bcc52e488c3" target="891c91e109e5">
   <data key="d13">1</data>
@@ -32332,7 +32332,7 @@
 <edge source="53b0b1a291d6" target="e45dbc614b75">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="53b0b1a291d6" target="e48b4a7b1f5d">
   <data key="d13">3</data>
@@ -32427,7 +32427,7 @@
 <edge source="1fdf77cabb17" target="0dca2ee7d601">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="1fdf77cabb17" target="f0e94350305b">
   <data key="d13">1</data>
@@ -33417,12 +33417,12 @@
 <edge source="891c91e109e5" target="0dca2ee7d601">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="891c91e109e5" target="2a7382fac9ed">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="891c91e109e5" target="14e7acd43c9c">
   <data key="d13">1</data>
@@ -35827,22 +35827,22 @@
 <edge source="3b301866faf2" target="48e8e7ccd9a0">
   <data key="d13">2</data>
   <data key="d14">2</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="3b301866faf2" target="786b00e79f04">
   <data key="d13">2</data>
   <data key="d14">2</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="3b301866faf2" target="964d2dcc7460">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="3b301866faf2" target="cb754e779b83">
   <data key="d13">2</data>
   <data key="d14">2</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="fa816a41e969" target="0a700e7fcc83">
   <data key="d13">1</data>
@@ -36012,7 +36012,7 @@
 <edge source="ff7f2fd0b0f7" target="1d6623ac89a0">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="ff7f2fd0b0f7" target="1e8528411f6c">
   <data key="d13">1</data>
@@ -37132,7 +37132,7 @@
 <edge source="d6f0dd02b7c4" target="e45dbc614b75">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="d6f0dd02b7c4" target="e48b4a7b1f5d">
   <data key="d13">3</data>
@@ -37937,7 +37937,7 @@
 <edge source="95ee598a1945" target="1d6623ac89a0">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="95ee598a1945" target="1e8528411f6c">
   <data key="d13">1</data>
@@ -38302,7 +38302,7 @@
 <edge source="7f5cfd35d610" target="1d6623ac89a0">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="7f5cfd35d610" target="1e8528411f6c">
   <data key="d13">1</data>
@@ -38667,7 +38667,7 @@
 <edge source="4b21353cace7" target="1d6623ac89a0">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="4b21353cace7" target="1e8528411f6c">
   <data key="d13">1</data>
@@ -39032,7 +39032,7 @@
 <edge source="2110baaa0905" target="1d6623ac89a0">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="2110baaa0905" target="1e8528411f6c">
   <data key="d13">1</data>
@@ -43597,7 +43597,7 @@
 <edge source="3e8120c39fcb" target="1d6623ac89a0">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="3e8120c39fcb" target="274975ad1b05">
   <data key="d13">1</data>
@@ -44097,7 +44097,7 @@
 <edge source="1e8528411f6c" target="1d6623ac89a0">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1e8528411f6c" target="274975ad1b05">
   <data key="d13">1</data>
@@ -47847,7 +47847,7 @@
 <edge source="f0e94350305b" target="0dca2ee7d601">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="f0e94350305b" target="5cc670e86079">
   <data key="d13">1</data>
@@ -48452,7 +48452,7 @@
 <edge source="7a3e6c24b0d2" target="1d6623ac89a0">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="7a3e6c24b0d2" target="274975ad1b05">
   <data key="d13">1</data>
@@ -50617,317 +50617,317 @@
 <edge source="1d6623ac89a0" target="05cdcee02576">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="065f2aae1a3b">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="0a700e7fcc83">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="1d6623ac89a0" target="12175113b5ad">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="15565472d820">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="274975ad1b05">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="2bf81fd962d6">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="30507e8b3803">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="3138ee14bea8">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="396c178a6b53">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="409487bc4a5a">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="45feba112bc0">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="46ff03d28edb">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="4b30c0911db2">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="548582a0c513">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="5501b9f863ac">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="577cf91f461c">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="6240a1756777">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="682bdc1e447c">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="6bc026a024ad">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="70c846500533">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="7790e468e9e1">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="7af3d1b4915d">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="7c50b709e70f">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="82327fded896">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="85e9ac815172">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="8bc958b9ddf2">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="91b6edcd0bc6">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="a2c36ab3ec5d">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="ade37b998618">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="b372d50445d9">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="b3f36a094abf">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="b58bb2242ba3">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="b7b4958aba1e">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="b82b4715dc0a">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="b89dfee3871d">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="b939fcd9e48a">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="1d6623ac89a0" target="c0c09bfadcc2">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="c3954befd540">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="c43efa814e24">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="c5a178878c14">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="c9b8d7a54194">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="cc4350ac6f68">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="1d6623ac89a0" target="ccabbe031ea3">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="d069a4f46972">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="d678ff927bf1">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="d8f76be4f521">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="dcb642f93e5f">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="e15d023eb547">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="e3e9389fbe40">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="e6201acd6f82">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="e6d122a022ff">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="ef785bdfccd8">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="f0c074211f25">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="f32bb6c63cd2">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="f52c994cc400">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="f5d55a2ac6ee">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="fdccf785ef48">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="7338651c98ac">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="7da19163b63f">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="a8e7cbc049c2">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="d0ebf8a607d4">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d6623ac89a0" target="de0ac6ddc855">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="91b6edcd0bc6" target="05cdcee02576">
   <data key="d13">2</data>
@@ -63897,7 +63897,7 @@
 <edge source="0dca2ee7d601" target="2a7382fac9ed">
   <data key="d13">3</data>
   <data key="d14">3</data>
-  <data key="d15">independent</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="0dca2ee7d601" target="70a89c80217a">
   <data key="d13">1</data>
@@ -63912,7 +63912,7 @@
 <edge source="0dca2ee7d601" target="d89ed832896d">
   <data key="d13">2</data>
   <data key="d14">2</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="0dca2ee7d601" target="dba156ba20a9">
   <data key="d13">2</data>
@@ -64412,7 +64412,7 @@
 <edge source="37d5c3009dba" target="eedf59330ed9">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="37d5c3009dba" target="925a749f57ed">
   <data key="d13">1</data>
@@ -64802,7 +64802,7 @@
 <edge source="1d8cde753271" target="eedf59330ed9">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="1d8cde753271" target="45c69371042c">
   <data key="d13">1</data>
@@ -67997,7 +67997,7 @@
 <edge source="f082df3d24cc" target="19b35b1439db">
   <data key="d13">2</data>
   <data key="d14">2</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="f082df3d24cc" target="eeb6d7e53bef">
   <data key="d13">2</data>
@@ -68017,22 +68017,22 @@
 <edge source="19b35b1439db" target="03e6bc39dcb3">
   <data key="d13">2</data>
   <data key="d14">2</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="19b35b1439db" target="eeb6d7e53bef">
   <data key="d13">2</data>
   <data key="d14">2</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="19b35b1439db" target="fb755bbee988">
   <data key="d13">2</data>
   <data key="d14">2</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="19b35b1439db" target="8601fad36ffc">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="eeb6d7e53bef" target="03e6bc39dcb3">
   <data key="d13">2</data>
@@ -71162,12 +71162,12 @@
 <edge source="9a50bd96b56f" target="c6dff71e918b">
   <data key="d13">3</data>
   <data key="d14">3</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="9a50bd96b56f" target="e45dbc614b75">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="9a50bd96b56f" target="44c4befb215d">
   <data key="d13">2</data>
@@ -73772,7 +73772,7 @@
 <edge source="44aa06167c04" target="eedf59330ed9">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="dba156ba20a9" target="e005983944fb">
   <data key="d13">2</data>
@@ -76327,7 +76327,7 @@
 <edge source="1b79b3017f17" target="e45dbc614b75">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="1b79b3017f17" target="e48b4a7b1f5d">
   <data key="d13">1</data>
@@ -76747,27 +76747,27 @@
 <edge source="c6dff71e918b" target="e45dbc614b75">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="c6dff71e918b" target="44c4befb215d">
   <data key="d13">2</data>
   <data key="d14">2</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="e45dbc614b75" target="a8a27aa74e2f">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="e45dbc614b75" target="e48b4a7b1f5d">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="e45dbc614b75" target="e6b70cd13104">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="cbb09d2fd0e6" target="530fa40fb7ea">
   <data key="d13">1</data>
@@ -80437,22 +80437,22 @@
 <edge source="7604a7bfad45" target="920747080390">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="7604a7bfad45" target="9dbcc2f916bd">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="7604a7bfad45" target="db8873f94474">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="7604a7bfad45" target="e127061b67d9">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="7604a7bfad45" target="f7297d3f21b2">
   <data key="d13">1</data>
@@ -83457,37 +83457,37 @@
 <edge source="c2b9ccc5aa15" target="cb754e779b83">
   <data key="d13">2</data>
   <data key="d14">2</data>
-  <data key="d15">independent</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="c2b9ccc5aa15" target="51aad1454ba5">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="c2b9ccc5aa15" target="964d2dcc7460">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="cb754e779b83" target="48e8e7ccd9a0">
   <data key="d13">2</data>
   <data key="d14">2</data>
-  <data key="d15">independent</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="cb754e779b83" target="786b00e79f04">
   <data key="d13">2</data>
   <data key="d14">2</data>
-  <data key="d15">independent</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="cb754e779b83" target="964d2dcc7460">
   <data key="d13">2</data>
   <data key="d14">2</data>
-  <data key="d15">independent</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="cb754e779b83" target="51aad1454ba5">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="756ff30e952f" target="a816a58e9668">
   <data key="d13">1</data>
@@ -83572,22 +83572,22 @@
 <edge source="786b00e79f04" target="48e8e7ccd9a0">
   <data key="d13">2</data>
   <data key="d14">2</data>
-  <data key="d15">independent</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="786b00e79f04" target="964d2dcc7460">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="48e8e7ccd9a0" target="964d2dcc7460">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="964d2dcc7460" target="51aad1454ba5">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="f7ea4628803e" target="2a5357149462">
   <data key="d13">2</data>
@@ -83612,7 +83612,7 @@
 <edge source="4f47a6584fe1" target="0ecae458ffce">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="744d73659fd4" target="0b8aab6e407f">
   <data key="d13">2</data>
@@ -83942,22 +83942,22 @@
 <edge source="7df4697c19ca" target="920747080390">
   <data key="d13">2</data>
   <data key="d14">2</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="7df4697c19ca" target="9dbcc2f916bd">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="7df4697c19ca" target="db8873f94474">
   <data key="d13">2</data>
   <data key="d14">2</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="7df4697c19ca" target="e127061b67d9">
   <data key="d13">2</data>
   <data key="d14">2</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="7df4697c19ca" target="f7297d3f21b2">
   <data key="d13">2</data>
@@ -83977,7 +83977,7 @@
 <edge source="267b3185c41f" target="ce9efcd6732b">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="267b3185c41f" target="e5d850c89083">
   <data key="d13">1</data>
@@ -83997,7 +83997,7 @@
 <edge source="f2c3667ef956" target="ce9efcd6732b">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="70fd9b254854" target="eed465d6d884">
   <data key="d13">1</data>
@@ -84947,52 +84947,52 @@
 <edge source="33b0e51a8e07" target="0663c41a102f">
   <data key="d13">2</data>
   <data key="d14">2</data>
-  <data key="d15">independent</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="33b0e51a8e07" target="c833ae7b0540">
   <data key="d13">2</data>
   <data key="d14">2</data>
-  <data key="d15">independent</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="33b0e51a8e07" target="2feb643322ee">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="33b0e51a8e07" target="ce9efcd6732b">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="33b0e51a8e07" target="9794093e8957">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="c833ae7b0540" target="0663c41a102f">
   <data key="d13">2</data>
   <data key="d14">2</data>
-  <data key="d15">independent</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="c833ae7b0540" target="2feb643322ee">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="c833ae7b0540" target="ce9efcd6732b">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="0663c41a102f" target="2feb643322ee">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="0663c41a102f" target="ce9efcd6732b">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="a5c4139d8e0b" target="3a2009a1d9e9">
   <data key="d13">2</data>
@@ -85407,7 +85407,7 @@
 <edge source="d7b7c74c3879" target="0ecae458ffce">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="d7b7c74c3879" target="32b0e4299cba">
   <data key="d13">1</data>
@@ -85582,7 +85582,7 @@
 <edge source="cb639c62f66e" target="ce9efcd6732b">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="cb639c62f66e" target="e5d850c89083">
   <data key="d13">1</data>
@@ -85792,17 +85792,17 @@
 <edge source="ce9efcd6732b" target="2feb643322ee">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="ce9efcd6732b" target="e5d850c89083">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="a3fb401e9150" target="eedf59330ed9">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="d78299e5a0b9" target="6eb48fa36a9a">
   <data key="d13">2</data>
@@ -86047,202 +86047,202 @@
 <edge source="de0ac6ddc855" target="7338651c98ac">
   <data key="d13">2</data>
   <data key="d14">2</data>
-  <data key="d15">independent</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="de0ac6ddc855" target="7da19163b63f">
   <data key="d13">2</data>
   <data key="d14">2</data>
-  <data key="d15">independent</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="de0ac6ddc855" target="a8e7cbc049c2">
   <data key="d13">2</data>
   <data key="d14">2</data>
-  <data key="d15">independent</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="de0ac6ddc855" target="d0ebf8a607d4">
   <data key="d13">2</data>
   <data key="d14">2</data>
-  <data key="d15">independent</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="de0ac6ddc855" target="0fcf73303f42">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="de0ac6ddc855" target="311642634219">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="de0ac6ddc855" target="3c5fe949e01e">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="de0ac6ddc855" target="8b30da685fc1">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="de0ac6ddc855" target="924d19835a30">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="de0ac6ddc855" target="bab910b23f0f">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="7338651c98ac" target="7da19163b63f">
   <data key="d13">2</data>
   <data key="d14">2</data>
-  <data key="d15">independent</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="7338651c98ac" target="a8e7cbc049c2">
   <data key="d13">2</data>
   <data key="d14">2</data>
-  <data key="d15">independent</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="7338651c98ac" target="d0ebf8a607d4">
   <data key="d13">2</data>
   <data key="d14">2</data>
-  <data key="d15">independent</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="7338651c98ac" target="0fcf73303f42">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="7338651c98ac" target="311642634219">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="7338651c98ac" target="3c5fe949e01e">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="7338651c98ac" target="8b30da685fc1">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="7338651c98ac" target="924d19835a30">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="7338651c98ac" target="bab910b23f0f">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="d0ebf8a607d4" target="7da19163b63f">
   <data key="d13">2</data>
   <data key="d14">2</data>
-  <data key="d15">independent</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="d0ebf8a607d4" target="a8e7cbc049c2">
   <data key="d13">2</data>
   <data key="d14">2</data>
-  <data key="d15">independent</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="d0ebf8a607d4" target="0fcf73303f42">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="d0ebf8a607d4" target="311642634219">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="d0ebf8a607d4" target="3c5fe949e01e">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="d0ebf8a607d4" target="8b30da685fc1">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="d0ebf8a607d4" target="924d19835a30">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="d0ebf8a607d4" target="bab910b23f0f">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="7da19163b63f" target="a8e7cbc049c2">
   <data key="d13">2</data>
   <data key="d14">2</data>
-  <data key="d15">independent</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="7da19163b63f" target="0fcf73303f42">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="7da19163b63f" target="311642634219">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="7da19163b63f" target="3c5fe949e01e">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="7da19163b63f" target="8b30da685fc1">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="7da19163b63f" target="924d19835a30">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="7da19163b63f" target="bab910b23f0f">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="a8e7cbc049c2" target="0fcf73303f42">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="a8e7cbc049c2" target="311642634219">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="a8e7cbc049c2" target="3c5fe949e01e">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">coi_mixed</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="a8e7cbc049c2" target="8b30da685fc1">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="a8e7cbc049c2" target="924d19835a30">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="a8e7cbc049c2" target="bab910b23f0f">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="f022c0e2325d" target="6485f0c33601">
   <data key="d13">1</data>
@@ -88612,92 +88612,92 @@
 <edge source="e127061b67d9" target="920747080390">
   <data key="d13">3</data>
   <data key="d14">3</data>
-  <data key="d15">independent</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="e127061b67d9" target="9dbcc2f916bd">
   <data key="d13">2</data>
   <data key="d14">2</data>
-  <data key="d15">independent</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="e127061b67d9" target="db8873f94474">
   <data key="d13">3</data>
   <data key="d14">3</data>
-  <data key="d15">independent</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="e127061b67d9" target="dd2ec542d4b8">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="e127061b67d9" target="006822d5b99d">
   <data key="d13">2</data>
   <data key="d14">2</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="e127061b67d9" target="f7297d3f21b2">
   <data key="d13">2</data>
   <data key="d14">2</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="920747080390" target="9dbcc2f916bd">
   <data key="d13">2</data>
   <data key="d14">2</data>
-  <data key="d15">independent</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="920747080390" target="db8873f94474">
   <data key="d13">3</data>
   <data key="d14">3</data>
-  <data key="d15">independent</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="920747080390" target="dd2ec542d4b8">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="920747080390" target="006822d5b99d">
   <data key="d13">2</data>
   <data key="d14">2</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="920747080390" target="f7297d3f21b2">
   <data key="d13">2</data>
   <data key="d14">2</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="db8873f94474" target="9dbcc2f916bd">
   <data key="d13">2</data>
   <data key="d14">2</data>
-  <data key="d15">independent</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="db8873f94474" target="dd2ec542d4b8">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="db8873f94474" target="006822d5b99d">
   <data key="d13">2</data>
   <data key="d14">2</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="db8873f94474" target="f7297d3f21b2">
   <data key="d13">2</data>
   <data key="d14">2</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="9dbcc2f916bd" target="dd2ec542d4b8">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">both_coi</data>
 </edge>
 <edge source="9dbcc2f916bd" target="006822d5b99d">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="9dbcc2f916bd" target="f7297d3f21b2">
   <data key="d13">1</data>
   <data key="d14">1</data>
-  <data key="d15">independent</data>
+  <data key="d15">coi_mixed</data>
 </edge>
 <edge source="9c6590ccc8da" target="09e0ef71e2d4">
   <data key="d13">2</data>

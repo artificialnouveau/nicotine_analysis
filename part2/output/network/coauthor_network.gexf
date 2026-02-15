@@ -7277,8 +7277,8 @@
           <attvalue for="5" value="0" />
           <attvalue for="6" value="1" />
           <attvalue for="7" value="false" />
-          <attvalue for="8" value="false" />
-          <attvalue for="9" value="Independent" />
+          <attvalue for="8" value="true" />
+          <attvalue for="9" value="COI Declared" />
           <attvalue for="10" value="49" />
         </attvalues>
       </node>
@@ -8222,8 +8222,8 @@
           <attvalue for="5" value="1" />
           <attvalue for="6" value="0" />
           <attvalue for="7" value="true" />
-          <attvalue for="8" value="false" />
-          <attvalue for="9" value="Independent" />
+          <attvalue for="8" value="true" />
+          <attvalue for="9" value="COI Declared" />
           <attvalue for="10" value="47" />
         </attvalues>
       </node>
@@ -8237,8 +8237,8 @@
           <attvalue for="5" value="1" />
           <attvalue for="6" value="0" />
           <attvalue for="7" value="false" />
-          <attvalue for="8" value="false" />
-          <attvalue for="9" value="Independent" />
+          <attvalue for="8" value="true" />
+          <attvalue for="9" value="COI Declared" />
           <attvalue for="10" value="47" />
         </attvalues>
       </node>
@@ -9842,8 +9842,8 @@
           <attvalue for="5" value="0" />
           <attvalue for="6" value="0" />
           <attvalue for="7" value="false" />
-          <attvalue for="8" value="false" />
-          <attvalue for="9" value="Independent" />
+          <attvalue for="8" value="true" />
+          <attvalue for="9" value="COI Declared" />
           <attvalue for="10" value="25" />
         </attvalues>
       </node>
@@ -13142,8 +13142,8 @@
           <attvalue for="5" value="1" />
           <attvalue for="6" value="0" />
           <attvalue for="7" value="true" />
-          <attvalue for="8" value="false" />
-          <attvalue for="9" value="Independent" />
+          <attvalue for="8" value="true" />
+          <attvalue for="9" value="COI Declared" />
           <attvalue for="10" value="35" />
         </attvalues>
       </node>
@@ -13157,8 +13157,8 @@
           <attvalue for="5" value="0" />
           <attvalue for="6" value="0" />
           <attvalue for="7" value="false" />
-          <attvalue for="8" value="false" />
-          <attvalue for="9" value="Independent" />
+          <attvalue for="8" value="true" />
+          <attvalue for="9" value="COI Declared" />
           <attvalue for="10" value="14" />
         </attvalues>
       </node>
@@ -17882,8 +17882,8 @@
           <attvalue for="5" value="0" />
           <attvalue for="6" value="0" />
           <attvalue for="7" value="false" />
-          <attvalue for="8" value="false" />
-          <attvalue for="9" value="Independent" />
+          <attvalue for="8" value="true" />
+          <attvalue for="9" value="COI Declared" />
           <attvalue for="10" value="68" />
         </attvalues>
       </node>
@@ -17897,8 +17897,8 @@
           <attvalue for="5" value="0" />
           <attvalue for="6" value="0" />
           <attvalue for="7" value="false" />
-          <attvalue for="8" value="false" />
-          <attvalue for="9" value="Independent" />
+          <attvalue for="8" value="true" />
+          <attvalue for="9" value="COI Declared" />
           <attvalue for="10" value="68" />
         </attvalues>
       </node>
@@ -18017,8 +18017,8 @@
           <attvalue for="5" value="0" />
           <attvalue for="6" value="0" />
           <attvalue for="7" value="false" />
-          <attvalue for="8" value="false" />
-          <attvalue for="9" value="Independent" />
+          <attvalue for="8" value="true" />
+          <attvalue for="9" value="COI Declared" />
           <attvalue for="10" value="68" />
         </attvalues>
       </node>
@@ -18032,8 +18032,8 @@
           <attvalue for="5" value="0" />
           <attvalue for="6" value="0" />
           <attvalue for="7" value="false" />
-          <attvalue for="8" value="false" />
-          <attvalue for="9" value="Independent" />
+          <attvalue for="8" value="true" />
+          <attvalue for="9" value="COI Declared" />
           <attvalue for="10" value="68" />
         </attvalues>
       </node>
@@ -18047,8 +18047,8 @@
           <attvalue for="5" value="0" />
           <attvalue for="6" value="0" />
           <attvalue for="7" value="false" />
-          <attvalue for="8" value="false" />
-          <attvalue for="9" value="Independent" />
+          <attvalue for="8" value="true" />
+          <attvalue for="9" value="COI Declared" />
           <attvalue for="10" value="68" />
         </attvalues>
       </node>
@@ -19562,8 +19562,8 @@
           <attvalue for="5" value="0" />
           <attvalue for="6" value="0" />
           <attvalue for="7" value="false" />
-          <attvalue for="8" value="false" />
-          <attvalue for="9" value="Independent" />
+          <attvalue for="8" value="true" />
+          <attvalue for="9" value="COI Declared" />
           <attvalue for="10" value="91" />
         </attvalues>
       </node>
@@ -19577,8 +19577,8 @@
           <attvalue for="5" value="0" />
           <attvalue for="6" value="0" />
           <attvalue for="7" value="false" />
-          <attvalue for="8" value="false" />
-          <attvalue for="9" value="Independent" />
+          <attvalue for="8" value="true" />
+          <attvalue for="9" value="COI Declared" />
           <attvalue for="10" value="91" />
         </attvalues>
       </node>
@@ -19592,8 +19592,8 @@
           <attvalue for="5" value="0" />
           <attvalue for="6" value="0" />
           <attvalue for="7" value="false" />
-          <attvalue for="8" value="false" />
-          <attvalue for="9" value="Independent" />
+          <attvalue for="8" value="true" />
+          <attvalue for="9" value="COI Declared" />
           <attvalue for="10" value="91" />
         </attvalues>
       </node>
@@ -20177,8 +20177,8 @@
           <attvalue for="5" value="1" />
           <attvalue for="6" value="0" />
           <attvalue for="7" value="true" />
-          <attvalue for="8" value="false" />
-          <attvalue for="9" value="Independent" />
+          <attvalue for="8" value="true" />
+          <attvalue for="9" value="COI Declared" />
           <attvalue for="10" value="47" />
         </attvalues>
       </node>
@@ -20702,8 +20702,8 @@
           <attvalue for="5" value="0" />
           <attvalue for="6" value="1" />
           <attvalue for="7" value="false" />
-          <attvalue for="8" value="false" />
-          <attvalue for="9" value="Independent" />
+          <attvalue for="8" value="true" />
+          <attvalue for="9" value="COI Declared" />
           <attvalue for="10" value="91" />
         </attvalues>
       </node>
@@ -21122,8 +21122,8 @@
           <attvalue for="5" value="0" />
           <attvalue for="6" value="0" />
           <attvalue for="7" value="false" />
-          <attvalue for="8" value="false" />
-          <attvalue for="9" value="Independent" />
+          <attvalue for="8" value="true" />
+          <attvalue for="9" value="COI Declared" />
           <attvalue for="10" value="70" />
         </attvalues>
       </node>
@@ -21137,8 +21137,8 @@
           <attvalue for="5" value="0" />
           <attvalue for="6" value="0" />
           <attvalue for="7" value="false" />
-          <attvalue for="8" value="false" />
-          <attvalue for="9" value="Independent" />
+          <attvalue for="8" value="true" />
+          <attvalue for="9" value="COI Declared" />
           <attvalue for="10" value="70" />
         </attvalues>
       </node>
@@ -21152,8 +21152,8 @@
           <attvalue for="5" value="0" />
           <attvalue for="6" value="0" />
           <attvalue for="7" value="false" />
-          <attvalue for="8" value="false" />
-          <attvalue for="9" value="Independent" />
+          <attvalue for="8" value="true" />
+          <attvalue for="9" value="COI Declared" />
           <attvalue for="10" value="70" />
         </attvalues>
       </node>
@@ -21167,8 +21167,8 @@
           <attvalue for="5" value="0" />
           <attvalue for="6" value="0" />
           <attvalue for="7" value="false" />
-          <attvalue for="8" value="false" />
-          <attvalue for="9" value="Independent" />
+          <attvalue for="8" value="true" />
+          <attvalue for="9" value="COI Declared" />
           <attvalue for="10" value="70" />
         </attvalues>
       </node>
@@ -21182,8 +21182,8 @@
           <attvalue for="5" value="0" />
           <attvalue for="6" value="0" />
           <attvalue for="7" value="false" />
-          <attvalue for="8" value="false" />
-          <attvalue for="9" value="Independent" />
+          <attvalue for="8" value="true" />
+          <attvalue for="9" value="COI Declared" />
           <attvalue for="10" value="70" />
         </attvalues>
       </node>
@@ -22547,8 +22547,8 @@
           <attvalue for="5" value="0" />
           <attvalue for="6" value="0" />
           <attvalue for="7" value="false" />
-          <attvalue for="8" value="false" />
-          <attvalue for="9" value="Independent" />
+          <attvalue for="8" value="true" />
+          <attvalue for="9" value="COI Declared" />
           <attvalue for="10" value="44" />
         </attvalues>
       </node>
@@ -23042,8 +23042,8 @@
           <attvalue for="5" value="0" />
           <attvalue for="6" value="0" />
           <attvalue for="7" value="false" />
-          <attvalue for="8" value="false" />
-          <attvalue for="9" value="Independent" />
+          <attvalue for="8" value="true" />
+          <attvalue for="9" value="COI Declared" />
           <attvalue for="10" value="91" />
         </attvalues>
       </node>
@@ -23057,8 +23057,8 @@
           <attvalue for="5" value="0" />
           <attvalue for="6" value="0" />
           <attvalue for="7" value="false" />
-          <attvalue for="8" value="false" />
-          <attvalue for="9" value="Independent" />
+          <attvalue for="8" value="true" />
+          <attvalue for="9" value="COI Declared" />
           <attvalue for="10" value="91" />
         </attvalues>
       </node>
@@ -23072,8 +23072,8 @@
           <attvalue for="5" value="0" />
           <attvalue for="6" value="0" />
           <attvalue for="7" value="false" />
-          <attvalue for="8" value="false" />
-          <attvalue for="9" value="Independent" />
+          <attvalue for="8" value="true" />
+          <attvalue for="9" value="COI Declared" />
           <attvalue for="10" value="91" />
         </attvalues>
       </node>
@@ -23087,8 +23087,8 @@
           <attvalue for="5" value="0" />
           <attvalue for="6" value="0" />
           <attvalue for="7" value="false" />
-          <attvalue for="8" value="false" />
-          <attvalue for="9" value="Independent" />
+          <attvalue for="8" value="true" />
+          <attvalue for="9" value="COI Declared" />
           <attvalue for="10" value="91" />
         </attvalues>
       </node>
@@ -23102,8 +23102,8 @@
           <attvalue for="5" value="0" />
           <attvalue for="6" value="0" />
           <attvalue for="7" value="false" />
-          <attvalue for="8" value="false" />
-          <attvalue for="9" value="Independent" />
+          <attvalue for="8" value="true" />
+          <attvalue for="9" value="COI Declared" />
           <attvalue for="10" value="91" />
         </attvalues>
       </node>
@@ -24497,8 +24497,8 @@
           <attvalue for="5" value="1" />
           <attvalue for="6" value="1" />
           <attvalue for="7" value="false" />
-          <attvalue for="8" value="false" />
-          <attvalue for="9" value="Independent" />
+          <attvalue for="8" value="true" />
+          <attvalue for="9" value="COI Declared" />
           <attvalue for="10" value="68" />
         </attvalues>
       </node>
@@ -26886,7 +26886,7 @@
       <edge source="98ebc589204d" target="0dca2ee7d601" id="349" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="98ebc589204d" target="1fdf77cabb17" id="350" weight="1">
@@ -32886,13 +32886,13 @@
       <edge source="3bcc52e488c3" target="0dca2ee7d601" id="1349" weight="2">
         <attvalues>
           <attvalue for="11" value="2" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="3bcc52e488c3" target="2a7382fac9ed" id="1350" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="3bcc52e488c3" target="891c91e109e5" id="1351" weight="1">
@@ -35832,7 +35832,7 @@
       <edge source="53b0b1a291d6" target="e45dbc614b75" id="1840" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="53b0b1a291d6" target="e48b4a7b1f5d" id="1841" weight="3">
@@ -35946,7 +35946,7 @@
       <edge source="1fdf77cabb17" target="0dca2ee7d601" id="1859" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="1fdf77cabb17" target="f0e94350305b" id="1860" weight="1">
@@ -37134,13 +37134,13 @@
       <edge source="891c91e109e5" target="0dca2ee7d601" id="2057" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="891c91e109e5" target="2a7382fac9ed" id="2058" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="891c91e109e5" target="14e7acd43c9c" id="2059" weight="1">
@@ -40026,25 +40026,25 @@
       <edge source="3b301866faf2" target="48e8e7ccd9a0" id="2539" weight="2">
         <attvalues>
           <attvalue for="11" value="2" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="3b301866faf2" target="786b00e79f04" id="2540" weight="2">
         <attvalues>
           <attvalue for="11" value="2" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="3b301866faf2" target="964d2dcc7460" id="2541" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="3b301866faf2" target="cb754e779b83" id="2542" weight="2">
         <attvalues>
           <attvalue for="11" value="2" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="fa816a41e969" target="0a700e7fcc83" id="2543" weight="1">
@@ -40248,7 +40248,7 @@
       <edge source="ff7f2fd0b0f7" target="1d6623ac89a0" id="2576" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="ff7f2fd0b0f7" target="1e8528411f6c" id="2577" weight="1">
@@ -41592,7 +41592,7 @@
       <edge source="d6f0dd02b7c4" target="e45dbc614b75" id="2800" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="d6f0dd02b7c4" target="e48b4a7b1f5d" id="2801" weight="3">
@@ -42558,7 +42558,7 @@
       <edge source="95ee598a1945" target="1d6623ac89a0" id="2961" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="95ee598a1945" target="1e8528411f6c" id="2962" weight="1">
@@ -42996,7 +42996,7 @@
       <edge source="7f5cfd35d610" target="1d6623ac89a0" id="3034" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="7f5cfd35d610" target="1e8528411f6c" id="3035" weight="1">
@@ -43434,7 +43434,7 @@
       <edge source="4b21353cace7" target="1d6623ac89a0" id="3107" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="4b21353cace7" target="1e8528411f6c" id="3108" weight="1">
@@ -43872,7 +43872,7 @@
       <edge source="2110baaa0905" target="1d6623ac89a0" id="3180" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="2110baaa0905" target="1e8528411f6c" id="3181" weight="1">
@@ -49350,7 +49350,7 @@
       <edge source="3e8120c39fcb" target="1d6623ac89a0" id="4093" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="3e8120c39fcb" target="274975ad1b05" id="4094" weight="1">
@@ -49950,7 +49950,7 @@
       <edge source="1e8528411f6c" target="1d6623ac89a0" id="4193" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1e8528411f6c" target="274975ad1b05" id="4194" weight="1">
@@ -54450,7 +54450,7 @@
       <edge source="f0e94350305b" target="0dca2ee7d601" id="4943" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="f0e94350305b" target="5cc670e86079" id="4944" weight="1">
@@ -55176,7 +55176,7 @@
       <edge source="7a3e6c24b0d2" target="1d6623ac89a0" id="5064" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="7a3e6c24b0d2" target="274975ad1b05" id="5065" weight="1">
@@ -57774,379 +57774,379 @@
       <edge source="1d6623ac89a0" target="05cdcee02576" id="5497" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="065f2aae1a3b" id="5498" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="0a700e7fcc83" id="5499" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="12175113b5ad" id="5500" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="15565472d820" id="5501" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="274975ad1b05" id="5502" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="2bf81fd962d6" id="5503" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="30507e8b3803" id="5504" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="3138ee14bea8" id="5505" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="396c178a6b53" id="5506" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="409487bc4a5a" id="5507" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="45feba112bc0" id="5508" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="46ff03d28edb" id="5509" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="4b30c0911db2" id="5510" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="548582a0c513" id="5511" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="5501b9f863ac" id="5512" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="577cf91f461c" id="5513" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="6240a1756777" id="5514" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="682bdc1e447c" id="5515" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="6bc026a024ad" id="5516" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="70c846500533" id="5517" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="7790e468e9e1" id="5518" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="7af3d1b4915d" id="5519" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="7c50b709e70f" id="5520" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="82327fded896" id="5521" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="85e9ac815172" id="5522" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="8bc958b9ddf2" id="5523" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="91b6edcd0bc6" id="5524" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="a2c36ab3ec5d" id="5525" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="ade37b998618" id="5526" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="b372d50445d9" id="5527" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="b3f36a094abf" id="5528" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="b58bb2242ba3" id="5529" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="b7b4958aba1e" id="5530" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="b82b4715dc0a" id="5531" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="b89dfee3871d" id="5532" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="b939fcd9e48a" id="5533" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="c0c09bfadcc2" id="5534" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="c3954befd540" id="5535" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="c43efa814e24" id="5536" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="c5a178878c14" id="5537" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="c9b8d7a54194" id="5538" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="cc4350ac6f68" id="5539" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="ccabbe031ea3" id="5540" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="d069a4f46972" id="5541" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="d678ff927bf1" id="5542" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="d8f76be4f521" id="5543" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="dcb642f93e5f" id="5544" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="e15d023eb547" id="5545" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="e3e9389fbe40" id="5546" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="e6201acd6f82" id="5547" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="e6d122a022ff" id="5548" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="ef785bdfccd8" id="5549" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="f0c074211f25" id="5550" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="f32bb6c63cd2" id="5551" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="f52c994cc400" id="5552" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="f5d55a2ac6ee" id="5553" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="fdccf785ef48" id="5554" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="7338651c98ac" id="5555" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="7da19163b63f" id="5556" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="a8e7cbc049c2" id="5557" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="d0ebf8a607d4" id="5558" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d6623ac89a0" target="de0ac6ddc855" id="5559" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="91b6edcd0bc6" target="05cdcee02576" id="5560" weight="2">
@@ -73710,7 +73710,7 @@
       <edge source="0dca2ee7d601" target="2a7382fac9ed" id="8153" weight="3">
         <attvalues>
           <attvalue for="11" value="3" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="0dca2ee7d601" target="70a89c80217a" id="8154" weight="1">
@@ -73728,7 +73728,7 @@
       <edge source="0dca2ee7d601" target="d89ed832896d" id="8156" weight="2">
         <attvalues>
           <attvalue for="11" value="2" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="0dca2ee7d601" target="dba156ba20a9" id="8157" weight="2">
@@ -74328,7 +74328,7 @@
       <edge source="37d5c3009dba" target="eedf59330ed9" id="8256" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="37d5c3009dba" target="925a749f57ed" id="8257" weight="1">
@@ -74796,7 +74796,7 @@
       <edge source="1d8cde753271" target="eedf59330ed9" id="8334" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="1d8cde753271" target="45c69371042c" id="8335" weight="1">
@@ -78630,7 +78630,7 @@
       <edge source="f082df3d24cc" target="19b35b1439db" id="8973" weight="2">
         <attvalues>
           <attvalue for="11" value="2" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="f082df3d24cc" target="eeb6d7e53bef" id="8974" weight="2">
@@ -78654,25 +78654,25 @@
       <edge source="19b35b1439db" target="03e6bc39dcb3" id="8977" weight="2">
         <attvalues>
           <attvalue for="11" value="2" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="19b35b1439db" target="eeb6d7e53bef" id="8978" weight="2">
         <attvalues>
           <attvalue for="11" value="2" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="19b35b1439db" target="fb755bbee988" id="8979" weight="2">
         <attvalues>
           <attvalue for="11" value="2" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="19b35b1439db" target="8601fad36ffc" id="8980" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="eeb6d7e53bef" target="03e6bc39dcb3" id="8981" weight="2">
@@ -82428,13 +82428,13 @@
       <edge source="9a50bd96b56f" target="c6dff71e918b" id="9606" weight="3">
         <attvalues>
           <attvalue for="11" value="3" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="9a50bd96b56f" target="e45dbc614b75" id="9607" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="9a50bd96b56f" target="44c4befb215d" id="9608" weight="2">
@@ -85560,7 +85560,7 @@
       <edge source="44aa06167c04" target="eedf59330ed9" id="10128" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="dba156ba20a9" target="e005983944fb" id="10129" weight="2">
@@ -88626,7 +88626,7 @@
       <edge source="1b79b3017f17" target="e45dbc614b75" id="10639" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="1b79b3017f17" target="e48b4a7b1f5d" id="10640" weight="1">
@@ -89130,31 +89130,31 @@
       <edge source="c6dff71e918b" target="e45dbc614b75" id="10723" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="c6dff71e918b" target="44c4befb215d" id="10724" weight="2">
         <attvalues>
           <attvalue for="11" value="2" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="e45dbc614b75" target="a8a27aa74e2f" id="10725" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="e45dbc614b75" target="e48b4a7b1f5d" id="10726" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="e45dbc614b75" target="e6b70cd13104" id="10727" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="cbb09d2fd0e6" target="530fa40fb7ea" id="10728" weight="1">
@@ -93558,25 +93558,25 @@
       <edge source="7604a7bfad45" target="920747080390" id="11461" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="7604a7bfad45" target="9dbcc2f916bd" id="11462" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="7604a7bfad45" target="db8873f94474" id="11463" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="7604a7bfad45" target="e127061b67d9" id="11464" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="7604a7bfad45" target="f7297d3f21b2" id="11465" weight="1">
@@ -97182,43 +97182,43 @@
       <edge source="c2b9ccc5aa15" target="cb754e779b83" id="12065" weight="2">
         <attvalues>
           <attvalue for="11" value="2" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="c2b9ccc5aa15" target="51aad1454ba5" id="12066" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="c2b9ccc5aa15" target="964d2dcc7460" id="12067" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="cb754e779b83" target="48e8e7ccd9a0" id="12068" weight="2">
         <attvalues>
           <attvalue for="11" value="2" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="cb754e779b83" target="786b00e79f04" id="12069" weight="2">
         <attvalues>
           <attvalue for="11" value="2" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="cb754e779b83" target="964d2dcc7460" id="12070" weight="2">
         <attvalues>
           <attvalue for="11" value="2" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="cb754e779b83" target="51aad1454ba5" id="12071" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="756ff30e952f" target="a816a58e9668" id="12072" weight="1">
@@ -97320,25 +97320,25 @@
       <edge source="786b00e79f04" target="48e8e7ccd9a0" id="12088" weight="2">
         <attvalues>
           <attvalue for="11" value="2" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="786b00e79f04" target="964d2dcc7460" id="12089" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="48e8e7ccd9a0" target="964d2dcc7460" id="12090" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="964d2dcc7460" target="51aad1454ba5" id="12091" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="f7ea4628803e" target="2a5357149462" id="12092" weight="2">
@@ -97368,7 +97368,7 @@
       <edge source="4f47a6584fe1" target="0ecae458ffce" id="12096" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="744d73659fd4" target="0b8aab6e407f" id="12097" weight="2">
@@ -97764,25 +97764,25 @@
       <edge source="7df4697c19ca" target="920747080390" id="12162" weight="2">
         <attvalues>
           <attvalue for="11" value="2" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="7df4697c19ca" target="9dbcc2f916bd" id="12163" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="7df4697c19ca" target="db8873f94474" id="12164" weight="2">
         <attvalues>
           <attvalue for="11" value="2" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="7df4697c19ca" target="e127061b67d9" id="12165" weight="2">
         <attvalues>
           <attvalue for="11" value="2" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="7df4697c19ca" target="f7297d3f21b2" id="12166" weight="2">
@@ -97806,7 +97806,7 @@
       <edge source="267b3185c41f" target="ce9efcd6732b" id="12169" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="267b3185c41f" target="e5d850c89083" id="12170" weight="1">
@@ -97830,7 +97830,7 @@
       <edge source="f2c3667ef956" target="ce9efcd6732b" id="12173" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="70fd9b254854" target="eed465d6d884" id="12174" weight="1">
@@ -98970,61 +98970,61 @@
       <edge source="33b0e51a8e07" target="0663c41a102f" id="12363" weight="2">
         <attvalues>
           <attvalue for="11" value="2" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="33b0e51a8e07" target="c833ae7b0540" id="12364" weight="2">
         <attvalues>
           <attvalue for="11" value="2" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="33b0e51a8e07" target="2feb643322ee" id="12365" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="33b0e51a8e07" target="ce9efcd6732b" id="12366" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="33b0e51a8e07" target="9794093e8957" id="12367" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="c833ae7b0540" target="0663c41a102f" id="12368" weight="2">
         <attvalues>
           <attvalue for="11" value="2" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="c833ae7b0540" target="2feb643322ee" id="12369" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="c833ae7b0540" target="ce9efcd6732b" id="12370" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="0663c41a102f" target="2feb643322ee" id="12371" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="0663c41a102f" target="ce9efcd6732b" id="12372" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="a5c4139d8e0b" target="3a2009a1d9e9" id="12373" weight="2">
@@ -99522,7 +99522,7 @@
       <edge source="d7b7c74c3879" target="0ecae458ffce" id="12455" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="d7b7c74c3879" target="32b0e4299cba" id="12456" weight="1">
@@ -99732,7 +99732,7 @@
       <edge source="cb639c62f66e" target="ce9efcd6732b" id="12490" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="cb639c62f66e" target="e5d850c89083" id="12491" weight="1">
@@ -99984,19 +99984,19 @@
       <edge source="ce9efcd6732b" target="2feb643322ee" id="12532" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="ce9efcd6732b" target="e5d850c89083" id="12533" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="a3fb401e9150" target="eedf59330ed9" id="12534" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="d78299e5a0b9" target="6eb48fa36a9a" id="12535" weight="2">
@@ -100290,241 +100290,241 @@
       <edge source="de0ac6ddc855" target="7338651c98ac" id="12583" weight="2">
         <attvalues>
           <attvalue for="11" value="2" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="de0ac6ddc855" target="7da19163b63f" id="12584" weight="2">
         <attvalues>
           <attvalue for="11" value="2" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="de0ac6ddc855" target="a8e7cbc049c2" id="12585" weight="2">
         <attvalues>
           <attvalue for="11" value="2" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="de0ac6ddc855" target="d0ebf8a607d4" id="12586" weight="2">
         <attvalues>
           <attvalue for="11" value="2" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="de0ac6ddc855" target="0fcf73303f42" id="12587" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="de0ac6ddc855" target="311642634219" id="12588" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="de0ac6ddc855" target="3c5fe949e01e" id="12589" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="de0ac6ddc855" target="8b30da685fc1" id="12590" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="de0ac6ddc855" target="924d19835a30" id="12591" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="de0ac6ddc855" target="bab910b23f0f" id="12592" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="7338651c98ac" target="7da19163b63f" id="12593" weight="2">
         <attvalues>
           <attvalue for="11" value="2" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="7338651c98ac" target="a8e7cbc049c2" id="12594" weight="2">
         <attvalues>
           <attvalue for="11" value="2" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="7338651c98ac" target="d0ebf8a607d4" id="12595" weight="2">
         <attvalues>
           <attvalue for="11" value="2" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="7338651c98ac" target="0fcf73303f42" id="12596" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="7338651c98ac" target="311642634219" id="12597" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="7338651c98ac" target="3c5fe949e01e" id="12598" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="7338651c98ac" target="8b30da685fc1" id="12599" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="7338651c98ac" target="924d19835a30" id="12600" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="7338651c98ac" target="bab910b23f0f" id="12601" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="d0ebf8a607d4" target="7da19163b63f" id="12602" weight="2">
         <attvalues>
           <attvalue for="11" value="2" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="d0ebf8a607d4" target="a8e7cbc049c2" id="12603" weight="2">
         <attvalues>
           <attvalue for="11" value="2" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="d0ebf8a607d4" target="0fcf73303f42" id="12604" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="d0ebf8a607d4" target="311642634219" id="12605" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="d0ebf8a607d4" target="3c5fe949e01e" id="12606" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="d0ebf8a607d4" target="8b30da685fc1" id="12607" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="d0ebf8a607d4" target="924d19835a30" id="12608" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="d0ebf8a607d4" target="bab910b23f0f" id="12609" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="7da19163b63f" target="a8e7cbc049c2" id="12610" weight="2">
         <attvalues>
           <attvalue for="11" value="2" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="7da19163b63f" target="0fcf73303f42" id="12611" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="7da19163b63f" target="311642634219" id="12612" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="7da19163b63f" target="3c5fe949e01e" id="12613" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="7da19163b63f" target="8b30da685fc1" id="12614" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="7da19163b63f" target="924d19835a30" id="12615" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="7da19163b63f" target="bab910b23f0f" id="12616" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="a8e7cbc049c2" target="0fcf73303f42" id="12617" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="a8e7cbc049c2" target="311642634219" id="12618" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="a8e7cbc049c2" target="3c5fe949e01e" id="12619" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="coi_mixed" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="a8e7cbc049c2" target="8b30da685fc1" id="12620" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="a8e7cbc049c2" target="924d19835a30" id="12621" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="a8e7cbc049c2" target="bab910b23f0f" id="12622" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="f022c0e2325d" target="6485f0c33601" id="12623" weight="1">
@@ -103368,109 +103368,109 @@
       <edge source="e127061b67d9" target="920747080390" id="13096" weight="3">
         <attvalues>
           <attvalue for="11" value="3" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="e127061b67d9" target="9dbcc2f916bd" id="13097" weight="2">
         <attvalues>
           <attvalue for="11" value="2" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="e127061b67d9" target="db8873f94474" id="13098" weight="3">
         <attvalues>
           <attvalue for="11" value="3" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="e127061b67d9" target="dd2ec542d4b8" id="13099" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="e127061b67d9" target="006822d5b99d" id="13100" weight="2">
         <attvalues>
           <attvalue for="11" value="2" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="e127061b67d9" target="f7297d3f21b2" id="13101" weight="2">
         <attvalues>
           <attvalue for="11" value="2" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="920747080390" target="9dbcc2f916bd" id="13102" weight="2">
         <attvalues>
           <attvalue for="11" value="2" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="920747080390" target="db8873f94474" id="13103" weight="3">
         <attvalues>
           <attvalue for="11" value="3" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="920747080390" target="dd2ec542d4b8" id="13104" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="920747080390" target="006822d5b99d" id="13105" weight="2">
         <attvalues>
           <attvalue for="11" value="2" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="920747080390" target="f7297d3f21b2" id="13106" weight="2">
         <attvalues>
           <attvalue for="11" value="2" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="db8873f94474" target="9dbcc2f916bd" id="13107" weight="2">
         <attvalues>
           <attvalue for="11" value="2" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="db8873f94474" target="dd2ec542d4b8" id="13108" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="db8873f94474" target="006822d5b99d" id="13109" weight="2">
         <attvalues>
           <attvalue for="11" value="2" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="db8873f94474" target="f7297d3f21b2" id="13110" weight="2">
         <attvalues>
           <attvalue for="11" value="2" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="9dbcc2f916bd" target="dd2ec542d4b8" id="13111" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="both_coi" />
         </attvalues>
       </edge>
       <edge source="9dbcc2f916bd" target="006822d5b99d" id="13112" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="9dbcc2f916bd" target="f7297d3f21b2" id="13113" weight="1">
         <attvalues>
           <attvalue for="11" value="1" />
-          <attvalue for="12" value="independent" />
+          <attvalue for="12" value="coi_mixed" />
         </attvalues>
       </edge>
       <edge source="9c6590ccc8da" target="09e0ef71e2d4" id="13114" weight="2">

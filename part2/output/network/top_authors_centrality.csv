@@ -29,7 +29,7 @@ d6d942bc9df2,"Tyndale, Rachel F",False,COI Declared,33,36.4,78,221,0.047273,0.02
 7407310fdc4e,"Czaplicki, Lauren",False,COI Declared,21,0.0,46,93,0.027879,0.023313,0.473681,0.001365
 56b5ce2de5e4,"Hoeng, Julia",True,Tobacco Company,8,25.0,27,63,0.016364,0.02216,0.286013,6e-06
 ac73f205f2fc,"Shihadeh, Alan",False,COI Declared,26,7.7,34,148,0.020606,0.022143,0.500982,0.000739
-0dca2ee7d601,"Rodu, Brad",False,Independent,7,14.3,11,17,0.006667,0.021949,0.350255,4.4e-05
+0dca2ee7d601,"Rodu, Brad",False,COI Declared,7,14.3,11,17,0.006667,0.021949,0.350255,4.4e-05
 6d01c54b6f58,"Cohen, Joanna E",False,COI Declared,20,5.0,30,68,0.018182,0.02114,0.478982,0.000191
 e00b1b0a8455,"McNeill, Ann",False,COI Declared,31,25.8,77,225,0.046667,0.021127,0.616143,0.176995
 d6fd2d978147,"Ling, Pamela M",False,COI Declared,32,28.1,46,71,0.027879,0.020924,0.475212,0.00445
@@ -109,7 +109,7 @@ f2664ac7b0b9,"Foulds, Jonathan",False,COI Declared,9,22.2,20,36,0.012121,0.00555
 4b4adadcb717,"Curren, Rodger",False,Independent,3,0.0,20,33,0.012121,0.005472,0.336131,1.3e-05
 34d0c72aad3f,"Behrsing, Holger",False,Independent,3,0.0,20,33,0.012121,0.005472,0.336131,1.3e-05
 256f0284cddb,"Meza, Rafael",False,COI Declared,11,18.2,28,55,0.01697,0.005396,0.560159,0.014385
-ce9efcd6732b,"Zhang, Long",False,Independent,3,0.0,8,8,0.004848,0.005381,0.268953,0.0
+ce9efcd6732b,"Zhang, Long",False,COI Declared,3,0.0,8,8,0.004848,0.005381,0.268953,0.0
 8601fad36ffc,"Wang, Feng",False,Independent,2,0.0,6,6,0.003636,0.005381,0.245362,0.0
 099c36c276aa,"Jabba, Sairam V",False,COI Declared,13,0.0,24,44,0.014545,0.005269,0.386328,0.000338
 d0a23b11235d,"Keithly, Lois",False,Independent,3,0.0,8,14,0.004848,0.005262,0.325597,3.1e-05
@@ -117,7 +117,7 @@ cd80819ab102,"Naughton, Felix",False,Independent,3,33.3,12,18,0.007273,0.005234,
 a235c7a88f2e,"Sóñora, Gustavo",False,Independent,2,0.0,6,6,0.003636,0.005174,0.360278,0.000528
 b8036323c736,"Bansal-Travers, Maansi",False,COI Declared,23,30.4,109,272,0.066061,0.00505,0.620718,0.165881
 34a9c62c8c91,"Chaffee, Benjamin W",False,Independent,6,50.0,22,32,0.013333,0.005015,0.439356,0.000726
-1d6623ac89a0,"Zhang, Juan",False,Independent,2,0.0,71,71,0.04303,0.004941,0.358768,0.000105
+1d6623ac89a0,"Zhang, Juan",False,COI Declared,2,0.0,71,71,0.04303,0.004941,0.358768,0.000105
 f2c3667ef956,"Li, Yong",False,Independent,3,0.0,5,7,0.00303,0.00483,0.26923,0.0
 267b3185c41f,"Liu, Jiahong",False,Independent,2,0.0,5,6,0.00303,0.004823,0.269202,0.0
 752488ecf055,"Bickel, Warren K",False,COI Declared,8,12.5,33,53,0.02,0.004803,0.567228,0.024311
@@ -246,7 +246,7 @@ a33a334e6a26,"Pechmann, Cornelia",False,Independent,3,33.3,3,4,0.001818,0.001079
 94b8741fd435,"Lim, Min Kyung",False,Independent,3,66.7,5,8,0.00303,0.001079,0.374194,0.000141
 0fdd0fac30f9,"Hawkins, Ben",False,Independent,2,0.0,3,3,0.001818,0.001079,0.236135,0.0
 7024470e4c1b,"Jackler, Robert K",False,Independent,5,20.0,2,5,0.001212,0.001079,0.291256,1.4e-05
-33b0e51a8e07,"Chen, Dan",False,Independent,3,0.0,5,7,0.00303,0.001079,0.206783,0.0
+33b0e51a8e07,"Chen, Dan",False,COI Declared,3,0.0,5,7,0.00303,0.001079,0.206783,0.0
 871b2614590f,"Borgerding, Michael F",False,Independent,3,0.0,5,6,0.00303,0.001079,0.24937,0.0
 d2ef174b8cb0,"Primack, Brian A",False,Independent,2,0.0,13,13,0.007879,0.001079,0.350442,0.000178
 9beead119eba,"Jiménez-Ruiz, Carlos A",False,COI Declared,3,33.3,2,2,0.001212,0.001079,0.259398,0.0
@@ -310,9 +310,9 @@ f3ba5b8cf3ef,"Strasser, Andrew A",False,COI Declared,11,18.2,45,89,0.027273,0.00
 65e3e1e31184,"Leventhal, Adam M",False,COI Declared,5,0.0,21,26,0.012727,0.000664,0.422797,0.00024
 be1626e3c3bf,"Travis, Nargiz",False,COI Declared,6,33.3,22,46,0.013333,0.000656,0.5328,0.012384
 956ce6fc41cd,"Leverette, Robert",False,Independent,3,0.0,18,28,0.010909,0.000646,0.284441,7e-06
-db8873f94474,"Zhang, Tikun",False,Independent,3,0.0,8,16,0.004848,0.000628,0.185816,0.0
-e127061b67d9,"Wu, Yuping",False,Independent,3,0.0,8,16,0.004848,0.000628,0.185816,0.0
-920747080390,"Kong, Guanghui",False,Independent,3,0.0,8,16,0.004848,0.000628,0.185816,0.0
+db8873f94474,"Zhang, Tikun",False,COI Declared,3,0.0,8,16,0.004848,0.000628,0.185816,0.0
+e127061b67d9,"Wu, Yuping",False,COI Declared,3,0.0,8,16,0.004848,0.000628,0.185816,0.0
+920747080390,"Kong, Guanghui",False,COI Declared,3,0.0,8,16,0.004848,0.000628,0.185816,0.0
 60b31e836bc5,"Jenssen, Brian P",False,Independent,4,25.0,3,4,0.001818,0.000625,0.331501,5e-06
 ad603b69e542,"McRobbie, Hayden",False,COI Declared,5,20.0,19,22,0.011515,0.000623,0.389597,0.001633
 4cbd457476c0,"Kong, Grace",False,Independent,5,20.0,12,15,0.007273,0.000602,0.382991,0.000347
@@ -382,7 +382,7 @@ aaa3f5e162bf,"Hajek, Peter",False,COI Declared,4,50.0,13,15,0.007879,0.000203,0.
 1fdf77cabb17,"Shiffman, Saul",False,Independent,4,25.0,10,10,0.006061,0.000199,0.35036,5.1e-05
 2e94f0a39d2f,"Peitsch, Manuel C",True,Tobacco Company,7,28.6,21,57,0.012727,0.000189,0.274093,0.0
 00aee89c881d,"Fagan, Pebbles",False,COI Declared,3,0.0,11,18,0.006667,0.000188,0.402059,0.000289
-cb754e779b83,"Mackey, Tim K",False,Independent,4,0.0,6,11,0.003636,0.000187,0.22428,0.0
+cb754e779b83,"Mackey, Tim K",False,COI Declared,4,0.0,6,11,0.003636,0.000187,0.22428,0.0
 8054ad623f59,"Byron, M Justin",False,COI Declared,6,16.7,19,31,0.011515,0.000186,0.388046,0.000598
 a816a58e9668,"Bialous, Stella",False,Independent,3,0.0,5,5,0.00303,0.000179,0.278567,2e-06
 003fd7052aa9,"Stewart, Susan L",False,Independent,4,25.0,10,24,0.006061,0.000175,0.334937,6e-06
@@ -435,7 +435,7 @@ a61b81148e74,"Silver, Karin",False,Independent,3,0.0,6,6,0.003636,7.8e-05,0.2680
 5654a7c63d5b,"Ranney, Leah M",False,Independent,2,0.0,5,6,0.00303,7.7e-05,0.290141,2.3e-05
 eafd9d7c2ba5,"Kong, Amanda Y",False,COI Declared,3,0.0,8,12,0.004848,7.6e-05,0.427806,0.000671
 c9845774f952,"Davis, R A",False,Independent,10,10.0,20,43,0.012121,7.4e-05,0.024377,0.0
-0ecae458ffce,"Feehan, Michael",False,Independent,2,50.0,2,2,0.001212,7.1e-05,0.168438,0.0
+0ecae458ffce,"Feehan, Michael",False,COI Declared,2,50.0,2,2,0.001212,7.1e-05,0.168438,0.0
 39e4b5bc16f2,"Baker, Timothy B",False,COI Declared,3,33.3,20,30,0.012121,6.9e-05,0.478393,0.000535
 7426982c4cfb,"Karaoghlanian, Nareg",False,COI Declared,16,0.0,26,105,0.015758,6.3e-05,0.484158,0.000491
 025acee914f9,"Afolalu, Esther F",True,Tobacco Company,2,0.0,2,2,0.001212,6.1e-05,0.203887,0.0
@@ -631,12 +631,12 @@ bfee7b45db9f,"Thompson, Mary E",False,COI Declared,8,37.5,39,94,0.023636,1e-06,0
 669917d01966,"Abrams, David",False,COI Declared,3,0.0,28,35,0.01697,1e-06,0.47362,0.01356
 19ffaadc1a09,"Waa, Andrew",False,Independent,5,0.0,10,21,0.006061,1e-06,0.385564,3e-05
 8eead895b527,"Michael Cummings, K",False,COI Declared,5,40.0,31,42,0.018788,1e-06,0.539994,0.027179
-de0ac6ddc855,"Yang, Zhen",False,Independent,2,0.0,11,15,0.006667,1e-06,0.258386,1e-06
-7338651c98ac,"Li, Pinhe",False,Independent,2,0.0,11,15,0.006667,1e-06,0.258386,1e-06
-d0ebf8a607d4,"Zhou, Quanwei",False,Independent,2,0.0,11,15,0.006667,1e-06,0.258386,1e-06
+de0ac6ddc855,"Yang, Zhen",False,COI Declared,2,0.0,11,15,0.006667,1e-06,0.258386,1e-06
+7338651c98ac,"Li, Pinhe",False,COI Declared,2,0.0,11,15,0.006667,1e-06,0.258386,1e-06
+d0ebf8a607d4,"Zhou, Quanwei",False,COI Declared,2,0.0,11,15,0.006667,1e-06,0.258386,1e-06
 9d8488ac4930,"Robertson, Rose Marie",False,COI Declared,4,0.0,19,23,0.011515,1e-06,0.478926,0.002349
-7da19163b63f,"Cai, Wen",False,Independent,2,0.0,11,15,0.006667,1e-06,0.258386,1e-06
-a8e7cbc049c2,"Li, Dongliang",False,Independent,2,0.0,11,15,0.006667,1e-06,0.258386,1e-06
+7da19163b63f,"Cai, Wen",False,COI Declared,2,0.0,11,15,0.006667,1e-06,0.258386,1e-06
+a8e7cbc049c2,"Li, Dongliang",False,COI Declared,2,0.0,11,15,0.006667,1e-06,0.258386,1e-06
 97a1fdf85699,"Crespi, Elizabeth",False,COI Declared,7,0.0,14,32,0.008485,1e-06,0.444897,5.3e-05
 ab5e625345e5,"Delnevo, Cristine",False,COI Declared,3,0.0,34,47,0.020606,1e-06,0.50896,0.018146
 5751e0f5e34e,"Stein, Jeffrey S",False,COI Declared,4,25.0,19,32,0.011515,1e-06,0.523925,0.018057
@@ -715,14 +715,14 @@ c8ae5dbc8d6a,"Blount, Benjamin C",False,COI Declared,2,0.0,17,23,0.010303,0.0,0.
 c2b6bb3e35a5,"Knight, Jo",False,COI Declared,2,50.0,9,15,0.005455,0.0,0.467039,0.000307
 0baed23fe7d0,"Yang, Huijuan",False,Independent,2,0.0,1,2,0.000606,0.0,0.212505,0.0
 22f2f1a0acc3,"Nollen, Nikki L",False,COI Declared,2,50.0,9,15,0.005455,0.0,0.467039,0.000307
-48e8e7ccd9a0,"Cai, Mingxiang",False,Independent,2,0.0,4,7,0.002424,0.0,0.221983,0.0
-786b00e79f04,"Yang, Joshua",False,Independent,2,0.0,4,7,0.002424,0.0,0.221983,0.0
+48e8e7ccd9a0,"Cai, Mingxiang",False,COI Declared,2,0.0,4,7,0.002424,0.0,0.221983,0.0
+786b00e79f04,"Yang, Joshua",False,COI Declared,2,0.0,4,7,0.002424,0.0,0.221983,0.0
 3f158d7b4791,"Ali, Amna",False,COI Declared,2,50.0,6,9,0.003636,0.0,0.393964,5e-06
 4850a7ff64dd,"Steffensen, Isabella",False,Independent,2,0.0,1,2,0.000606,0.0,0.001212,0.0
-964d2dcc7460,"Nali, Matthew C",False,Independent,2,0.0,6,7,0.003636,0.0,0.214189,0.0
+964d2dcc7460,"Nali, Matthew C",False,COI Declared,2,0.0,6,7,0.003636,0.0,0.214189,0.0
 fb204662ab3a,"Kim, Mimi M",False,Independent,2,0.0,1,2,0.000606,0.0,0.001212,0.0
 f7ea4628803e,"Mazur, Artur",False,Independent,2,50.0,2,4,0.001212,0.0,0.140275,0.0
-c2b9ccc5aa15,"Li, Jiawei",False,Independent,2,0.0,3,4,0.001818,0.0,0.214189,0.0
+c2b9ccc5aa15,"Li, Jiawei",False,COI Declared,2,0.0,3,4,0.001818,0.0,0.214189,0.0
 1ede585bd917,"Pesko, Michael",False,COI Declared,2,0.0,15,15,0.009091,0.0,0.367949,0.001054
 0ecdf3c28db3,"Pesko, Michael F",False,COI Declared,3,0.0,9,9,0.005455,0.0,0.330138,0.000103
 5ceecb796095,"Garnett, Claire",False,COI Declared,2,0.0,5,8,0.00303,0.0,0.379785,0.000164
@@ -778,7 +778,7 @@ ba15d30edb8f,"Sharma, Akshika",False,Independent,3,66.7,17,17,0.010303,0.0,0.393
 ab35a35cf793,"Christen, A G",False,Independent,4,0.0,0,0,0.0,0.0,0.0,0.0
 f5905d8eff6c,"Sheeran, Paschal",False,COI Declared,3,0.0,11,13,0.006667,0.0,0.341224,3.4e-05
 9c6590ccc8da,"Mo, Zejun",False,Independent,2,0.0,6,12,0.003636,0.0,0.00396,0.0
-9dbcc2f916bd,"Li, Yongping",False,Independent,2,0.0,8,11,0.004848,0.0,0.168305,0.0
+9dbcc2f916bd,"Li, Yongping",False,COI Declared,2,0.0,8,11,0.004848,0.0,0.168305,0.0
 2660a1c898f1,"Schoretsaniti, Sotiria",False,Independent,2,0.0,11,20,0.006667,0.0,0.32042,3.4e-05
 6bc0845c0ac1,"Papachristou, Efstathios",False,Independent,2,0.0,11,20,0.006667,0.0,0.32042,3.4e-05
 a26ec22a0b04,"Lambrou, Angeliki",False,Independent,2,0.0,11,20,0.006667,0.0,0.32042,3.4e-05
@@ -793,7 +793,7 @@ ba569202d528,"Yazidjoglou, Amelia",False,COI Declared,2,50.0,4,7,0.002424,0.0,0.
 0a72b6f7e2bb,"Rose, Shiho",False,COI Declared,2,50.0,4,7,0.002424,0.0,0.246416,1e-06
 4d2f93715310,"McGill, Bronwyn",False,COI Declared,2,50.0,4,7,0.002424,0.0,0.246416,1e-06
 e1b692c9f7f5,"Yang, Qian",False,Independent,3,0.0,4,9,0.002424,0.0,0.475044,0.001123
-dd2ec542d4b8,"Wang, Jin",False,Independent,2,0.0,4,4,0.002424,0.0,0.15377,0.0
+dd2ec542d4b8,"Wang, Jin",False,COI Declared,2,0.0,4,4,0.002424,0.0,0.15377,0.0
 d88a2355fe2d,"Huang, Ying",False,Independent,2,0.0,6,12,0.003636,0.0,0.00396,0.0
 185feec93c35,"Taylor, Eve",False,COI Declared,3,33.3,19,19,0.011515,0.0,0.377563,0.009452
 0d4f8c6de3f8,"Duan, Lili",False,Independent,2,0.0,6,12,0.003636,0.0,0.00396,0.0
@@ -845,7 +845,7 @@ dfe2d403406a,"Hanby, Elaine",False,COI Declared,2,0.0,5,7,0.00303,0.0,0.354077,0
 cfc11af5b5fe,"Yang, Alicia Y",False,Independent,2,0.0,4,8,0.002424,0.0,0.317558,7e-06
 230d67b57fd0,"Walia, Diksha",False,Independent,2,50.0,1,2,0.000606,0.0,0.001212,0.0
 48d67e57f8df,"Goel, Sonu",False,Independent,2,50.0,1,2,0.000606,0.0,0.001212,0.0
-76b4b838b488,"Yang, Chunlei",False,Independent,2,0.0,0,0,0.0,0.0,0.0,0.0
+76b4b838b488,"Yang, Chunlei",False,COI Declared,2,0.0,0,0,0.0,0.0,0.0,0.0
 924d19835a30,"Hu, Jun",False,Independent,2,0.0,10,14,0.006061,0.0,0.253858,0.0
 bab910b23f0f,"Jiang, Zhongrong",False,Independent,2,0.0,10,14,0.006061,0.0,0.253858,0.0
 311642634219,"Liu, Lulu",False,Independent,2,0.0,10,14,0.006061,0.0,0.253858,0.0
@@ -869,7 +869,7 @@ eeb2f8c9c3cc,"Martinez, Sydney A",False,Independent,2,0.0,9,15,0.005455,0.0,0.34
 c25ff18350a1,"Alam, Arzoo",False,COI Declared,2,0.0,5,8,0.00303,0.0,0.428516,8e-06
 1fa27eda8623,"Satybaldiyeva, Nora",False,Independent,2,0.0,6,6,0.003636,0.0,0.347202,5.7e-05
 ece59d5a0ce9,"Brouwer, Andrew F",False,COI Declared,2,50.0,9,9,0.005455,0.0,0.365046,0.000772
-eedf59330ed9,"Hanewinkel, Reiner",False,Independent,2,50.0,4,4,0.002424,0.0,0.308843,1.5e-05
+eedf59330ed9,"Hanewinkel, Reiner",False,COI Declared,2,50.0,4,4,0.002424,0.0,0.308843,1.5e-05
 31022ea3aec4,"Bojang, Fanta",False,COI Declared,2,0.0,15,15,0.009091,0.0,0.009091,0.0
 b7c7f705037c,"Del Giovane, Cinzia",False,COI Declared,2,0.0,7,14,0.004242,0.0,0.360471,2.8e-05
 db62510fd4f7,"Dickson, Jennifer L",False,COI Declared,2,0.0,15,15,0.009091,0.0,0.009091,0.0
@@ -991,8 +991,8 @@ e8f2a2490745,"Acton, Dana",False,Independent,2,0.0,11,22,0.006667,0.0,0.440891,0
 147f93f140bd,"Oh, Hayoung",False,COI Declared,3,66.7,13,17,0.007879,0.0,0.498962,0.005914
 ae24974e8b35,"Cadham, Christopher J",False,COI Declared,2,50.0,10,14,0.006061,0.0,0.472277,0.008095
 9514be5a09ee,"Rivard, Cheryl",False,COI Declared,3,0.0,21,30,0.012727,0.0,0.509596,0.026982
-0663c41a102f,"Yang, Xiaoe",False,Independent,2,0.0,4,6,0.002424,0.0,0.206767,0.0
-c833ae7b0540,"Wang, Mei",False,Independent,2,0.0,4,6,0.002424,0.0,0.206767,0.0
+0663c41a102f,"Yang, Xiaoe",False,COI Declared,2,0.0,4,6,0.002424,0.0,0.206767,0.0
+c833ae7b0540,"Wang, Mei",False,COI Declared,2,0.0,4,6,0.002424,0.0,0.206767,0.0
 8efee689837f,"Arnold, Michael J",False,COI Declared,2,50.0,7,9,0.004242,0.0,0.432676,3e-05
 f1c9492c1451,"Mayo, Matthew S",False,COI Declared,5,40.0,10,23,0.006061,0.0,0.515002,0.000102
 e37b4d8e7f6f,"Jin, Yao",False,Independent,2,0.0,7,13,0.004242,0.0,0.241259,0.0
@@ -1365,7 +1365,7 @@ a0523bc85c9d,"Douglas, Clifford E",False,COI Declared,4,25.0,11,15,0.006667,0.0,
 60f6b8e9cbd9,"Fix, Brian V",False,Independent,7,14.3,21,38,0.012727,0.0,0.575567,0.044647
 21183023ef35,"Hammond, D",False,COI Declared,3,0.0,5,6,0.00303,0.0,0.268601,3.6e-05
 725e53bc60b0,"Baurley, James W",False,Independent,2,0.0,18,22,0.010909,0.0,0.435981,0.000279
-2a7382fac9ed,"Plurphanswat, Nantaporn",False,Independent,3,33.3,3,5,0.001818,0.0,0.310373,1e-05
+2a7382fac9ed,"Plurphanswat, Nantaporn",False,COI Declared,3,33.3,3,5,0.001818,0.0,0.310373,1e-05
 c66300a6395e,"Neuberger, Manfred",False,Independent,2,50.0,0,0,0.0,0.0,0.0,0.0
 16f49d8d61c4,"Reisinger, Sarah A",False,COI Declared,4,0.0,9,31,0.005455,0.0,0.496822,0.000643
 8ac2688f17ea,"McDaid, Lisa",False,Independent,2,50.0,6,12,0.003636,0.0,0.310707,2e-05
@@ -1406,8 +1406,8 @@ e3189266904c,"Thirlway, Frances",False,COI Declared,3,0.0,6,6,0.003636,0.0,0.363
 cad18edd7f45,"Zandberg, Izabella",False,COI Declared,2,100.0,19,21,0.011515,0.0,0.45439,0.013802
 314e2f98951e,"Bahelah, Raed",False,COI Declared,2,50.0,10,15,0.006061,0.0,0.402391,2.8e-05
 cbb09d2fd0e6,"Kendra, Matthew S",False,COI Declared,2,50.0,2,3,0.001212,0.0,0.426367,7e-06
-e45dbc614b75,"Nides, Mitchell",False,Independent,2,0.0,8,8,0.004848,0.0,0.375477,0.00015
-c6dff71e918b,"McKeganey, Neil",False,Independent,3,33.3,3,6,0.001818,0.0,0.383938,2e-06
+e45dbc614b75,"Nides, Mitchell",False,COI Declared,2,0.0,8,8,0.004848,0.0,0.375477,0.00015
+c6dff71e918b,"McKeganey, Neil",False,COI Declared,3,33.3,3,6,0.001818,0.0,0.383938,2e-06
 aa376ec5ca5f,"Herrera, Josseline",False,Independent,2,0.0,4,8,0.002424,0.0,0.372077,3.5e-05
 3a91de370316,"Coats, Ellen M",False,Independent,2,0.0,5,8,0.00303,0.0,0.254237,0.0
 3db0602cefdb,"Green, Victoria R",False,COI Declared,2,50.0,24,28,0.014545,0.0,0.473413,0.013475
@@ -1510,7 +1510,7 @@ c05707bcd5e3,"Marshall, Henry",False,COI Declared,2,100.0,1,2,0.000606,0.0,0.001
 96c782632529,"Navarro, Mario Antonio",False,Independent,3,33.3,3,7,0.001818,0.0,0.317762,8e-06
 9fc35f9049a8,"O'Brien, Erin Keely",False,Independent,3,33.3,3,7,0.001818,0.0,0.317762,8e-06
 d5ab150650c5,"Brose, Leonie S",False,COI Declared,3,33.3,10,11,0.006061,0.0,0.457908,0.010149
-19b35b1439db,"Cai, Bin",False,Independent,3,0.0,5,9,0.00303,0.0,0.192549,0.0
+19b35b1439db,"Cai, Bin",False,COI Declared,3,0.0,5,9,0.00303,0.0,0.192549,0.0
 a44bbdd4c36f,"McCambridge, Jim",False,Independent,2,0.0,0,0,0.0,0.0,0.0,0.0
 3f7984400356,"Sargent, James",False,Independent,2,0.0,5,7,0.00303,0.0,0.342692,0.00036
 2a56b92b7df3,"Niaura, Ray",False,COI Declared,4,0.0,32,46,0.019394,0.0,0.518697,0.026567

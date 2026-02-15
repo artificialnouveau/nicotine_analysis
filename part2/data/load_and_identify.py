@@ -55,6 +55,7 @@ NO_COI_PHRASES = [
 ]
 
 YES_COI_PHRASES = [
+    "received funding from", "funded by", "supported by", "grant from",
     "consultant", "honoraria", "speaker", "advisory board",
     "employee of", "employment", "stock", "equity", "patent",
     "royalties", "expert witness", "litigation",
